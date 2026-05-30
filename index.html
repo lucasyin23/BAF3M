@@ -508,39 +508,50 @@ body{
 }
 .sa-input[disabled]{opacity:.5;cursor:default;}
 
-/* ══ MATCHING ══ */
-.m-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px;}
-.m-col-head{
-  font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
-  color:var(--text3);margin-bottom:8px;font-family:var(--mono);
-}
-.m-row{display:flex;align-items:center;gap:7px;margin-bottom:5px;}
-.m-term{
+/* ══ CLICK-TO-MATCH ══ */
+.mc-instr{font-size:13px;color:var(--text3);margin-bottom:14px;}
+.mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.mc-col-head{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;font-family:var(--mono);}
+.mc-term,.mc-def{
+  padding:10px 12px;border-radius:var(--r-sm);
+  border:1px solid var(--border2);
+  background:var(--surface2);
+  cursor:pointer;transition:all var(--ease);
+  margin-bottom:6px;font-size:13px;color:var(--text2);
   display:flex;align-items:center;gap:8px;
-  padding:8px 11px;background:var(--surface2);
-  border:1px solid var(--border);border-radius:var(--r-sm);
-  font-size:12px;font-weight:500;flex:1;color:var(--text2);
+  user-select:none;
 }
-.m-badge{
-  width:18px;height:18px;min-width:18px;border-radius:3px;
-  background:var(--surface3);color:var(--text3);
-  font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;
-  font-family:var(--mono);flex-shrink:0;border:1px solid var(--border);
+.mc-term:hover,.mc-def:hover{border-color:var(--accent);color:var(--text);}
+.mc-term.mc-selected,.mc-def.mc-selected{
+  border-color:var(--accent);
+  background:var(--accent-light);
+  color:var(--accent);
 }
-.m-box{
-  width:34px;height:26px;background:var(--surface);
-  border:1px solid var(--border2);border-radius:4px;
-  color:var(--accent);font-size:12px;font-weight:600;text-align:center;
-  font-family:var(--mono);outline:none;margin-left:auto;flex-shrink:0;
+.mc-term.mc-connected{border-color:var(--border2);color:var(--text2);background:var(--surface3);}
+.mc-def.mc-connected{border-color:var(--border2);color:var(--text2);background:var(--surface3);}
+.mc-term.mc-correct{border-color:var(--green)!important;background:var(--green-bg)!important;color:var(--text)!important;cursor:default;}
+.mc-term.mc-wrong{border-color:var(--red)!important;background:var(--red-bg)!important;color:var(--text)!important;cursor:default;}
+.mc-def.mc-def-correct{border-color:var(--green)!important;background:var(--green-bg)!important;color:var(--text)!important;cursor:default;}
+.mc-def.mc-def-wrong{border-color:var(--red)!important;background:var(--red-bg)!important;cursor:default;}
+.mc-badge{
+  width:20px;height:20px;min-width:20px;border-radius:4px;
+  background:var(--surface3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:700;font-family:var(--mono);
+  color:var(--text3);flex-shrink:0;
 }
-.m-box:focus{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-light);}
-.m-term.m-ok{border-color:var(--green);background:var(--green-bg);}
-.m-term.m-no{border-color:var(--red);background:var(--red-bg);}
-.m-def{
-  padding:8px 11px;background:var(--surface2);
-  border:1px solid var(--border);border-radius:var(--r-sm);
-  font-size:12px;color:var(--text3);line-height:1.5;margin-bottom:5px;
+.mc-text{flex:1;line-height:1.45;}
+.mc-arrow{
+  font-family:var(--mono);font-size:11px;font-weight:700;
+  color:var(--accent);min-width:16px;text-align:right;flex-shrink:0;
 }
+.mc-dnum{
+  font-family:var(--mono);font-size:11px;font-weight:700;
+  color:var(--accent);min-width:16px;flex-shrink:0;
+}
+@media(max-width:640px){.mc-grid{grid-template-columns:1fr;}}
+
+/* ══ MATCHING (old input style - kept for fallback) ══ */
 
 /* ══ ACTION ROW ══ */
 .act-row{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap;}
@@ -566,7 +577,8 @@ body{
   font-size:13.5px;font-weight:500;font-family:var(--sans);
   cursor:pointer;transition:all var(--ease);
 }
-.btn-reveal:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light);}
+.btn-reveal:hover:not([disabled]){border-color:var(--accent);color:var(--accent);background:var(--accent-light);}
+.btn-reveal[disabled]{opacity:.4;cursor:not-allowed;}
 
 /* ══ ANIMATION ══ */
 @keyframes up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
@@ -2156,66 +2168,151 @@ function revealSA(){
   fb.innerHTML='<strong>Model Answer:</strong><br>'+q.model.replace(/\n/g,'<br>');
 }
 
+// ── MATCH STATE ──────────────────────────────────────────────────
+var matchState = { selectedTerm: null, selectedDef: null, pairs: [], connections: {} };
+
 function renderMatch(q){
-  var pairs=q.pairs;
-  var shuffled=shuffle(pairs.map(function(p){return Object.assign({},p);}));
-  var numToTerm={};
-  shuffled.forEach(function(p,i){numToTerm[i+1]=p.term;});
+  var pairs = q.pairs;
+  var shuffledDefs = shuffle(pairs.map(function(p,i){ return {def:p.def, origIdx:i}; }));
+  matchState = { selectedTerm:null, selectedDef:null, pairs:pairs, shuffledDefs:shuffledDefs, connections:{} };
 
-  var termRows=pairs.map(function(p,i){
-    return '<div class="match-row"><div class="match-term-box" id="mt-'+i+'">'
-      +'<div class="m-badge">'+String.fromCharCode(65+i)+'</div>'
-      +'<span style="flex:1">'+p.term+'</span>'
-      +'<input class="m-box" id="mi-'+i+'" maxlength="2" placeholder="?"/>'
-      +'</div></div>';
+  var termItems = pairs.map(function(p,i){
+    return '<div class="mc-term" id="mct-'+i+'" onclick="matchSelectTerm('+i+')">'
+      +'<span class="mc-badge">'+String.fromCharCode(65+i)+'</span>'
+      +'<span class="mc-text">'+p.term+'</span>'
+      +'<span class="mc-arrow" id="mca-'+i+'"></span>'
+      +'</div>';
   }).join('');
 
-  var defItems=shuffled.map(function(p,i){
-    return '<div class="match-def-box"><strong style="color:var(--accent);font-family:\'DM Mono\',monospace;margin-right:5px">'+(i+1)+'.</strong>'+p.def+'</div>';
+  var defItems = shuffledDefs.map(function(d,i){
+    return '<div class="mc-def" id="mcd-'+i+'" onclick="matchSelectDef('+i+')">'
+      +'<span class="mc-dnum">'+( i+1)+'</span>'
+      +'<span class="mc-text">'+d.def+'</span>'
+      +'</div>';
   }).join('');
 
-  var em=encodeURIComponent(JSON.stringify(numToTerm));
   setBox('<div class="pop"><div class="ttag ttag-match">Matching</div>'
     +'<div class="qcard" id="card">'
     +'<div class="q-num">Question '+(state.idx+1)+' of '+state.questions.length+'</div>'
-    +'<div class="q-text">Match each term to its definition - write the number in the box.</div>'
-    +'<div class="m-grid">'
-    +'<div><div class="match-col-lbl">Terms</div>'+termRows+'</div>'
-    +'<div><div class="match-col-lbl">Definitions</div>'+defItems+'</div>'
+    +'<div class="mc-instr">Select a term on the left, then its definition on the right.</div>'
+    +'<div class="mc-grid">'
+    +'<div class="mc-col"><div class="mc-col-head">Terms</div>'+termItems+'</div>'
+    +'<div class="mc-col"><div class="mc-col-head">Definitions</div>'+defItems+'</div>'
     +'</div>'
     +'<div class="fb" id="fb"></div>'
     +'<div class="act-row">'
     +'<button class="btn-skip" onclick="skipQ()">Skip →</button>'
-    +'<button class="btn-reveal" id="btnReveal" onclick="checkMatch(\''+em+'\','+pairs.length+')">Check Answers</button>'
+    +'<button class="btn-reveal" id="btnReveal" onclick="submitMatch()" disabled>Submit</button>'
     +'<button class="btn-next" id="btnNext" onclick="nextQ()" style="display:none">Next →</button>'
     +'</div></div></div>');
 }
 
-function checkMatch(em,pairCount){
-  var card=document.getElementById('card');
-  if(card.dataset.done)return;
+function matchSelectTerm(i){
+  var card = document.getElementById('card');
+  if(card.dataset.done) return;
+  // Deselect if already selected
+  if(matchState.selectedTerm===i){ matchState.selectedTerm=null; refreshMatchUI(); return; }
+  matchState.selectedTerm=i;
+  // If a def is already selected, make the connection
+  if(matchState.selectedDef!==null){ matchMakePair(); return; }
+  refreshMatchUI();
+}
+
+function matchSelectDef(i){
+  var card = document.getElementById('card');
+  if(card.dataset.done) return;
+  if(matchState.selectedDef===i){ matchState.selectedDef=null; refreshMatchUI(); return; }
+  matchState.selectedDef=i;
+  if(matchState.selectedTerm!==null){ matchMakePair(); return; }
+  refreshMatchUI();
+}
+
+function matchMakePair(){
+  var ti = matchState.selectedTerm;
+  var di = matchState.selectedDef;
+  // Remove any existing connection for this term or def
+  Object.keys(matchState.connections).forEach(function(k){
+    if(parseInt(k)===ti || matchState.connections[k]===di) delete matchState.connections[k];
+  });
+  matchState.connections[ti] = di;
+  matchState.selectedTerm = null;
+  matchState.selectedDef = null;
+  refreshMatchUI();
+  // Enable submit if all terms matched
+  var submitBtn = document.getElementById('btnReveal');
+  if(submitBtn) submitBtn.disabled = Object.keys(matchState.connections).length < matchState.pairs.length;
+}
+
+function refreshMatchUI(){
+  var pairs = matchState.pairs;
+  var conns = matchState.connections;
+  // Reset all
+  pairs.forEach(function(_,i){
+    var t = document.getElementById('mct-'+i);
+    var a = document.getElementById('mca-'+i);
+    if(!t) return;
+    t.className='mc-term';
+    if(a) a.textContent='';
+    if(conns[i]!==undefined){
+      t.classList.add('mc-connected');
+      if(a) a.textContent = (conns[i]+1)+'';
+    }
+    if(matchState.selectedTerm===i) t.classList.add('mc-selected');
+  });
+  matchState.shuffledDefs.forEach(function(_,i){
+    var d = document.getElementById('mcd-'+i);
+    if(!d) return;
+    d.className='mc-def';
+    // Check if this def is connected
+    var isConn = Object.values(conns).indexOf(i) >= 0;
+    if(isConn) d.classList.add('mc-connected');
+    if(matchState.selectedDef===i) d.classList.add('mc-selected');
+  });
+}
+
+function submitMatch(){
+  var card = document.getElementById('card');
+  if(card.dataset.done) return;
   card.dataset.done='1';
-  var numToTerm=JSON.parse(decodeURIComponent(em));
   document.getElementById('btnReveal').style.display='none';
   document.getElementById('btnNext').style.display='block';
   card.querySelector('.btn-skip').style.display='none';
-  var q=state.questions[state.idx];
-  var got=0; var keyParts=[];
-  q.pairs.forEach(function(p,i){
-    var inp=document.getElementById('mi-'+i);
-    var termEl=document.getElementById('mt-'+i);
-    var val=parseInt(inp.value.trim());
-    inp.disabled=true;
-    var cn=Object.keys(numToTerm).find(function(k){return numToTerm[k]===p.term;});
-    keyParts.push(String.fromCharCode(65+i)+'&#8594;'+cn);
-    if(numToTerm[val]===p.term){termEl.classList.add('m-correct');inp.style.color='var(--green)';got++;}
-    else{termEl.classList.add('m-wrong');inp.style.color='var(--red)';}
+
+  var pairs = matchState.pairs;
+  var conns = matchState.connections;
+  var shuffledDefs = matchState.shuffledDefs;
+  var got = 0;
+  var keyParts = [];
+
+  pairs.forEach(function(p,i){
+    var t = document.getElementById('mct-'+i);
+    var connDefIdx = conns[i];
+    var correctDefIdx = shuffledDefs.findIndex(function(d){ return d.origIdx===i; });
+    var correctNum = correctDefIdx + 1;
+    keyParts.push(String.fromCharCode(65+i)+'='+correctNum);
+    if(connDefIdx===correctDefIdx){
+      got++;
+      if(t){ t.className='mc-term mc-correct'; }
+      var d = document.getElementById('mcd-'+correctDefIdx);
+      if(d) d.className='mc-def mc-def-correct';
+    } else {
+      if(t){ t.className='mc-term mc-wrong'; }
+      if(connDefIdx!==undefined){
+        var wd = document.getElementById('mcd-'+connDefIdx);
+        if(wd) wd.className='mc-def mc-def-wrong';
+      }
+      // Show correct def
+      var cd = document.getElementById('mcd-'+correctDefIdx);
+      if(cd) cd.classList.add('mc-def-correct');
+    }
   });
-  var fb=document.getElementById('fb');
-  var pct=got/pairCount;
-  fb.className='feedback '+(pct>=0.7?'fb-correct':'fb-wrong')+' show';
-  fb.innerHTML='You matched <strong>'+got+'/'+pairCount+'</strong> correctly.<br><span style="font-size:12px;opacity:.85;font-family:\'DM Mono\',monospace">Key: '+keyParts.join('  ')+'</span>';
-  if(pct>=0.7)state.correct+=got; else state.wrong+=(pairCount-got);
+
+  var pct = got/pairs.length;
+  var fb = document.getElementById('fb');
+  fb.className='fb '+(pct>=0.7?'fb-ok':'fb-no')+' show';
+  fb.innerHTML='You matched <strong>'+got+'/'+pairs.length+'</strong> correctly. '
+    +'<span style="font-size:12px;color:var(--text3);font-family:var(--mono)">Key: '+keyParts.join(' ')+'</span>';
+  if(pct>=0.7) state.correct+=got; else state.wrong+=(pairs.length-got);
   updateTopStats();
 }
 

@@ -805,6 +805,94 @@ body{
 .cl-extra-arrow{font-size:16px;color:var(--text3);transition:var(--trans);}
 .cl-extra-card:hover .cl-extra-arrow{color:#14b8a6;transform:translateX(3px);}
 
+/* ══ EXAM PREP ══ */
+.exam-header{
+  background:var(--surface);border:2px solid var(--text);
+  border-radius:var(--r);padding:20px 24px;margin-bottom:28px;text-align:center;
+}
+.exam-school{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;}
+.exam-title{font-family:var(--serif);font-size:26px;font-weight:700;letter-spacing:-.03em;color:var(--text);margin-bottom:14px;}
+.exam-meta-row{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;font-size:14px;color:var(--text2);}
+.exam-name-input{border:none;border-bottom:1px solid var(--border3);background:transparent;font-family:var(--sans);font-size:14px;color:var(--text);outline:none;width:160px;padding:2px 4px;}
+.exam-section{margin-bottom:36px;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.exam-section-title{font-family:var(--serif);font-size:16px;font-weight:700;padding:12px 18px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.exam-marks{font-size:12px;font-weight:600;font-family:var(--mono);color:var(--text3);background:var(--surface3);padding:3px 9px;border-radius:4px;}
+.exam-instructions{font-size:13px;color:var(--text2);padding:12px 18px 8px;line-height:1.7;font-style:italic;}
+.exam-scenario{font-size:13px;color:var(--text2);padding:4px 18px 14px;line-height:1.85;background:var(--accent-light);border-bottom:1px solid var(--border);}
+.exam-check-btn{margin:14px 18px;padding:9px 22px;border-radius:var(--r-sm);border:none;background:var(--accent);color:#fff;font-size:13px;font-weight:600;font-family:var(--sans);cursor:pointer;transition:opacity var(--ease);}
+.exam-check-btn:hover{opacity:.88;}
+.exam-feedback{display:none;margin:0 18px 16px;padding:14px 16px;border-radius:var(--r-sm);background:var(--surface2);border:1px solid var(--border);font-size:13px;line-height:2;}
+.exam-feedback.show{display:block;}
+.exam-result{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--text);}
+/* Word bank */
+.exam-wordbank{padding:8px 18px 4px;}
+.exam-wordbank-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
+.exam-wordbank-chips{display:flex;flex-wrap:wrap;gap:7px;}
+.wb-chip{padding:4px 12px;border-radius:4px;background:var(--surface3);border:1px solid var(--border2);font-size:13px;font-weight:500;color:var(--text2);}
+.exam-fitb-list{padding:10px 18px 4px;}
+.exam-fitb-row{display:flex;align-items:baseline;gap:8px;margin-bottom:12px;font-size:14px;color:var(--text);}
+.exam-fitb-num{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--text3);min-width:20px;}
+.exam-fitb-q{line-height:1.8;flex:1;}
+.exam-blank{border:none;border-bottom:2px solid var(--border3);background:transparent;font-family:var(--sans);font-size:14px;color:var(--accent);outline:none;width:160px;padding:2px 4px;margin:0 4px;}
+.exam-blank:focus{border-bottom-color:var(--accent);}
+/* Journal */
+.journal-wrap{overflow-x:auto;padding:0 18px 4px;}
+.journal-table{width:100%;border-collapse:collapse;font-size:13px;}
+.journal-table th{background:var(--surface2);padding:8px 10px;border:1px solid var(--border2);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);text-align:center;}
+.journal-table td{border:1px solid var(--border);padding:2px 4px;vertical-align:middle;}
+.jt-date{width:80px;}
+.jt-desc{min-width:240px;}
+.jt-pr{width:50px;}
+.jt-amt{width:110px;}
+.jt-input{width:100%;background:transparent;border:none;outline:none;font-family:var(--sans);font-size:13px;color:var(--text);padding:5px 6px;}
+.jt-num-input{text-align:right;}
+.jt-indent{padding-left:24px!important;}
+.jt-pr-input{text-align:center;}
+/* Worksheet */
+.ws-outer{padding:0 18px 4px;overflow-x:auto;}
+.ws-title{text-align:center;font-size:13px;line-height:1.8;padding:10px 0 8px;font-weight:600;color:var(--text);}
+.ws-scroll{overflow-x:auto;}
+.ws-table{border-collapse:collapse;font-size:12px;min-width:700px;width:100%;}
+.ws-table th,.ws-table td{border:1px solid var(--border2);padding:0;}
+.ws-header-top th,.ws-header-sub th{background:var(--surface2);padding:6px 8px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);text-align:center;}
+.ws-sec-head{border-bottom:1px solid var(--border3)!important;}
+.ws-acct-head{min-width:160px;text-align:left!important;padding-left:8px!important;}
+.ws-acct-cell{padding:3px 8px!important;font-size:12.5px;color:var(--text2);border-right:2px solid var(--border2)!important;white-space:nowrap;}
+.ws-num-cell{text-align:right;padding:0!important;min-width:80px;}
+.ws-input{width:100%;background:transparent;border:none;outline:none;text-align:right;font-family:var(--mono);font-size:12px;color:var(--text);padding:5px 6px;}
+.ws-input:focus{background:var(--accent-light);}
+.ws-given{display:block;text-align:right;padding:5px 6px;font-family:var(--mono);font-size:12px;color:var(--text2);}
+.ws-total-row{background:var(--surface2);}
+.ws-total-input{font-weight:700;}
+.ws-col-head{min-width:80px;}
+/* Financial Statements */
+.stmt-wrap{padding:0 18px 8px;}
+.stmt-title{text-align:center;font-size:13px;line-height:1.8;padding:10px 0 8px;font-weight:600;color:var(--text);}
+.stmt-table{width:100%;max-width:500px;margin:0 auto;border-collapse:collapse;font-size:13.5px;}
+.stmt-label{padding:5px 8px;color:var(--text2);}
+.stmt-section{padding:7px 8px;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface2);}
+.stmt-sub-section{padding:5px 8px;font-weight:600;font-size:12px;color:var(--text);text-decoration:underline;}
+.pl20{padding-left:24px!important;}
+.stmt-amt{text-align:right;padding:5px 8px;}
+.stmt-space{width:120px;}
+.stmt-input{width:90px;border:none;border-bottom:1px solid var(--border2);background:transparent;font-family:var(--mono);font-size:13px;color:var(--accent);text-align:right;outline:none;padding:2px 4px;}
+.stmt-input:focus{border-bottom-color:var(--accent);}
+.stmt-subtotal td{border-top:1px solid var(--border2);}
+.stmt-total td{border-top:2px solid var(--text);border-bottom:2px solid var(--text);}
+
+/* ══ PRINCIPLES GRID ══ */
+.principles-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:8px;margin-top:4px;
+}
+.principle-chip{
+  padding:14px 16px;border-radius:var(--r-sm);
+  border:1px solid var(--border);
+  background:var(--surface);
+}
+.principle-chip-name{font-size:13px;font-weight:700;margin-bottom:4px;letter-spacing:-.01em;}
+.principle-chip-def{font-size:12px;color:var(--text3);line-height:1.5;}
+
 /* ══ FILL IN THE BLANK ══ */
 .ttag-fitb{background:rgba(20,184,166,.1);color:#14b8a6;}
 .lvl-tile.t-fitb:hover{border-color:rgba(20,184,166,.4);box-shadow:0 8px 32px rgba(20,184,166,.1);}
@@ -2125,6 +2213,9 @@ function routeFromPath(path){
   if(p==='/progress') { renderProgress(); return; }
   if(p==='/practice-test'||p==='/practice-test/session') { renderPracticeTest(true); return; }
   if(p==='/fill-in-the-blank') { startGlobalFITB(true); return; }
+  if(p==='/principles') { renderPrinciplesMode(true); return; }
+  if(p==='/principles/session') { startPrinciplesSession(true); return; }
+  if(p==='/exam-prep') { renderExamPrep(true); return; }
 
   // /chapters/c1, /chapters/c1/level1, /chapters/c1/all, /chapters/c1/unit2 etc.
   var chMatch = p.match(/^\/chapters\/c(\d+)(\/(.+))?$/);
@@ -2205,7 +2296,7 @@ function renderChapterList(noPush){
   });
   html+='</div>'
 
-  // Fill in the Blank section
+  // Other Modes section
   +'<div class="cl-section-head">Other Modes</div>'
   +'<div class="cl-extra-row">'
   +'<div class="cl-extra-card" onclick="startGlobalFITB()">'
@@ -2216,10 +2307,517 @@ function renderChapterList(noPush){
   +'</div>'
   +'<div class="cl-extra-arrow">›</div>'
   +'</div>'
+  +'<div class="cl-extra-card" onclick="renderPrinciplesMode()">'
+  +'<div class="cl-extra-icon" style="color:var(--accent)">⚖️</div>'
+  +'<div class="cl-extra-body">'
+  +'<div class="cl-extra-title">Accounting Principles</div>'
+  +'<div class="cl-extra-sub">GAAPs, IFRS concepts — Business Entity, Cost, Matching, Conservatism, Materiality, Objectivity, and more.</div>'
+  +'</div>'
+  +'<div class="cl-extra-arrow">›</div>'
+  +'</div>'
+  +'<div class="cl-extra-card" onclick="renderExamPrep()">'
+  +'<div class="cl-extra-icon" style="color:#e11d48">📋</div>'
+  +'<div class="cl-extra-body">'
+  +'<div class="cl-extra-title" style="color:#e11d48">Exam Prep</div>'
+  +'<div class="cl-extra-sub">Full practice exam — adjusting entries, closing entries, worksheets, classified balance sheet, statement of owner\'s equity.</div>'
+  +'</div>'
+  +'<div class="cl-extra-arrow">›</div>'
+  +'</div>'
   +'</div>'
 
   +'</div></div>';
   app.innerHTML=html;
+}
+
+// ── ACCOUNTING PRINCIPLES DATA ────────────────────────────────────
+var PRINCIPLES_QUESTIONS = [
+  // ── Business Entity Principle ─────────────────────────────
+  {type:'mcq',q:"What does the Business Entity Principle require?",opts:["All business debts must be paid within one year","The owner's personal finances must be kept completely separate from the business's finances","The business must file taxes as a corporation","All transactions must be recorded in the owner's name"],ans:1,exp:"The Business Entity Principle treats the business as a separate entity from its owner. Personal car payments, groceries, etc. must never appear in the business's books."},
+  {type:'mcq',q:"An owner pays for a personal vacation using the business bank account. Which principle is violated?",opts:["Matching Principle","Cost Principle","Business Entity Principle","Materiality Principle"],ans:2,exp:"The Business Entity Principle is violated - personal expenses must be kept completely separate from business finances."},
+  {type:'mcq',q:"TRUE or FALSE: Under the Business Entity Principle, a sole proprietor and their business are treated as the same entity for accounting purposes.",opts:["True","False"],ans:1,exp:"False. Even though legally a sole proprietor and their business may be one, the Business Entity Principle requires them to be treated as SEPARATE entities for accounting purposes."},
+  {type:'mcq',q:"Which of the following would violate the Business Entity Principle?",opts:["Recording depreciation on business equipment","Recording the owner's personal mortgage payment as a business expense","Preparing a balance sheet at year end","Recording a cash sale to a customer"],ans:1,exp:"Recording personal expenses in the business books violates the Business Entity Principle - personal and business finances must remain completely separate."},
+
+  // ── Cost Principle ────────────────────────────────────────
+  {type:'mcq',q:"What does the Cost Principle (Historical Cost Principle) state?",opts:["Assets should be recorded at their current market value","Assets should be recorded at the price originally paid for them","Assets should be recorded at their replacement cost","Assets should be revalued every year"],ans:1,exp:"The Cost Principle requires assets to be recorded at their original purchase price (historical cost) - not current market value, even if the asset's value has changed significantly."},
+  {type:'mcq',q:"A business bought land for $50,000. It is now worth $120,000. At what value should it appear on the balance sheet?",opts:["$120,000 - current market value","$85,000 - average of cost and market value","$50,000 - original purchase price","$0 - land does not appear on the balance sheet"],ans:2,exp:"Under the Cost Principle, assets are recorded at original cost ($50,000) regardless of current market value. This provides objectivity and consistency."},
+  {type:'mcq',q:"TRUE or FALSE: The Cost Principle is also called the Historical Cost Principle.",opts:["True","False"],ans:0,exp:"True. The Cost Principle and Historical Cost Principle refer to the same concept - recording assets at their original purchase price."},
+  {type:'mcq',q:"Why is the Cost Principle used instead of recording current market values?",opts:["It is easier to calculate","It provides objective, verifiable amounts that cannot be manipulated","It results in lower taxes","It is required by the Canada Revenue Agency"],ans:1,exp:"Original cost is objective and verifiable - anyone can confirm what was paid. Market values are subjective and can fluctuate, making financial statements less reliable."},
+  {type:'mcq',q:"Which GAAP/principle requires assets to be shown at what was paid rather than what they are worth today?",opts:["Matching Principle","Business Entity Principle","Cost Principle","Conservatism Principle"],ans:2,exp:"The Cost Principle (Historical Cost Principle) requires assets to be recorded at their original purchase price, not current market value."},
+
+  // ── Matching Principle ────────────────────────────────────
+  {type:'mcq',q:"What does the Matching Principle require?",opts:["Revenue and expenses from different years should be averaged","Expenses should be recorded in the same accounting period as the revenues they helped earn","Expenses should only be recorded when cash is paid","All revenues must be matched to a specific customer"],ans:1,exp:"The Matching Principle ensures the income statement accurately reflects profitability by pairing expenses with the revenues they generated in the same period."},
+  {type:'mcq',q:"A business pays for a 12-month insurance policy in January. Under the Matching Principle, how should this be recorded?",opts:["Record the full amount as an expense in January","Record 1/12 of the cost as an expense each month","Record it as a liability","Record it as revenue"],ans:1,exp:"Each month, 1/12 of the insurance cost should be expensed to match the insurance coverage being used that month - this is the Matching Principle in action."},
+  {type:'mcq',q:"TRUE or FALSE: The Matching Principle is the basis for accrual accounting.",opts:["True","False"],ans:0,exp:"True. The Matching Principle requires recording revenues when earned and expenses when incurred (not when cash changes hands) - which is exactly what accrual accounting does."},
+  {type:'mcq',q:"Which principle explains why adjusting entries are needed for prepaid expenses and depreciation?",opts:["Business Entity Principle","Cost Principle","Matching Principle","Time Period Principle"],ans:2,exp:"Adjusting entries for prepaid insurance, supplies, and depreciation are needed to MATCH the expense to the period in which the benefit was received - applying the Matching Principle."},
+  {type:'mcq',q:"Under the Matching Principle, when should wages expense be recorded?",opts:["When the employee is hired","When the work is performed (even if paycheques are issued later)","When the paycheque is written","At year end only"],ans:1,exp:"Wages should be recorded when the WORK IS PERFORMED because that is when the expense was incurred and the related revenue was earned - not when cash is paid."},
+
+  // ── Conservatism Principle ────────────────────────────────
+  {type:'mcq',q:"What does the Conservatism Principle state?",opts:["Always choose the accounting method that gives the highest net income","When multiple accounting methods are acceptable, choose the one least likely to overstate assets or income","Always use the most expensive method","Record only confirmed revenues, not potential ones"],ans:1,exp:"Conservatism means when in doubt, choose the method that gives LOWER income and LOWER asset values. This protects users of financial statements from being misled by overstated results."},
+  {type:'mcq',q:"A business is choosing between two depreciation methods. Method A gives $5,000 depreciation; Method B gives $8,000. Under the Conservatism Principle, which should be chosen?",opts:["Method A - lower depreciation, higher net income","Method B - higher depreciation, lower net income (more conservative)","Either method is fine","The method that gives the highest asset value"],ans:1,exp:"Conservatism requires choosing Method B - higher depreciation means lower net income and lower asset book value, which avoids overstating the financial results."},
+  {type:'mcq',q:"TRUE or FALSE: The Conservatism Principle means a business should always understate its profits.",opts:["True","False"],ans:1,exp:"False. Conservatism does NOT mean deliberately understating profits - it means choosing the more cautious option when alternatives exist, to avoid OVERSTATING assets or income."},
+  {type:'mcq',q:"Which principle is most relevant when an accountant must choose between two equally acceptable accounting methods?",opts:["Time Period Principle","Conservatism Principle","Matching Principle","Objectivity Principle"],ans:1,exp:"The Conservatism Principle guides accountants when alternatives exist - choose the method that is less likely to overstate assets or income."},
+
+  // ── Materiality Principle ─────────────────────────────────
+  {type:'mcq',q:"What does the Materiality Principle allow?",opts:["Businesses to ignore large errors","Insignificant items to be handled in the most practical way, even if it bends strict accounting rules","All expenses to be recorded as assets","Businesses to skip preparing financial statements"],ans:1,exp:"Materiality recognizes that strict accounting treatment of trivial items wastes time. A $3 stapler can be expensed immediately rather than depreciated over 5 years."},
+  {type:'mcq',q:"A business buys a $4 stapler. Under the Materiality Principle, what is the most practical treatment?",opts:["Capitalize it as a fixed asset and depreciate over 5 years","Record it as a long-term liability","Expense it immediately as a supplies expense","Ignore it entirely"],ans:0,exp:"Because the stapler's cost is immaterial (insignificant), it is practical to expense it immediately rather than going through the full depreciation process. Materiality allows this shortcut."},
+  {type:'mcq',q:"TRUE or FALSE: The Materiality Principle allows businesses to ignore large, significant accounting errors.",opts:["True","False"],ans:1,exp:"False. Materiality applies only to INSIGNIFICANT items. Large, significant items must always be treated with full accounting rigour. Only trivial amounts can be handled informally."},
+  {type:'mcq',q:"An item is considered 'material' if it would:",opts:["Cost less than $100","Change a user's decision if it were reported differently","Be recorded as an asset","Appear on the income statement"],ans:1,exp:"An item is material if its misstatement or omission would change the decision of a reasonable user of the financial statements. Size alone does not determine materiality."},
+
+  // ── Principle of Objectivity ──────────────────────────────
+  {type:'mcq',q:"What does the Principle of Objectivity (Objective Evidence) require?",opts:["All accounting estimates must be exact","All accounting entries must be supported by verifiable, objective evidence","Accountants must never use estimates","Financial statements must be audited every year"],ans:1,exp:"The Objectivity Principle requires that accounting entries be based on objective, verifiable evidence - such as invoices, receipts, and contracts - not opinions or estimates."},
+  {type:'mcq',q:"Which of the following BEST satisfies the Principle of Objectivity?",opts:["The owner's estimate of how much sales will grow next year","A supplier's invoice for $500 of supplies purchased","The accountant's opinion on asset value","A verbal agreement with a customer"],ans:1,exp:"A supplier's invoice is objective, verifiable evidence. Estimates, opinions, and verbal agreements are subjective and do not satisfy the Objectivity Principle."},
+  {type:'mcq',q:"Why are source documents (invoices, receipts, cheques) essential to the Principle of Objectivity?",opts:["They allow businesses to avoid taxes","They provide verifiable, objective proof that transactions actually occurred","They replace the need for a journal","They are required by the government"],ans:1,exp:"Source documents provide objective, verifiable evidence of transactions - supporting the Objectivity Principle. They form the audit trail that proves every entry is based on real events."},
+  {type:'mcq',q:"TRUE or FALSE: An accountant's personal opinion about an asset's value satisfies the Principle of Objectivity.",opts:["True","False"],ans:1,exp:"False. The Objectivity Principle requires verifiable, objective evidence - not personal opinions. Original cost (from a source document) is objective; personal opinions are not."},
+
+  // ── Time Period Principle ──────────────────────────────────
+  {type:'mcq',q:"What does the Time Period Principle state?",opts:["A business must report financial results every month","A business's life can be divided into specific time periods for accounting and reporting purposes","All transactions must occur within the same calendar year","Financial statements must cover exactly 12 months"],ans:1,exp:"The Time Period Principle allows a business's ongoing operations to be divided into specific periods (monthly, quarterly, annually) so that timely financial reports can be prepared."},
+  {type:'mcq',q:"A company prepares financial statements every month. Which principle allows this?",opts:["Matching Principle","Business Entity Principle","Time Period Principle","Cost Principle"],ans:2,exp:"The Time Period Principle recognizes that a business's life can be divided into shorter periods - enabling monthly, quarterly, or annual reporting."},
+  {type:'mcq',q:"TRUE or FALSE: A fiscal year must run from January 1 to December 31.",opts:["True","False"],ans:1,exp:"False. A fiscal year is any 12-month period chosen by the business - it does not need to match the calendar year. Many businesses choose fiscal years that match their operating cycle."},
+  {type:'mcq',q:"Which principle is the basis for why businesses prepare annual or monthly financial statements?",opts:["Conservatism Principle","Time Period Principle","Matching Principle","Objectivity Principle"],ans:1,exp:"The Time Period Principle allows ongoing business operations to be divided into periods, making regular financial reporting possible and meaningful."},
+
+  // ── IFRS vs ASPE ──────────────────────────────────────────
+  {type:'mcq',q:"Which accounting standard is used by publicly traded companies in Canada?",opts:["ASPE","GAAP 1970","IFRS","CPA Standards"],ans:2,exp:"IFRS (International Financial Reporting Standards) is required for publicly traded companies in Canada. It allows investors worldwide to compare financial statements."},
+  {type:'mcq',q:"Which accounting standard is designed for private companies in Canada?",opts:["IFRS","ASPE","SEC Standards","Tax Accounting Standards"],ans:1,exp:"ASPE (Accounting Standards for Private Enterprises) is designed specifically for private Canadian companies. It is simpler than IFRS and better suited to smaller businesses."},
+  {type:'mcq',q:"Under IFRS, how are certain assets allowed to be reported?",opts:["Only at historical cost","At fair (market) value in some cases","At the owner's estimated value","At replacement cost only"],ans:1,exp:"A key difference: IFRS allows fair value accounting for some assets (e.g., investment properties), whereas ASPE typically uses historical cost. This is why large public companies may show different values than smaller private ones."},
+  {type:'mcq',q:"TRUE or FALSE: IFRS and ASPE are the same standard, just different names.",opts:["True","False"],ans:1,exp:"False. IFRS and ASPE are two distinct accounting frameworks with different rules. IFRS is international and used by public companies; ASPE is Canadian and used by private companies."},
+  {type:'mcq',q:"What does GAAP stand for?",opts:["Generally Accepted Accounting Principles","Government Authorized Accounting Procedures","General Annual Accounting Practices","Gross Asset Accounting Policies"],ans:0,exp:"GAAP = Generally Accepted Accounting Principles. These are the standard rules and guidelines that accountants follow when preparing financial statements."},
+  {type:'mcq',q:"Which of the following is NOT an accounting principle covered by GAAPs?",opts:["Business Entity Principle","Matching Principle","Profit Maximization Principle","Cost Principle"],ans:2,exp:"Profit Maximization is a business finance concept, not an accounting principle. GAAPs include Business Entity, Cost, Matching, Conservatism, Materiality, Objectivity, and Time Period principles."},
+
+  // ── Mixed / compare ───────────────────────────────────────
+  {type:'mcq',q:"Which principle explains why adjusting entries are made for prepaid insurance each month?",opts:["Business Entity Principle","Cost Principle","Matching Principle","Conservatism Principle"],ans:2,exp:"Prepaid insurance adjustments match the insurance expense to the period in which the coverage was used - this is the Matching Principle."},
+  {type:'mcq',q:"Which principle explains why land is still recorded at $50,000 even though it is now worth $200,000?",opts:["Matching Principle","Cost Principle","Conservatism Principle","Materiality Principle"],ans:1,exp:"The Cost Principle requires assets to be recorded at their original purchase price. Current market value is not used in historical cost accounting."},
+  {type:'mcq',q:"An accountant is unsure whether to include a $50 discrepancy. Which principle would allow them to ignore it?",opts:["Business Entity Principle","Conservatism Principle","Materiality Principle","Objectivity Principle"],ans:2,exp:"The Materiality Principle allows insignificant items to be handled practically. A $50 discrepancy is typically immaterial and may be adjusted without strict accounting treatment."},
+  {type:'mcq',q:"Which principle is violated when an accountant records an entry based on a verbal agreement with no supporting documentation?",opts:["Matching Principle","Objectivity Principle","Time Period Principle","Cost Principle"],ans:1,exp:"The Objectivity Principle requires verifiable, objective evidence (like invoices or contracts). A verbal agreement with no documentation is not objective evidence."},
+  {type:'mcq',q:"A business records its owner's personal car as a company asset. Which two principles are violated?",opts:["Cost Principle and Matching Principle","Business Entity Principle and Objectivity Principle","Time Period Principle and Conservatism Principle","Matching Principle and Materiality Principle"],ans:1,exp:"Business Entity Principle: personal assets must be separate from business assets. Objectivity Principle: there is no objective business transaction to support recording a personal car as a company asset."},
+  {type:'mcq',q:"Which principle requires that the same depreciation method be used consistently from year to year?",opts:["Conservatism Principle","Matching Principle","Consistency Principle","Time Period Principle"],ans:2,exp:"The Consistency Principle requires businesses to use the same accounting methods each period so that financial statements are comparable over time."},
+  {type:'mcq',q:"TRUE or FALSE: The Matching Principle is only relevant for large corporations.",opts:["True","False"],ans:1,exp:"False. The Matching Principle applies to ALL businesses regardless of size. Whenever a business has prepaid expenses, depreciation, or accrued items, the Matching Principle is at work."},
+  {type:'mcq',q:"Which of the following is an example of applying the Conservatism Principle?",opts:["Recording revenue before it is earned","Choosing the depreciation method that gives the highest income","Estimating bad debts to avoid overstating Accounts Receivable","Recording assets at market value"],ans:2,exp:"Estimating bad debts (amounts unlikely to be collected) reduces Accounts Receivable to a more conservative, realistic amount - avoiding overstating assets. This is Conservatism in action."},
+];
+
+function renderExamPrep(noPush){
+  hideSubBar(); showTopStats(false);
+  setBreadcrumb(['Exam Prep']);
+  window.scrollTo(0,0);
+  if(!noPush) pushRoute(BASE+'/exam-prep');
+  var app=document.getElementById('app');
+  app.innerHTML='<div class="wrap"><div class="inner pop">'
+    +'<div class="exam-header">'
+    +'<div class="exam-school">BAF3M - Grade 11 Financial Accounting Fundamentals</div>'
+    +'<div class="exam-title">Practice Exam</div>'
+    +'<div class="exam-meta-row">'
+    +'<span><b>Name:</b> <input class="exam-name-input" type="text" placeholder="Your name"></span>'
+    +'<span><b>Date:</b> <input class="exam-name-input" type="text" placeholder="Date"></span>'
+    +'</div>'
+    +'</div>'
+
+    // Section 1: Fill in the Blank word bank
+    +'<div class="exam-section">'
+    +'<div class="exam-section-title">Section 1 &nbsp;—&nbsp; Fill in the Blank <span class="exam-marks">/20</span></div>'
+    +'<div class="exam-instructions">Use the word bank below. Write the best term in each blank.</div>'
+    +'<div class="exam-wordbank" id="wordBank"></div>'
+    +'<div class="exam-fitb-list" id="fitbList"></div>'
+    +'</div>'
+
+    // Section 2: Journal Entries
+    +'<div class="exam-section">'
+    +'<div class="exam-section-title">Section 2 &nbsp;—&nbsp; Adjusting Journal Entries <span class="exam-marks">/16</span></div>'
+    +'<div class="exam-instructions">Prepare the adjusting journal entries for December 31. Show your work in the general journal below.</div>'
+    +'<div class="exam-scenario">'
+    +'<b>Given information for December 31:</b><br>'
+    +'a) Supplies on hand at Dec 31: $320. Unadjusted Supplies balance: $1,100.<br>'
+    +'b) Monthly insurance: $150/month. Unadjusted Prepaid Insurance balance: $1,800.<br>'
+    +'c) Equipment cost $24,000, useful life 5 years, residual value $0. Use straight-line depreciation.<br>'
+    +'d) Wages earned but unpaid at Dec 31: $680.'
+    +'</div>'
+    +buildJournal('adj',[
+      {date:'Dec 31',desc:'(a) Supplies Expense',dr:'',cr:''},
+      {date:'',desc:'Supplies',dr:'',cr:''},
+      {date:'Dec 31',desc:'(b) Insurance Expense',dr:'',cr:''},
+      {date:'',desc:'Prepaid Insurance',dr:'',cr:''},
+      {date:'Dec 31',desc:'(c) Depreciation Expense - Equipment',dr:'',cr:''},
+      {date:'',desc:'Accumulated Depreciation - Equipment',dr:'',cr:''},
+      {date:'Dec 31',desc:'(d) Wages Expense',dr:'',cr:''},
+      {date:'',desc:'Wages Payable',dr:'',cr:''},
+    ])
+    +'<button class="exam-check-btn" onclick="checkAdjEntries()">Check Answers</button>'
+    +'<div class="exam-feedback" id="adjFeedback"></div>'
+    +'</div>'
+
+    // Section 3: Closing Entries
+    +'<div class="exam-section">'
+    +'<div class="exam-section-title">Section 3 &nbsp;—&nbsp; Closing Journal Entries <span class="exam-marks">/16</span></div>'
+    +'<div class="exam-instructions">Prepare the four closing entries for the year ended December 31.</div>'
+    +'<div class="exam-scenario">'
+    +'<b>Adjusted balances:</b><br>'
+    +'Service Revenue: $48,200 &nbsp;|&nbsp; Rent Revenue: $3,600<br>'
+    +'Wages Expense: $18,400 &nbsp;|&nbsp; Rent Expense: $9,600 &nbsp;|&nbsp; Supplies Expense: $780 &nbsp;|&nbsp; Insurance Expense: $1,800 &nbsp;|&nbsp; Depreciation Expense: $4,800<br>'
+    +'Owner\'s Drawings: $14,000 &nbsp;|&nbsp; J. Smith, Capital (opening): $52,000'
+    +'</div>'
+    +buildJournal('cls',[
+      {date:'Dec 31',desc:'(1) Service Revenue',dr:'',cr:''},
+      {date:'',desc:'Rent Revenue',dr:'',cr:''},
+      {date:'',desc:'Income Summary',dr:'',cr:''},
+      {date:'Dec 31',desc:'(2) Income Summary',dr:'',cr:''},
+      {date:'',desc:'Wages Expense',dr:'',cr:''},
+      {date:'',desc:'Rent Expense',dr:'',cr:''},
+      {date:'',desc:'Supplies Expense',dr:'',cr:''},
+      {date:'',desc:'Insurance Expense',dr:'',cr:''},
+      {date:'',desc:'Depreciation Expense',dr:'',cr:''},
+      {date:'Dec 31',desc:'(3) Income Summary',dr:'',cr:''},
+      {date:'',desc:'J. Smith, Capital',dr:'',cr:''},
+      {date:'Dec 31',desc:'(4) J. Smith, Capital',dr:'',cr:''},
+      {date:'',desc:'J. Smith, Drawings',dr:'',cr:''},
+    ])
+    +'<button class="exam-check-btn" onclick="checkClosingEntries()">Check Answers</button>'
+    +'<div class="exam-feedback" id="clsFeedback"></div>'
+    +'</div>'
+
+    // Section 4: 8-Column Worksheet
+    +'<div class="exam-section">'
+    +'<div class="exam-section-title">Section 4 &nbsp;—&nbsp; 8-Column Worksheet <span class="exam-marks">/20</span></div>'
+    +'<div class="exam-instructions">Complete the 8-column worksheet for the year ended December 31. Use the trial balance and adjustments data provided.</div>'
+    +buildWorksheet()
+    +'<button class="exam-check-btn" onclick="checkWorksheet()">Check Answers</button>'
+    +'<div class="exam-feedback" id="wsFeedback"></div>'
+    +'</div>'
+
+    // Section 5: Classified Balance Sheet
+    +'<div class="exam-section">'
+    +'<div class="exam-section-title">Section 5 &nbsp;—&nbsp; Classified Financial Statements <span class="exam-marks">/20</span></div>'
+    +'<div class="exam-instructions">Using the following adjusted balances, prepare: (a) the Statement of Owner\'s Equity, and (b) a classified Balance Sheet as at December 31.</div>'
+    +'<div class="exam-scenario">'
+    +'Cash $8,400 &nbsp;|&nbsp; Accounts Receivable $3,200 &nbsp;|&nbsp; Supplies $320 &nbsp;|&nbsp; Prepaid Insurance $1,200<br>'
+    +'Equipment $24,000 &nbsp;|&nbsp; Accumulated Depreciation - Equipment $4,800<br>'
+    +'Accounts Payable $2,800 &nbsp;|&nbsp; Wages Payable $680 &nbsp;|&nbsp; Mortgage Payable (long-term) $12,000<br>'
+    +'Net Income (from Section 3): $16,420 &nbsp;|&nbsp; Drawings $14,000 &nbsp;|&nbsp; Opening Capital $52,000'
+    +'</div>'
+    +buildStatementOfEquity()
+    +buildClassifiedBS()
+    +'<button class="exam-check-btn" onclick="checkFinancials()">Check Answers</button>'
+    +'<div class="exam-feedback" id="bsFeedback"></div>'
+    +'</div>'
+
+    +'<button class="back-nav" onclick="renderChapterList()">← Back to chapters</button>'
+    +'</div></div>';
+
+  // Populate word bank FITB
+  buildExamFITB();
+}
+
+// ── Journal builder ────────────────────────────────────────────────
+function buildJournal(prefix, rows){
+  var html='<div class="journal-wrap"><table class="journal-table">'
+    +'<thead><tr>'
+    +'<th class="jt-date">Date</th>'
+    +'<th class="jt-desc">Account Title and Explanation</th>'
+    +'<th class="jt-pr">PR</th>'
+    +'<th class="jt-amt">Debit</th>'
+    +'<th class="jt-amt">Credit</th>'
+    +'</tr></thead><tbody>';
+  rows.forEach(function(r,i){
+    var isCredit = !r.dr && r.date==='';
+    html+='<tr>'
+      +'<td class="jt-date"><input class="jt-input" type="text" value="'+r.date+'" placeholder="" id="'+prefix+'_date_'+i+'"></td>'
+      +'<td class="jt-desc"><input class="jt-input jt-desc-input'+(isCredit?' jt-indent':'')+'" type="text" value="'+r.desc+'" placeholder="Account name" id="'+prefix+'_desc_'+i+'"></td>'
+      +'<td class="jt-pr"><input class="jt-input jt-pr-input" type="text" id="'+prefix+'_pr_'+i+'"></td>'
+      +'<td class="jt-amt"><input class="jt-input jt-num-input" type="text" value="'+r.dr+'" placeholder="" id="'+prefix+'_dr_'+i+'"></td>'
+      +'<td class="jt-amt"><input class="jt-input jt-num-input" type="text" value="'+r.cr+'" placeholder="" id="'+prefix+'_cr_'+i+'"></td>'
+      +'</tr>';
+  });
+  html+='</tbody></table></div>';
+  return html;
+}
+
+// ── Worksheet builder ──────────────────────────────────────────────
+function buildWorksheet(){
+  var accounts=[
+    {name:'Cash',tb_dr:'8,400',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Accounts Receivable',tb_dr:'3,200',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Supplies',tb_dr:'1,100',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Prepaid Insurance',tb_dr:'1,800',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Equipment',tb_dr:'24,000',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Accumulated Depreciation',tb_dr:'',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Accounts Payable',tb_dr:'',tb_cr:'2,800',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'J. Smith, Capital',tb_dr:'',tb_cr:'52,000',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'J. Smith, Drawings',tb_dr:'14,000',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Service Revenue',tb_dr:'',tb_cr:'48,200',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Rent Revenue',tb_dr:'',tb_cr:'3,600',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Wages Expense',tb_dr:'17,720',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Rent Expense',tb_dr:'9,600',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Supplies Expense',tb_dr:'',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Insurance Expense',tb_dr:'',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Depreciation Expense',tb_dr:'',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+    {name:'Wages Payable',tb_dr:'',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+  ];
+  var html='<div class="ws-outer"><div class="ws-title">J. Smith Services<br>Work Sheet<br>For the Year Ended December 31</div>'
+    +'<div class="ws-scroll"><table class="ws-table">'
+    +'<thead>'
+    +'<tr class="ws-header-top">'
+    +'<th rowspan="2" class="ws-acct-head">Account Title</th>'
+    +'<th colspan="2" class="ws-sec-head">Trial Balance</th>'
+    +'<th colspan="2" class="ws-sec-head">Adjustments</th>'
+    +'<th colspan="2" class="ws-sec-head">Income Statement</th>'
+    +'<th colspan="2" class="ws-sec-head">Balance Sheet</th>'
+    +'</tr>'
+    +'<tr class="ws-header-sub">'
+    +'<th class="ws-col-head">Dr.</th><th class="ws-col-head">Cr.</th>'
+    +'<th class="ws-col-head">Dr.</th><th class="ws-col-head">Cr.</th>'
+    +'<th class="ws-col-head">Dr.</th><th class="ws-col-head">Cr.</th>'
+    +'<th class="ws-col-head">Dr.</th><th class="ws-col-head">Cr.</th>'
+    +'</tr>'
+    +'</thead><tbody>';
+  var cols=['tb_dr','tb_cr','adj_dr','adj_cr','is_dr','is_cr','bs_dr','bs_cr'];
+  accounts.forEach(function(a,i){
+    html+='<tr>';
+    html+='<td class="ws-acct-cell">'+a.name+'</td>';
+    cols.forEach(function(col){
+      var readonly = col==='tb_dr'||col==='tb_cr';
+      html+='<td class="ws-num-cell">'
+        +(readonly
+          ? '<span class="ws-given">'+(a[col]||'')+'</span>'
+          : '<input class="ws-input" type="text" id="ws_'+i+'_'+col+'" placeholder="">'
+        )+'</td>';
+    });
+    html+='</tr>';
+  });
+  // Totals row
+  html+='<tr class="ws-total-row">'
+    +'<td class="ws-acct-cell"><b>Totals</b></td>';
+  cols.forEach(function(col){
+    var readonly = col==='tb_dr'||col==='tb_cr';
+    html+='<td class="ws-num-cell">'
+      +(readonly ? '<span class="ws-given"></span>' : '<input class="ws-input ws-total-input" type="text" id="ws_total_'+col+'" placeholder="">')
+      +'</td>';
+  });
+  html+='</tr>';
+  // Net income row
+  html+='<tr class="ws-total-row">'
+    +'<td class="ws-acct-cell"><b>Net Income</b></td>';
+  cols.forEach(function(col){
+    var show = col==='is_dr'||col==='is_cr'||col==='bs_dr'||col==='bs_cr';
+    html+='<td class="ws-num-cell">'
+      +(show ? '<input class="ws-input ws-total-input" type="text" id="ws_ni_'+col+'" placeholder="">' : '')
+      +'</td>';
+  });
+  html+='</tr>';
+  html+='</tbody></table></div></div>';
+  return html;
+}
+
+// ── Statement of Owner's Equity builder ───────────────────────────
+function buildStatementOfEquity(){
+  return '<div class="stmt-wrap">'
+    +'<div class="stmt-title">J. Smith, Capital<br><small>Statement of Owner\'s Equity</small><br><small>For the Year Ended December 31</small></div>'
+    +'<table class="stmt-table">'
+    +'<tr><td class="stmt-label">J. Smith, Capital — January 1</td><td class="stmt-space"></td><td class="stmt-amt"><input class="stmt-input" type="text" id="eq_open" placeholder=""></td></tr>'
+    +'<tr><td class="stmt-label">Add: Net Income for the year</td><td class="stmt-amt"><input class="stmt-input" type="text" id="eq_ni" placeholder=""></td><td></td></tr>'
+    +'<tr><td class="stmt-label">Less: Owner\'s Drawings</td><td class="stmt-amt">(<input class="stmt-input" type="text" id="eq_draw" placeholder="">)</td><td></td></tr>'
+    +'<tr class="stmt-subtotal"><td class="stmt-label">Net change in Capital</td><td class="stmt-amt"><input class="stmt-input" type="text" id="eq_change" placeholder=""></td><td></td></tr>'
+    +'<tr class="stmt-total"><td class="stmt-label"><b>J. Smith, Capital — December 31</b></td><td class="stmt-space"></td><td class="stmt-amt"><input class="stmt-input" type="text" id="eq_end" placeholder=""></td></tr>'
+    +'</table></div>';
+}
+
+// ── Classified Balance Sheet builder ──────────────────────────────
+function buildClassifiedBS(){
+  return '<div class="stmt-wrap" style="margin-top:20px">'
+    +'<div class="stmt-title">J. Smith Services<br><small>Balance Sheet</small><br><small>December 31</small></div>'
+    +'<table class="stmt-table">'
+    +'<tr><td class="stmt-section" colspan="3">ASSETS</td></tr>'
+    +'<tr><td class="stmt-sub-section" colspan="3">Current Assets</td></tr>'
+    +'<tr><td class="stmt-label pl20">Cash</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_cash" placeholder=""></td><td></td></tr>'
+    +'<tr><td class="stmt-label pl20">Accounts Receivable</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_ar" placeholder=""></td><td></td></tr>'
+    +'<tr><td class="stmt-label pl20">Supplies</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_supp" placeholder=""></td><td></td></tr>'
+    +'<tr><td class="stmt-label pl20">Prepaid Insurance</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_prepaid" placeholder=""></td><td></td></tr>'
+    +'<tr class="stmt-subtotal"><td class="stmt-label pl20">Total Current Assets</td><td></td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_curr_tot" placeholder=""></td></tr>'
+    +'<tr><td class="stmt-sub-section" colspan="3">Fixed Assets</td></tr>'
+    +'<tr><td class="stmt-label pl20">Equipment</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_equip" placeholder=""></td><td></td></tr>'
+    +'<tr><td class="stmt-label pl20">Less: Accumulated Depreciation</td><td class="stmt-amt">(<input class="stmt-input" type="text" id="bs_accum" placeholder="">)</td><td></td></tr>'
+    +'<tr class="stmt-subtotal"><td class="stmt-label pl20">Book Value of Equipment</td><td></td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_bv" placeholder=""></td></tr>'
+    +'<tr class="stmt-total"><td class="stmt-label"><b>TOTAL ASSETS</b></td><td></td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_total_assets" placeholder=""></td></tr>'
+    +'<tr><td class="stmt-section" colspan="3">LIABILITIES</td></tr>'
+    +'<tr><td class="stmt-sub-section" colspan="3">Current Liabilities</td></tr>'
+    +'<tr><td class="stmt-label pl20">Accounts Payable</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_ap" placeholder=""></td><td></td></tr>'
+    +'<tr><td class="stmt-label pl20">Wages Payable</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_wp" placeholder=""></td><td></td></tr>'
+    +'<tr class="stmt-subtotal"><td class="stmt-label pl20">Total Current Liabilities</td><td></td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_curr_liab" placeholder=""></td></tr>'
+    +'<tr><td class="stmt-sub-section" colspan="3">Long-Term Liabilities</td></tr>'
+    +'<tr><td class="stmt-label pl20">Mortgage Payable</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_mort" placeholder=""></td><td></td></tr>'
+    +'<tr class="stmt-subtotal"><td class="stmt-label pl20">Total Liabilities</td><td></td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_total_liab" placeholder=""></td></tr>'
+    +'<tr><td class="stmt-section" colspan="3">OWNER\'S EQUITY</td></tr>'
+    +'<tr><td class="stmt-label pl20">J. Smith, Capital</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_capital" placeholder=""></td><td></td></tr>'
+    +'<tr class="stmt-total"><td class="stmt-label"><b>TOTAL LIABILITIES AND OWNER\'S EQUITY</b></td><td></td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_total_le" placeholder=""></td></tr>'
+    +'</table></div>';
+}
+
+// ── FITB word bank for Section 1 ──────────────────────────────────
+var EXAM_FITB = [
+  {q:"The ___ account is used as a clearing account during the closing process.",ans:"Income Summary",hint:"income summary"},
+  {q:"The ___ method charges the same amount of depreciation each year.",ans:"straight-line",hint:"straight-line"},
+  {q:"Assets minus liabilities equals ___.",ans:"Owner's Equity",hint:"owner's equity"},
+  {q:"The ___ Principle requires recording expenses in the same period as the revenues they helped earn.",ans:"Matching",hint:"matching"},
+  {q:"Original cost minus accumulated depreciation equals the asset's ___ value.",ans:"book",hint:"book value"},
+  {q:"An asset that will be used for more than one year is called a ___ asset.",ans:"fixed",hint:"fixed"},
+  {q:"The ___ trial balance is prepared after all closing entries have been journalized and posted.",ans:"post-closing",hint:"post-closing"},
+  {q:"A ___ account (like Accumulated Depreciation) reduces the balance of a related account.",ans:"contra",hint:"contra"},
+  {q:"Under the ___ method, the depreciation rate is applied to the declining book value each year.",ans:"declining balance",hint:"declining balance"},
+  {q:"The ___ basis of accounting records revenue when earned and expenses when incurred.",ans:"accrual",hint:"accrual"},
+];
+
+function buildExamFITB(){
+  var shuffled = shuffle(EXAM_FITB.slice());
+  var wordBank = shuffled.map(function(q){return q.ans;});
+  var bankHtml='<div class="exam-wordbank-label">Word Bank:</div><div class="exam-wordbank-chips">'
+    +shuffle(wordBank.slice()).map(function(w){return '<span class="wb-chip">'+w+'</span>';}).join('')
+    +'</div>';
+  document.getElementById('wordBank').innerHTML=bankHtml;
+  var listHtml='';
+  shuffled.forEach(function(q,i){
+    listHtml+='<div class="exam-fitb-row">'
+      +'<span class="exam-fitb-num">'+(i+1)+'.</span>'
+      +'<span class="exam-fitb-q">'+q.q.replace('___','<input class="exam-blank" type="text" id="efitb_'+i+'" data-ans="'+q.hint+'" placeholder="___________">')+'</span>'
+      +'</div>';
+  });
+  document.getElementById('fitbList').innerHTML=listHtml;
+}
+
+// ── Check functions ────────────────────────────────────────────────
+function numVal(id){
+  var el=document.getElementById(id);
+  if(!el) return null;
+  return parseFloat((el.value||'').replace(/,/g,''))||0;
+}
+
+function checkAdjEntries(){
+  var answers={
+    adj_dr_0:780, adj_cr_1:780,   // Supplies: 1100-320
+    adj_dr_2:150, adj_cr_3:150,   // Insurance: 1800/12
+    adj_dr_4:4800, adj_cr_5:4800, // Depreciation: 24000/5
+    adj_dr_6:680, adj_cr_7:680,   // Wages payable
+  };
+  var correct=0, total=Object.keys(answers).length/2;
+  var lines=[];
+  [[0,1,'Supplies',780],[2,3,'Insurance',150],[4,5,'Depreciation',4800],[6,7,'Wages',680]].forEach(function(e){
+    var drOk=Math.abs(numVal('adj_dr_'+e[0])-e[3])<1;
+    var crOk=Math.abs(numVal('adj_cr_'+e[1])-e[3])<1;
+    if(drOk&&crOk){correct++;lines.push('<span style="color:var(--green)">✓ '+e[2]+': $'+e[3].toLocaleString()+'</span>');}
+    else lines.push('<span style="color:var(--red)">✗ '+e[2]+': Dr. $'+e[3].toLocaleString()+' / Cr. $'+e[3].toLocaleString()+'</span>');
+  });
+  var fb=document.getElementById('adjFeedback');
+  fb.innerHTML='<div class="exam-result"><b>'+correct+' / 4</b> entries correct</div>'+lines.join('<br>');
+  fb.className='exam-feedback show';
+}
+
+function checkClosingEntries(){
+  var ni=16420, exp=35380;
+  var rev1=numVal('cls_dr_0'),rev2=numVal('cls_dr_1'),revIS=numVal('cls_cr_2');
+  var revOk=Math.abs(rev1-48200)<1&&Math.abs(rev2-3600)<1&&Math.abs(revIS-51800)<1;
+  var expIS=numVal('cls_dr_3'),expOk=Math.abs(expIS-exp)<1;
+  var niDr=numVal('cls_dr_9'),niCr=numVal('cls_cr_10'),niOk=Math.abs(niDr-ni)<1&&Math.abs(niCr-ni)<1;
+  var drawDr=numVal('cls_dr_11'),drawCr=numVal('cls_cr_12'),drawOk=Math.abs(drawDr-14000)<1&&Math.abs(drawCr-14000)<1;
+  var results=[
+    [revOk,'Close Revenue: Service $48,200 + Rent $3,600 = IS $51,800'],
+    [expOk,'Close Expenses: Total $'+exp.toLocaleString()],
+    [niOk,'Close Income Summary: $'+ni.toLocaleString()],
+    [drawOk,'Close Drawings: $14,000'],
+  ];
+  var correct=results.filter(function(r){return r[0];}).length;
+  var lines=results.map(function(r){return '<span style="color:'+(r[0]?'var(--green)':'var(--red)')+'">'+(r[0]?'✓':'✗')+' '+r[1]+'</span>';});
+  var fb=document.getElementById('clsFeedback');
+  fb.innerHTML='<div class="exam-result"><b>'+correct+' / 4</b> closing entries correct</div>'+lines.join('<br>');
+  fb.className='exam-feedback show';
+}
+
+function checkWorksheet(){
+  var feedback=[];
+  var adjOk=Math.abs(numVal('ws_13_adj_dr')-780)<1&&Math.abs(numVal('ws_2_adj_cr')-780)<1;
+  feedback.push([adjOk,'Supplies adjustment: Dr. 780 / Cr. 780']);
+  var insOk=Math.abs(numVal('ws_14_adj_dr')-150)<1&&Math.abs(numVal('ws_3_adj_cr')-150)<1;
+  feedback.push([insOk,'Insurance adjustment: Dr. 150 / Cr. 150']);
+  var depOk=Math.abs(numVal('ws_15_adj_dr')-4800)<1&&Math.abs(numVal('ws_5_adj_cr')-4800)<1;
+  feedback.push([depOk,'Depreciation adjustment: Dr. 4,800 / Cr. 4,800']);
+  var wagOk=Math.abs(numVal('ws_11_adj_dr')-680)<1&&Math.abs(numVal('ws_16_adj_cr')-680)<1;
+  feedback.push([wagOk,'Wages payable adjustment: Dr. 680 / Cr. 680']);
+  var niOk=Math.abs(numVal('ws_ni_is_dr')-16420)<1;
+  feedback.push([niOk,'Net Income: $16,420 in IS Debit column']);
+  var correct=feedback.filter(function(r){return r[0];}).length;
+  var lines=feedback.map(function(r){return '<span style="color:'+(r[0]?'var(--green)':'var(--red)')+'">'+(r[0]?'✓':'✗')+' '+r[1]+'</span>';});
+  var fb=document.getElementById('wsFeedback');
+  fb.innerHTML='<div class="exam-result"><b>'+correct+' / '+feedback.length+'</b> worksheet items correct</div>'+lines.join('<br>');
+  fb.className='exam-feedback show';
+}
+
+function checkFinancials(){
+  var endCap=54420; // 52000+16420-14000
+  var totalAssets=40320; // 8400+3200+320+1200+(24000-4800)
+  var totalLiab=15480; // 2800+680+12000
+  var checks=[
+    [Math.abs(numVal('eq_end')-endCap)<1,'Ending Capital: $'+endCap.toLocaleString()],
+    [Math.abs(numVal('bs_total_assets')-totalAssets)<1,'Total Assets: $'+totalAssets.toLocaleString()],
+    [Math.abs(numVal('bs_total_liab')-totalLiab)<1,'Total Liabilities: $'+totalLiab.toLocaleString()],
+    [Math.abs(numVal('bs_capital')-endCap)<1,'Owner\'s Capital on Balance Sheet: $'+endCap.toLocaleString()],
+    [Math.abs(numVal('bs_total_le')-(totalLiab+endCap))<1,'Total Liabilities + Equity: $'+(totalLiab+endCap).toLocaleString()],
+  ];
+  var correct=checks.filter(function(r){return r[0];}).length;
+  var lines=checks.map(function(r){return '<span style="color:'+(r[0]?'var(--green)':'var(--red)')+'">'+(r[0]?'✓':'✗')+' '+r[1]+'</span>';});
+  var fb=document.getElementById('bsFeedback');
+  fb.innerHTML='<div class="exam-result"><b>'+correct+' / 5</b> key totals correct</div>'+lines.join('<br>');
+  fb.className='exam-feedback show';
+}
+
+function renderPrinciplesMode(noPush){
+  hideSubBar(); showTopStats(false);
+  setBreadcrumb(['Accounting Principles']);
+  window.scrollTo(0,0);
+  if(!noPush) pushRoute(BASE+'/principles');
+  var app=document.getElementById('app');
+  app.innerHTML='<div class="wrap"><div class="inner pop">'
+    +'<div class="pt-header">'
+    +'<div class="pt-eyebrow">GAAPs &amp; IFRS</div>'
+    +'<div class="pt-title">Accounting Principles</div>'
+    +'<div class="pt-sub">Practice every major principle covered in BAF3M - Business Entity, Cost, Matching, Conservatism, Materiality, Objectivity, Time Period, IFRS vs ASPE, and more. Questions shuffle every session.</div>'
+    +'</div>'
+    +'<div class="principles-grid">'
+    +[
+      ['Business Entity','Keeps personal and business finances separate.','var(--accent)'],
+      ['Cost (Historical Cost)','Record assets at original purchase price.','#0ea5e9'],
+      ['Matching','Match expenses to the revenues they helped earn.','#10b981'],
+      ['Conservatism','Choose the method least likely to overstate assets or income.','#8b5cf6'],
+      ['Materiality','Insignificant items can be handled practically.','#f59e0b'],
+      ['Objectivity','Entries must be supported by verifiable evidence.','#ef4444'],
+      ['Time Period','Business life is divided into reporting periods.','#ec4899'],
+      ['IFRS vs ASPE','Public companies use IFRS; private companies use ASPE.','#14b8a6'],
+    ].map(function(p){
+      return '<div class="principle-chip" style="border-color:'+p[2]+'22;background:'+p[2]+'08">'
+        +'<div class="principle-chip-name" style="color:'+p[2]+'">'+p[0]+'</div>'
+        +'<div class="principle-chip-def">'+p[1]+'</div>'
+        +'</div>';
+    }).join('')
+    +'</div>'
+    +'<button class="start-btn" style="margin-top:28px;padding:14px 40px;font-size:16px" onclick="startPrinciplesSession()">Start Practising</button>'
+    +'<button class="back-nav" onclick="renderChapterList()">← Back</button>'
+    +'</div></div>';
+}
+
+function startPrinciplesSession(noPush){
+  var qs = shuffle(PRINCIPLES_QUESTIONS.slice()).map(function(q){ return Object.assign({},q); });
+  state.chIdx=0; state.level='PRIN'; state.unitIdx=null;
+  state.questions=qs;
+  state.idx=0; state.correct=0; state.wrong=0; state.skipped=[];
+  state.screen='quiz';
+  setBreadcrumb(['Accounting Principles']);
+  if(!noPush) pushRoute(BASE+'/principles/session');
+  var sb=document.getElementById('subBar');
+  sb.classList.add('on');
+  var badge=document.getElementById('lvlBadge');
+  badge.textContent='Accounting Principles - '+qs.length+' questions';
+  badge.className='q-mode-tag';
+  document.getElementById('subProgBar').style.background='var(--accent)';
+  var tog=document.getElementById('saveToggle');
+  if(tog) tog.checked=false;
+  sessionSaveEnabled=false;
+  setSubProg(0);
+  showTopStats(true);
+  updateTopStats();
+  renderQuestion();
 }
 
 function startGlobalFITB(noPush){

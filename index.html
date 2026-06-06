@@ -783,6 +783,84 @@ body{
 .tut-mode-name{font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:2px;}
 .tut-mode-desc{font-size:12px;color:var(--text3);line-height:1.6;}
 
+/* ══ CHAPTER LIST EXTRA SECTION ══ */
+.cl-section-head{
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text3);margin:24px 0 10px;
+  padding-bottom:6px;border-bottom:1px solid var(--border);
+}
+.cl-extra-row{display:flex;flex-direction:column;gap:6px;}
+.cl-extra-card{
+  display:flex;align-items:center;gap:16px;
+  padding:16px 20px;
+  background:var(--card-bg);border:1px solid var(--border);
+  border-radius:var(--r);cursor:pointer;
+  transition:var(--trans);
+}
+.cl-extra-card:hover{background:var(--surface2);border-color:rgba(20,184,166,.4);}
+.cl-extra-icon{font-size:22px;flex-shrink:0;}
+.cl-extra-body{flex:1;}
+.cl-extra-title{font-size:14px;font-weight:600;color:var(--text);letter-spacing:-.01em;margin-bottom:3px;}
+.cl-extra-sub{font-size:12px;color:var(--text3);}
+.cl-extra-arrow{font-size:16px;color:var(--text3);transition:var(--trans);}
+.cl-extra-card:hover .cl-extra-arrow{color:#14b8a6;transform:translateX(3px);}
+
+/* ══ FILL IN THE BLANK ══ */
+.ttag-fitb{background:rgba(20,184,166,.1);color:#14b8a6;}
+.lvl-tile.t-fitb:hover{border-color:rgba(20,184,166,.4);box-shadow:0 8px 32px rgba(20,184,166,.1);}
+.fitb-q{white-space:pre-wrap;}
+.fitb-wrap{display:flex;gap:8px;margin-top:4px;}
+.fitb-input{
+  flex:1;background:var(--surface2);border:1px solid var(--border2);
+  border-radius:var(--r-sm);padding:11px 15px;
+  font-size:15px;color:var(--text);font-family:var(--sans);
+  outline:none;transition:all var(--ease);
+}
+.fitb-input:focus{border-color:#14b8a6;box-shadow:0 0 0 3px rgba(20,184,166,.12);}
+.fitb-input[disabled]{opacity:.55;cursor:default;}
+.fitb-check-btn{
+  padding:11px 22px;border-radius:var(--r-sm);border:none;
+  background:#14b8a6;color:#fff;
+  font-size:14px;font-weight:600;font-family:var(--sans);
+  cursor:pointer;transition:opacity var(--ease);white-space:nowrap;
+}
+.fitb-check-btn:hover{opacity:.88;}
+
+/* ══ PRACTICE TEST ══ */
+.pt-header{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.pt-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
+.pt-title{font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:-.02em;color:var(--text);margin-bottom:8px;}
+.pt-sub{font-size:14px;color:var(--text3);line-height:1.7;}
+.pt-config{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px 22px 18px;}
+.pt-section-label{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3);margin-bottom:10px;}
+.pt-ch-grid{display:flex;flex-direction:column;gap:6px;}
+.pt-ch-row{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 12px;border-radius:var(--r-sm);
+  border:1px solid var(--border);background:var(--surface2);
+  cursor:pointer;transition:all var(--ease);
+}
+.pt-ch-row:hover{border-color:var(--border2);background:var(--surface3);}
+.pt-ch-check{accent-color:var(--accent);width:15px;height:15px;cursor:pointer;flex-shrink:0;}
+.pt-ch-name{font-size:13px;font-weight:500;color:var(--text2);}
+.pt-btn-row{display:flex;gap:7px;flex-wrap:wrap;}
+.pt-toggle{
+  padding:7px 16px;border-radius:var(--r-sm);
+  border:1px solid var(--border2);background:var(--surface2);
+  color:var(--text3);font-size:13px;font-weight:500;
+  font-family:var(--sans);cursor:pointer;transition:all var(--ease);
+}
+.pt-toggle:hover{border-color:var(--border3);color:var(--text2);}
+.pt-toggle.active{
+  background:var(--accent-light);border-color:var(--accent);
+  color:var(--accent);font-weight:600;
+}
+.pt-error{
+  font-size:13px;color:var(--red);margin-top:10px;
+  padding:10px 14px;background:var(--red-bg);
+  border:1px solid var(--red);border-radius:var(--r-sm);
+}
+
 /* ══ SAVE TOGGLE ══ */
 .save-toggle{
   display:flex;align-items:center;gap:6px;
@@ -1805,6 +1883,120 @@ var CHAPTER_UNITS = [
    {name:"Unit 13 – Closing Entries",keys:["closing","income summary","post-closing","close revenue","close expense","closing step"]}],
 ];
 
+// ── FILL IN THE BLANK DATA ────────────────────────────────────────
+var FITB_QUESTIONS = {
+  C1:[
+    {q:"The accounting equation states that Assets = ___ + Owner's Equity.",ans:["liabilities","liability"],exp:"Assets = Liabilities + Owner's Equity - this is the fundamental ALOE equation."},
+    {q:"___ are resources owned by or owed to a business.",ans:["assets","asset"],exp:"Assets include things like Cash (owned) and Accounts Receivable (owed to the business)."},
+    {q:"The owner's share of the business is called ___ equity.",ans:["owner's","owners","owner"],exp:"Owner's Equity represents the owner's claim on the assets after all liabilities are paid."},
+    {q:"A ___ is someone to whom the business owes money.",ans:["creditor"],exp:"A creditor is owed money BY the business. A debtor owes money TO the business."},
+    {q:"Under the Cost Principle, assets are recorded at their original ___ price.",ans:["purchase","cost","historical cost","purchase price"],exp:"The Cost Principle (Historical Cost Principle) requires assets to be recorded at what was paid for them."},
+    {q:"The ___ Principle requires personal and business finances to be kept separate.",ans:["business entity","business entity principle","entity"],exp:"The Business Entity Principle treats the business as separate from its owner for accounting purposes."},
+    {q:"A ___ shows the financial position of a business at a specific date.",ans:["balance sheet"],exp:"The balance sheet lists assets, liabilities, and owner's equity at a single point in time."},
+    {q:"___ are amounts owed by a business to outside parties.",ans:["liabilities","liability"],exp:"Liabilities are debts - things the business owes to creditors, banks, and suppliers."},
+    {q:"Listing assets in order of how quickly they can be converted to cash is called order of ___.",ans:["liquidity","permanence"],exp:"Assets on the balance sheet are listed in order of liquidity - Cash first, then Accounts Receivable, then fixed assets last."},
+    {q:"IFRS stands for International Financial Reporting ___.",ans:["standards","standard"],exp:"IFRS = International Financial Reporting Standards. Used by publicly traded companies in Canada."},
+    {q:"ASPE stands for Accounting Standards for Private ___.",ans:["enterprises","enterprise"],exp:"ASPE = Accounting Standards for Private Enterprises. Used by smaller private companies in Canada."},
+    {q:"A person who owes money to the business is called a ___.",ans:["debtor"],exp:"A debtor owes money TO your business (e.g., a customer who bought on credit). A creditor is owed money by your business."},
+  ],
+  C2:[
+    {q:"In double-entry accounting, every transaction must have equal ___ and credits.",ans:["debits","debit"],exp:"For every debit there must be an equal credit - this keeps the accounting equation balanced."},
+    {q:"The left side of a T-account is the ___ side.",ans:["debit","dr","dr."],exp:"Debit = Left side. Credit = Right side. This is fixed - never changes."},
+    {q:"Assets normally have a ___ balance.",ans:["debit","dr"],exp:"Assets increase on the debit (left) side, so their normal balance is a debit balance."},
+    {q:"The complete collection of all T-accounts is called the general ___.",ans:["ledger"],exp:"The general ledger contains one T-account for every account the business uses."},
+    {q:"A ___ balance proves that total debits equal total credits in the ledger.",ans:["trial","trial balance"],exp:"A trial balance lists all accounts and their balances to verify the ledger is mathematically accurate."},
+    {q:"Opening balances are taken from the previous ___.",ans:["balance sheet"],exp:"At the start of each period, the opening balances come from the closing balance sheet of the previous period."},
+    {q:"Liabilities and Owner's Equity normally have a ___ balance.",ans:["credit","cr","cr."],exp:"Liabilities and equity increase on the credit (right) side, so their normal balance is a credit balance."},
+    {q:"The three steps to find a T-account balance are: add each side, subtract smaller from ___, write the balance on the larger side.",ans:["larger","the larger side","larger side"],exp:"The balance goes on whichever side has the larger total - debit side for assets, credit side for liabilities/equity."},
+  ],
+  C3:[
+    {q:"The financial statement that shows revenues and expenses for a period is the ___ statement.",ans:["income","income statement"],exp:"The income statement reports revenues minus expenses to show net income or net loss for the period."},
+    {q:"When revenues exceed expenses, the result is called net ___.",ans:["income","net income"],exp:"Net income = revenues greater than expenses. Net loss = expenses greater than revenues."},
+    {q:"The accounting principle that matches expenses to the revenues they helped earn is the ___ principle.",ans:["matching","matching principle"],exp:"The matching principle ensures expenses are recorded in the same period as the revenues they helped generate."},
+    {q:"Owner's ___ are withdrawals of cash or assets by the owner for personal use.",ans:["drawings","drawing","drawings account"],exp:"Drawings reduce the owner's equity. They are not an expense - they do not go on the income statement."},
+    {q:"Revenue is recognized when it is ___, not when cash is received, under accrual accounting.",ans:["earned"],exp:"Under accrual basis, revenue is recorded when EARNED (work done), not when cash arrives."},
+    {q:"Under ___ basis accounting, revenue is recorded only when cash is received.",ans:["cash","cash basis","cash-basis"],exp:"Cash-basis accounting records transactions only when cash changes hands - simpler but less accurate than accrual."},
+    {q:"The income statement heading includes: company name, Income Statement, and the ___.",ans:["date","period","accounting period","dates","time period"],exp:"The heading tells who (company name), what (Income Statement), and when (the period covered, e.g., For the Month Ended...)."},
+  ],
+  C4:[
+    {q:"The book where transactions are first recorded in date order is called the ___.",ans:["journal","general journal"],exp:"The journal is the book of original entry - all transactions are first recorded here before being posted."},
+    {q:"The process of transferring journal entries to the ledger is called ___.",ans:["posting"],exp:"Posting moves each debit and credit from the journal into the appropriate T-account in the general ledger."},
+    {q:"In a journal entry, the credited account is ___ to distinguish it from the debit.",ans:["indented","indented below"],exp:"The credit account is indented to visually separate it from the debit account written at the left margin."},
+    {q:"A numbered list of all accounts used by a business is called the chart of ___.",ans:["accounts"],exp:"The chart of accounts assigns a number to every account, making it easy to locate and organize accounts."},
+    {q:"The column in the journal and ledger used to cross-reference entries is called the ___ column.",ans:["posting reference","pr","posting reference (pr)","p.r."],exp:"The PR (Posting Reference) column links journal entries to their corresponding ledger accounts and vice versa."},
+    {q:"An entry at the start of a new period to set up opening balances is called the ___ entry.",ans:["opening","opening entry"],exp:"The opening entry transfers all balance sheet balances from the previous period into the new ledger accounts."},
+    {q:"A journal entry with more than one debit or credit is called a ___ entry.",ans:["compound","compound journal"],exp:"A compound journal entry has multiple debits and/or credits - as long as total debits still equal total credits."},
+    {q:"Documents that provide proof a transaction occurred are called ___ documents.",ans:["source","source documents"],exp:"Source documents include invoices, receipts, cheque copies, and bank statements - the paper trail for every transaction."},
+    {q:"Source documents are ___ (given sequential numbers) to make it easy to detect missing ones.",ans:["prenumbered","pre-numbered","numbered"],exp:"Prenumbering means any gap in the number sequence immediately signals a missing or lost document."},
+  ],
+  C5:[
+    {q:"An informal working paper used to organize data before preparing financial statements is called a ___.",ans:["worksheet","work sheet","working paper"],exp:"The worksheet is not a formal financial statement - it is an internal tool used to prepare the income statement and balance sheet."},
+    {q:"Revenue and expense accounts are called ___ accounts because they are closed each period.",ans:["temporary"],exp:"Temporary accounts (revenue, expense, drawings) are closed to zero at the end of each period so they start fresh."},
+    {q:"Asset, liability, and owner's equity accounts are called ___ accounts.",ans:["permanent"],exp:"Permanent accounts carry their balances forward from period to period - they are never closed."},
+    {q:"On the worksheet, expenses are extended to the Income Statement ___ column.",ans:["debit","dr","dr."],exp:"Expenses have debit balances, so they go in the DEBIT column of the Income Statement section."},
+    {q:"A balance sheet that separates current assets from fixed assets is called a ___ balance sheet.",ans:["classified"],exp:"A classified balance sheet groups accounts by category: current assets, fixed assets, current liabilities, long-term liabilities."},
+    {q:"Assets expected to be converted to cash within one year are called ___ assets.",ans:["current"],exp:"Current assets include Cash, Accounts Receivable, Supplies, and Prepaid Insurance."},
+    {q:"Assets used over many years to operate the business are called ___ assets.",ans:["fixed","plant","long-term","non-current"],exp:"Fixed assets (plant and equipment) include Buildings, Equipment, and Vehicles - they are used for more than one year."},
+    {q:"Ending Capital = Opening Capital + Net Income - ___.",ans:["drawings","owner's drawings","drawing"],exp:"The statement of owner's equity formula: Opening Capital + Net Income (or - Net Loss) - Drawings = Ending Capital."},
+  ],
+  C6:[
+    {q:"Entries made at the end of the period to update prepaid and depreciation accounts are called ___ entries.",ans:["adjusting","adjusting entries"],exp:"Adjusting entries correct account balances (prepaid expenses, depreciation, supplies) before the financial statements are prepared."},
+    {q:"The systematic allocation of a fixed asset's cost over its useful life is called ___.",ans:["depreciation"],exp:"Depreciation spreads the cost of a long-term asset over the years it is used, matching expense to the benefit received."},
+    {q:"The original cost of an asset minus its accumulated depreciation is called its ___ value.",ans:["book","book value","net book value"],exp:"Book Value = Original Cost - Accumulated Depreciation. It represents the asset's remaining undepreciated cost."},
+    {q:"The ___ balance method charges higher depreciation in early years of an asset's life.",ans:["declining","declining balance","diminishing"],exp:"Declining balance applies a fixed % to the reducing book value - resulting in higher depreciation when the asset is new."},
+    {q:"Accumulated Depreciation is a ___ account - it reduces the asset's value on the balance sheet.",ans:["contra","contra asset","contra-asset"],exp:"Contra assets have credit balances and offset their related asset accounts. Accumulated Depreciation is subtracted from the asset's cost."},
+    {q:"Entries that zero out all temporary accounts at year end are called ___ entries.",ans:["closing","closing entries"],exp:"Closing entries transfer revenue and expense balances to Income Summary, then to Owner's Capital, resetting temporary accounts."},
+    {q:"The account used as a clearing account during the closing process is called ___ Summary.",ans:["income","income summary"],exp:"Income Summary temporarily holds all revenues and expenses during closing, then is closed to Owner's Capital."},
+    {q:"A ___ trial balance is prepared after closing entries to confirm only permanent accounts remain.",ans:["post-closing","postclosing","post closing"],exp:"The post-closing trial balance lists only permanent accounts with their new balances - all temporary accounts should be zero."},
+    {q:"The 8-column worksheet adds ___ columns to the standard 6-column version.",ans:["adjustments","adjustment","two adjustment","two"],exp:"The two new columns are the Adjustments Debit and Adjustments Credit columns for recording end-of-period adjusting entries."},
+    {q:"Under the straight-line method, depreciation is calculated as: Cost minus ___ value, divided by useful life.",ans:["residual","salvage","scrap","residual value","salvage value"],exp:"Straight-line depreciation = (Cost - Residual/Salvage Value) / Useful Life in years."},
+  ]
+};
+
+function normalizeFITB(str){
+  // lowercase, remove extra spaces, punctuation, hyphens
+  return str.toLowerCase()
+    .replace(/[^a-z0-9 ]/g,'')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+function checkFITBAnswer(userInput, acceptedAnswers){
+  var normalized = normalizeFITB(userInput);
+  return acceptedAnswers.some(function(ans){
+    return normalizeFITB(ans) === normalized;
+  });
+}
+
+function expandFITB(ch){
+  var id = ch.id;
+  return FITB_QUESTIONS[id] ? shuffle(FITB_QUESTIONS[id].slice()) : [];
+}
+
+function startFITB(noPush){
+  var ch = CHAPTERS[state.chIdx];
+  state.level='FITB'; state.unitIdx=null;
+  var qs = expandFITB(ch).map(function(q){ return Object.assign({type:'fitb'},q); });
+  state.questions=qs;
+  state.idx=0; state.correct=0; state.wrong=0; state.skipped=[];
+  state.screen='quiz';
+  setBreadcrumb([ch.title,'Fill in the Blank']);
+  if(!noPush) pushRoute(BASE+'/chapters/c'+(state.chIdx+1)+'/fitb');
+  var sb=document.getElementById('subBar');
+  sb.classList.add('on');
+  var badge=document.getElementById('lvlBadge');
+  badge.textContent='Fill in the Blank';
+  badge.className='q-mode-tag';
+  document.getElementById('subProgBar').style.background='#14b8a6';
+  var tog=document.getElementById('saveToggle');
+  if(tog) tog.checked=false;
+  sessionSaveEnabled=false;
+  setSubProg(0);
+  showTopStats(true);
+  updateTopStats();
+  renderQuestion();
+}
+
 function qMatchesUnit(q, unit) {
   var text = (q.q || '').toLowerCase();
   if (q.type === 'sa') text += ' ' + (q.model || '').toLowerCase();
@@ -1931,6 +2123,8 @@ function routeFromPath(path){
   if(p==='/course') { renderCourse(true); return; }
   if(p==='/contact') { renderContact(true); return; }
   if(p==='/progress') { renderProgress(); return; }
+  if(p==='/practice-test'||p==='/practice-test/session') { renderPracticeTest(true); return; }
+  if(p==='/fill-in-the-blank') { startGlobalFITB(true); return; }
 
   // /chapters/c1, /chapters/c1/level1, /chapters/c1/all, /chapters/c1/unit2 etc.
   var chMatch = p.match(/^\/chapters\/c(\d+)(\/(.+))?$/);
@@ -1944,6 +2138,7 @@ function routeFromPath(path){
     if(sub==='level1'){ startLevel('L1',true); return; }
     if(sub==='level2'){ startLevel('L2',true); return; }
     if(sub==='level3'){ startLevel('L3',true); return; }
+    if(sub==='fitb'){ startFITB(true); return; }
     var uMatch = sub.match(/^unit(\d+)$/);
     if(uMatch){ startUnitReview(parseInt(uMatch[1])-1, true); return; }
     state.screen='levels'; renderApp(); return;
@@ -1974,6 +2169,10 @@ function renderChapters(noPush){
     +'<span class="landing-box-icon">&#128196;</span>'
     +'<span class="landing-box-label">Course Description</span>'
     +'</button>'
+    +'<button class="landing-box" onclick="renderPracticeTest()" style="border-color:var(--accent);color:var(--accent);background:var(--accent-light)">'
+    +'<span class="landing-box-icon">&#9998;</span>'
+    +'<span class="landing-box-label">Practice Test</span>'
+    +'</button>'
     +'</div>'
     +'</div>'
     +'<div class="landing-scroll-hint" onclick="renderChapterList()">See all chapters ↓</div>'
@@ -1987,6 +2186,10 @@ function renderChapterList(noPush){
   if(!noPush) pushRoute(BASE+'/chapters');
   document.getElementById('topDivider').style.display='block';
   var app=document.getElementById('app');
+
+  // Count total FITB questions across all chapters
+  var totalFitb = Object.values(FITB_QUESTIONS).reduce(function(n,arr){return n+arr.length;},0);
+
   var html='<div class="wrap"><div class="inner pop">'
     +'<div class="chapter-list-header">'
     +'<div class="chapter-list-title">Chapters</div>'
@@ -2000,8 +2203,52 @@ function renderChapterList(noPush){
       +'<div class="ch-trail"><div class="ch-badge">3 levels</div><div class="ch-arrow">›</div></div>'
       +'</div>';
   });
-  html+='</div></div></div>';
+  html+='</div>'
+
+  // Fill in the Blank section
+  +'<div class="cl-section-head">Other Modes</div>'
+  +'<div class="cl-extra-row">'
+  +'<div class="cl-extra-card" onclick="startGlobalFITB()">'
+  +'<div class="cl-extra-icon" style="color:#14b8a6">✏️</div>'
+  +'<div class="cl-extra-body">'
+  +'<div class="cl-extra-title">Fill in the Blank</div>'
+  +'<div class="cl-extra-sub">Type the missing term. Spelling variants accepted. ~'+totalFitb+' questions across all chapters.</div>'
+  +'</div>'
+  +'<div class="cl-extra-arrow">›</div>'
+  +'</div>'
+  +'</div>'
+
+  +'</div></div>';
   app.innerHTML=html;
+}
+
+function startGlobalFITB(noPush){
+  // Pool all FITB questions from all chapters
+  var all = [];
+  CHAPTERS.forEach(function(ch){
+    var qs = FITB_QUESTIONS[ch.id] || [];
+    qs.forEach(function(q){ all.push(Object.assign({type:'fitb'},q)); });
+  });
+  all = shuffle(all);
+  state.chIdx=0; state.level='FITB'; state.unitIdx=null;
+  state.questions=all;
+  state.idx=0; state.correct=0; state.wrong=0; state.skipped=[];
+  state.screen='quiz';
+  setBreadcrumb(['Fill in the Blank']);
+  if(!noPush) pushRoute(BASE+'/fill-in-the-blank');
+  var sb=document.getElementById('subBar');
+  sb.classList.add('on');
+  var badge=document.getElementById('lvlBadge');
+  badge.textContent='Fill in the Blank - All Chapters';
+  badge.className='q-mode-tag';
+  document.getElementById('subProgBar').style.background='#14b8a6';
+  var tog=document.getElementById('saveToggle');
+  if(tog) tog.checked=false;
+  sessionSaveEnabled=false;
+  setSubProg(0);
+  showTopStats(true);
+  updateTopStats();
+  renderQuestion();
 }
 
 function renderTutorial(noPush){
@@ -2096,6 +2343,174 @@ function renderCourse(noPush){
     +'</div></div></div>';
 }
 
+function renderPracticeTest(noPush){
+  hideSubBar(); showTopStats(false);
+  setBreadcrumb(['Practice Test']);
+  window.scrollTo(0,0);
+  if(!noPush) pushRoute(BASE+'/practice-test');
+  var app=document.getElementById('app');
+
+  var chOpts='';
+  CHAPTERS.forEach(function(ch,i){
+    chOpts+='<label class="pt-ch-row">'
+      +'<input type="checkbox" class="pt-ch-check" value="'+i+'" checked>'
+      +'<span class="pt-ch-name">Ch'+(i+1)+' - '+ch.title+'</span>'
+      +'</label>';
+  });
+
+  app.innerHTML='<div class="wrap"><div class="inner pop">'
+    +'<div class="pt-header">'
+    +'<div class="pt-eyebrow">Assessment</div>'
+    +'<div class="pt-title">Practice Test</div>'
+    +'<div class="pt-sub">Build a timed test from selected chapters and difficulty levels. Questions are randomly selected and shuffled.</div>'
+    +'</div>'
+    +'<div class="pt-config">'
+
+    // Chapter selection
+    +'<div class="pt-section-label">Chapters to include</div>'
+    +'<div class="pt-ch-grid">'+chOpts+'</div>'
+
+    // Difficulty
+    +'<div class="pt-section-label" style="margin-top:20px">Difficulty</div>'
+    +'<div class="pt-btn-row" id="ptDiffRow">'
+    +'<button class="pt-toggle active" data-val="L1" onclick="ptToggle(this)">Level 1</button>'
+    +'<button class="pt-toggle active" data-val="L2" onclick="ptToggle(this)">Level 2</button>'
+    +'<button class="pt-toggle active" data-val="L3" onclick="ptToggle(this)">Level 3</button>'
+    +'</div>'
+
+    // Question count
+    +'<div class="pt-section-label" style="margin-top:20px">Number of questions</div>'
+    +'<div class="pt-btn-row">'
+    +'<button class="pt-toggle" data-val="10" onclick="ptCount(this)">10</button>'
+    +'<button class="pt-toggle active" data-val="20" onclick="ptCount(this)">20</button>'
+    +'<button class="pt-toggle" data-val="30" onclick="ptCount(this)">30</button>'
+    +'<button class="pt-toggle" data-val="50" onclick="ptCount(this)">50</button>'
+    +'<button class="pt-toggle" data-val="all" onclick="ptCount(this)">All</button>'
+    +'</div>'
+
+    // Timer
+    +'<div class="pt-section-label" style="margin-top:20px">Time limit</div>'
+    +'<div class="pt-btn-row">'
+    +'<button class="pt-toggle" data-val="0" onclick="ptTimer(this)">No limit</button>'
+    +'<button class="pt-toggle" data-val="10" onclick="ptTimer(this)">10 min</button>'
+    +'<button class="pt-toggle active" data-val="20" onclick="ptTimer(this)">20 min</button>'
+    +'<button class="pt-toggle" data-val="30" onclick="ptTimer(this)">30 min</button>'
+    +'<button class="pt-toggle" data-val="45" onclick="ptTimer(this)">45 min</button>'
+    +'</div>'
+
+    +'</div>'
+    +'<div id="ptError" class="pt-error" style="display:none">Please select at least one chapter and one difficulty level.</div>'
+    +'<button class="start-btn" style="margin-top:28px;padding:14px 40px;font-size:16px" onclick="startPracticeTest()">Begin Test</button>'
+    +'<button class="back-nav" onclick="goChapters()">← Back</button>'
+    +'</div></div>';
+}
+
+var ptState = {count:20, timer:20, diffLevels:['L1','L2','L3']};
+
+function ptToggle(el){
+  el.classList.toggle('active');
+}
+function ptCount(el){
+  document.querySelectorAll('.pt-btn-row')[1].querySelectorAll('.pt-toggle').forEach(function(b){b.classList.remove('active');});
+  el.classList.add('active');
+  ptState.count = el.dataset.val==='all' ? 9999 : parseInt(el.dataset.val);
+}
+function ptTimer(el){
+  document.querySelectorAll('.pt-btn-row')[2].querySelectorAll('.pt-toggle').forEach(function(b){b.classList.remove('active');});
+  el.classList.add('active');
+  ptState.timer = parseInt(el.dataset.val);
+}
+
+function startPracticeTest(){
+  // Gather selections
+  var selectedChs = [];
+  document.querySelectorAll('.pt-ch-check:checked').forEach(function(cb){ selectedChs.push(parseInt(cb.value)); });
+  var selectedLevels = [];
+  document.querySelectorAll('#ptDiffRow .pt-toggle.active').forEach(function(b){ selectedLevels.push(b.dataset.val); });
+
+  if(selectedChs.length===0 || selectedLevels.length===0){
+    document.getElementById('ptError').style.display='block';
+    return;
+  }
+  document.getElementById('ptError').style.display='none';
+
+  // Build question pool
+  var pool=[];
+  selectedChs.forEach(function(ci){
+    selectedLevels.forEach(function(lk){
+      var qs = CHAPTERS[ci].levels[lk] || [];
+      expandMatching(qs).forEach(function(q){ pool.push(q); });
+    });
+  });
+  pool=shuffle(pool);
+
+  var countSetting = ptState.count;
+  // Get count from active button
+  var countBtns = document.querySelectorAll('.pt-btn-row')[1];
+  if(countBtns){
+    var activeBtn = countBtns.querySelector('.pt-toggle.active');
+    if(activeBtn) countSetting = activeBtn.dataset.val==='all' ? 9999 : parseInt(activeBtn.dataset.val);
+  }
+  var timerMins = ptState.timer;
+  var timerBtns = document.querySelectorAll('.pt-btn-row')[2];
+  if(timerBtns){
+    var activeTimer = timerBtns.querySelector('.pt-toggle.active');
+    if(activeTimer) timerMins = parseInt(activeTimer.dataset.val);
+  }
+
+  var questions = pool.slice(0, Math.min(countSetting, pool.length));
+  if(questions.length===0){
+    document.getElementById('ptError').style.display='block';
+    return;
+  }
+
+  // Set up state like a normal quiz session
+  state.chIdx=0; state.level='PT'; state.unitIdx=null;
+  state.questions=questions;
+  state.idx=0; state.correct=0; state.wrong=0; state.skipped=[];
+  state.screen='quiz';
+
+  setBreadcrumb(['Practice Test']);
+  pushRoute(BASE+'/practice-test/session');
+
+  // Show sub bar with timer
+  var sb=document.getElementById('subBar');
+  sb.classList.add('on');
+  var badge=document.getElementById('lvlBadge');
+  badge.textContent='Practice Test - '+questions.length+' questions';
+  badge.className='q-mode-tag';
+  document.getElementById('subProgBar').style.background='var(--accent)';
+  var tog=document.getElementById('saveToggle');
+  if(tog) tog.checked=false;
+  sessionSaveEnabled=false;
+  setSubProg(0);
+  showTopStats(true);
+  updateTopStats();
+
+  // Start countdown timer if set
+  if(window._ptTimerInterval) clearInterval(window._ptTimerInterval);
+  if(timerMins>0){
+    var endTime = Date.now() + timerMins*60*1000;
+    window._ptTimerInterval = setInterval(function(){
+      var remaining = Math.max(0, endTime - Date.now());
+      var mins = Math.floor(remaining/60000);
+      var secs = Math.floor((remaining%60000)/1000);
+      var pct=document.getElementById('subPct');
+      if(pct) pct.textContent = mins+':'+(secs<10?'0':'')+secs;
+      if(remaining<=0){
+        clearInterval(window._ptTimerInterval);
+        showComplete();
+      }
+    },500);
+  }
+
+  renderQuestion();
+}
+
+function stopPtTimer(){
+  if(window._ptTimerInterval){ clearInterval(window._ptTimerInterval); window._ptTimerInterval=null; }
+}
+
 function renderContact(noPush){
   hideSubBar(); showTopStats(false);
   setBreadcrumb(['Contact']);
@@ -2126,22 +2541,7 @@ function renderContact(noPush){
     +'<button class="back-nav" onclick="renderChapterList()">← Back</button>'
     +'</div></div></div>';
 }
-    +'<p style="font-size:14px;color:var(--muted);line-height:1.7">Creator of the BAF3M Grade 11 Financial Accounting Fundamentals review site. Feel free to reach out via email or connect on LinkedIn.</p>'
-    +'</div>'
-    +'<div style="display:flex;flex-direction:column;gap:10px">'
-    +'<a href="mailto:Lucasyin1009@gmail.com" style="text-decoration:none">'
-    +'<div class="c-card" id="emailCard">'
-    +'<div class="c-icon" style="background:rgba(91,156,246,.1);border-color:rgba(91,156,246,.2)">✉</div>'
-    +'<div class="c-body"><div class="c-label">Email</div><div class="c-val">Lucasyin1009@gmail.com</div></div>'
-    +'<div class="c-go">›</div>'
-    +'</div></a>'
-    +'<a href="https://www.linkedin.com/in/lucassyin/" target="_blank" rel="noopener" style="text-decoration:none">'
-    +'<div class="c-card" id="linkedinCard">'
-    +'<div class="c-icon" style="background:rgba(10,102,194,.15);border-color:rgba(10,102,194,.3);color:#4d9de0">in</div>'
-    +'<div class="c-body"><div class="c-label">LinkedIn</div><div class="c-val">linkedin.com/in/lucassyin</div></div>'
-    +'<div class="c-go">›</div>'
-    +'</div></a>'
-    +'<a href="https://www.instagram.com/lucass.yin/" target="_blank" rel="noopener" style="text-decoration:none">'
+
 function selectChapter(i){
   state.chIdx=i;
   state.screen='levels';
@@ -2197,13 +2597,23 @@ function renderLevels(){
       +'</div>';
   });
 
+  var fitbCount = expandFITB(CHAPTERS[state.chIdx]).length;
+  var fitbCard = fitbCount > 0
+    ? '<div class="lvl-tile t-fitb" onclick="startFITB()">'
+      +'<div class="tile-icon">✏️</div>'
+      +'<div class="tile-name" style="color:var(--teal,#14b8a6)">Fill in the Blank</div>'
+      +'<div class="tile-sub">Recall</div>'
+      +'<div class="tile-desc">Type the missing word or phrase. Spelling variants and case are accepted.</div>'
+      +'<div class="tile-count">~'+fitbCount+'q</div>'
+      +'</div>' : '';
+
   var html='<div class="wrap"><div class="inner"><div class="mode-page pop">'
     +'<div class="mode-header">'
     +'<div class="mode-eyebrow" style="color:'+ch.color+'">Chapter '+(state.chIdx+1)+' &middot; '+ch.units+'</div>'
     +'<div class="mode-title">'+ch.title+'</div>'
     +'</div>'
     +'<div class="sec-head">By Difficulty Level</div>'
-    +'<div class="lvl-row">'+levelCards+chReviewCard+'</div>'
+    +'<div class="lvl-row">'+levelCards+chReviewCard+(fitbCard?fitbCard:'')+'</div>'
     +'<div class="sec-head" style="margin-top:24px">By Unit</div>'
     +'<div class="unit-stack">'+unitCards+'</div>'
     +'<button class="back-nav" onclick="renderChapterList()">← All Chapters</button>'
@@ -2273,6 +2683,7 @@ function renderQuestion(){
   var q=state.questions[state.idx];
   if(q.type==='mcq') renderMCQ(q);
   else if(q.type==='sa') renderSA(q);
+  else if(q.type==='fitb') renderFITB(q);
   else renderMatch(q);
 }
 
@@ -2354,6 +2765,54 @@ function revealSA(){
 
 // ── MATCH STATE ──────────────────────────────────────────────────
 var matchState = { selectedTerm: null, selectedDef: null, pairs: [], connections: {} };
+
+function renderFITB(q){
+  setBox('<div class="pop"><div class="ttag ttag-fitb">Fill in the Blank</div>'
+    +'<div class="qcard" id="card">'
+    +'<div class="q-num">Question '+(state.idx+1)+' of '+state.questions.length+'</div>'
+    +'<div class="q-body fitb-q">'+q.q+'</div>'
+    +'<div class="fitb-wrap">'
+    +'<input class="fitb-input" id="fitbInput" type="text" placeholder="Type your answer..." autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key===\'Enter\')checkFITB()">'
+    +'<button class="fitb-check-btn" onclick="checkFITB()">Check</button>'
+    +'</div>'
+    +'<div class="fb" id="fb"></div>'
+    +'<div class="act-row">'
+    +'<button class="btn-skip" onclick="skipQ()">Skip →</button>'
+    +'<button class="btn-next" id="btnNext" onclick="nextQ()" style="display:none">Next →</button>'
+    +'</div></div></div>');
+  setTimeout(function(){ var el=document.getElementById('fitbInput'); if(el) el.focus(); },80);
+}
+
+function checkFITB(){
+  var card=document.getElementById('card');
+  if(card.dataset.done) return;
+  var input=document.getElementById('fitbInput');
+  var val=input.value.trim();
+  if(!val) return;
+  card.dataset.done='1';
+  input.disabled=true;
+
+  var q=state.questions[state.idx];
+  var correct=checkFITBAnswer(val, q.ans);
+  var fb=document.getElementById('fb');
+
+  if(correct){
+    state.correct++;
+    card.classList.add('c-ok');
+    fb.className='fb fb-ok show';
+    fb.innerHTML='<strong>Correct!</strong> '+q.exp;
+  } else {
+    state.wrong++;
+    card.classList.add('c-no');
+    fb.className='fb fb-no show';
+    fb.innerHTML='<strong>Not quite.</strong> The answer is: <strong>'
+      +q.ans[0]+'</strong>. '+q.exp;
+  }
+  document.getElementById('btnNext').style.display='block';
+  document.querySelector('.btn-skip').style.display='none';
+  updateTopStats();
+  sessionSave();
+}
 
 function renderMatch(q){
   var pairs = q.pairs;
@@ -2678,6 +3137,7 @@ function clearProgress(){
 }
 
 function showComplete(){
+  stopPtTimer();
   setSubProg(100);
   var ch=CHAPTERS[state.chIdx];
   var attempted=state.correct+state.wrong;

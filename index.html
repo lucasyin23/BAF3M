@@ -806,22 +806,22 @@ body{
 .cl-extra-card:hover .cl-extra-arrow{color:#14b8a6;transform:translateX(3px);}
 
 /* ══ EXAM PREP ══ */
-.exam-header{
-  background:var(--surface);border:2px solid var(--text);
-  border-radius:var(--r);padding:20px 24px;margin-bottom:28px;text-align:center;
-}
-.exam-school{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;}
-.exam-title{font-family:var(--serif);font-size:26px;font-weight:700;letter-spacing:-.03em;color:var(--text);margin-bottom:14px;}
+.exam-wrap{width:100%;max-width:1100px;margin:0 auto;padding:28px 20px 100px;}
+.exam-section-wide .ws-outer,.exam-section-wide .ws-scroll,.exam-section-wide .ws-table{min-width:100%!important;}
+.exam-header{background:var(--surface);border:2px solid var(--text);border-radius:var(--r);padding:20px 24px;margin-bottom:24px;text-align:center;}
+.exam-school{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+.exam-title{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--text);margin-bottom:14px;}
 .exam-meta-row{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;font-size:14px;color:var(--text2);}
 .exam-name-input{border:none;border-bottom:1px solid var(--border3);background:transparent;font-family:var(--sans);font-size:14px;color:var(--text);outline:none;width:160px;padding:2px 4px;}
-.exam-section{margin-bottom:36px;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
-.exam-section-title{font-family:var(--serif);font-size:16px;font-weight:700;padding:12px 18px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
-.exam-marks{font-size:12px;font-weight:600;font-family:var(--mono);color:var(--text3);background:var(--surface3);padding:3px 9px;border-radius:4px;}
-.exam-instructions{font-size:13px;color:var(--text2);padding:12px 18px 8px;line-height:1.7;font-style:italic;}
-.exam-scenario{font-size:13px;color:var(--text2);padding:4px 18px 14px;line-height:1.85;background:var(--accent-light);border-bottom:1px solid var(--border);}
-.exam-check-btn{margin:14px 18px;padding:9px 22px;border-radius:var(--r-sm);border:none;background:var(--accent);color:#fff;font-size:13px;font-weight:600;font-family:var(--sans);cursor:pointer;transition:opacity var(--ease);}
+.exam-section{margin-bottom:28px;border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;}
+.exam-section-wide{margin-bottom:28px;border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;}
+.exam-section-title{font-family:var(--serif);font-size:15px;font-weight:700;padding:11px 18px;background:var(--surface2);border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;}
+.exam-marks{font-size:11px;font-weight:600;font-family:var(--mono);color:var(--text3);background:var(--surface3);padding:3px 9px;border-radius:4px;}
+.exam-instructions{font-size:13px;color:var(--text2);padding:10px 18px 6px;line-height:1.7;font-style:italic;border-bottom:1px solid var(--border);}
+.exam-scenario{font-size:13px;color:var(--text2);padding:10px 18px 12px;line-height:1.85;background:rgba(92,110,248,.04);border-bottom:1px solid var(--border);}
+.exam-check-btn{margin:14px 18px 4px;padding:9px 22px;border-radius:var(--r-sm);border:none;background:var(--accent);color:#fff;font-size:13px;font-weight:600;font-family:var(--sans);cursor:pointer;transition:opacity var(--ease);display:block;}
 .exam-check-btn:hover{opacity:.88;}
-.exam-feedback{display:none;margin:0 18px 16px;padding:14px 16px;border-radius:var(--r-sm);background:var(--surface2);border:1px solid var(--border);font-size:13px;line-height:2;}
+.exam-feedback{display:none;margin:0 18px 16px;padding:12px 16px;border-radius:var(--r-sm);background:var(--surface2);border:1px solid var(--border);font-size:13px;line-height:2;}
 .exam-feedback.show{display:block;}
 .exam-result{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--text);}
 /* Word bank */
@@ -839,46 +839,73 @@ body{
 .journal-wrap{overflow-x:auto;padding:0 18px 4px;}
 .journal-table{width:100%;border-collapse:collapse;font-size:13px;}
 .journal-table th{background:var(--surface2);padding:8px 10px;border:1px solid var(--border2);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);text-align:center;}
-.journal-table td{border:1px solid var(--border);padding:2px 4px;vertical-align:middle;}
+.journal-table td{border:1px solid var(--border2);padding:1px 4px;vertical-align:middle;}
 .jt-date{width:80px;}
 .jt-desc{min-width:240px;}
 .jt-pr{width:50px;}
 .jt-amt{width:110px;}
-.jt-input{width:100%;background:transparent;border:none;outline:none;font-family:var(--sans);font-size:13px;color:var(--text);padding:5px 6px;}
-.jt-num-input{text-align:right;}
+.jt-input{width:100%;background:transparent;border:none;outline:none;font-family:var(--sans);font-size:13px;color:var(--text);padding:6px 6px;}
+.jt-num-input{text-align:right;font-family:var(--mono);}
 .jt-indent{padding-left:24px!important;}
 .jt-pr-input{text-align:center;}
 /* Worksheet */
-.ws-outer{padding:0 18px 4px;overflow-x:auto;}
-.ws-title{text-align:center;font-size:13px;line-height:1.8;padding:10px 0 8px;font-weight:600;color:var(--text);}
+.ws-outer{padding:0 18px 8px;}
+.ws-title{text-align:center;font-size:13px;line-height:1.9;padding:10px 0 8px;color:var(--text);}
 .ws-scroll{overflow-x:auto;}
-.ws-table{border-collapse:collapse;font-size:12px;min-width:700px;width:100%;}
-.ws-table th,.ws-table td{border:1px solid var(--border2);padding:0;}
-.ws-header-top th,.ws-header-sub th{background:var(--surface2);padding:6px 8px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);text-align:center;}
-.ws-sec-head{border-bottom:1px solid var(--border3)!important;}
-.ws-acct-head{min-width:160px;text-align:left!important;padding-left:8px!important;}
-.ws-acct-cell{padding:3px 8px!important;font-size:12.5px;color:var(--text2);border-right:2px solid var(--border2)!important;white-space:nowrap;}
-.ws-num-cell{text-align:right;padding:0!important;min-width:80px;}
-.ws-input{width:100%;background:transparent;border:none;outline:none;text-align:right;font-family:var(--mono);font-size:12px;color:var(--text);padding:5px 6px;}
-.ws-input:focus{background:var(--accent-light);}
-.ws-given{display:block;text-align:right;padding:5px 6px;font-family:var(--mono);font-size:12px;color:var(--text2);}
+.ws-table{border-collapse:collapse;font-size:13px;width:100%;}
+.ws-table th,.ws-table td{border:1px solid var(--border3);}
+.ws-header-top th,.ws-header-sub th{background:var(--surface2);padding:7px 8px;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text2);text-align:center;border-color:var(--text);}
+.ws-sec-head{border-bottom:2px solid var(--text)!important;border-right:2px solid var(--text)!important;border-left:2px solid var(--text)!important;}
+.ws-row-num-h{width:26px;min-width:26px;background:var(--surface3)!important;border-color:var(--border3)!important;}
+.ws-rn{width:26px;text-align:center;font-size:10px;font-family:var(--mono);color:var(--text3);background:var(--surface2);padding:2px;}
+.ws-acct-head{min-width:200px;text-align:left!important;padding-left:10px!important;}
+.ws-acct-no-h{width:52px;text-align:center!important;border-right:2px solid var(--text)!important;}
+.ws-acct-cell{padding:0 10px!important;font-size:13px;color:var(--text);border-right:2px solid var(--text)!important;min-width:200px;white-space:nowrap;height:32px;}
+.ws-acct-given{color:var(--text2);}
+.ws-acct-input{text-align:left!important;font-size:13px;height:30px;padding:4px 8px!important;}
+.ws-acct-no{width:52px;text-align:center;padding:0!important;border-right:2px solid var(--text)!important;}
+.ws-given-val{font-size:12px;color:var(--text3);text-align:center;padding:4px 2px!important;}
+.ws-no-input{text-align:center!important;font-size:12px;width:46px;}
+.ws-num-cell{text-align:right;padding:0!important;min-width:100px;border-right:1px solid var(--border3);}
+.ws-num-cell:nth-child(6),.ws-num-cell:nth-child(8),.ws-num-cell:nth-child(10){border-right:2px solid var(--text)!important;}
+.ws-input{width:100%;background:transparent;border:none;outline:none;text-align:right;font-family:var(--mono);font-size:13px;color:var(--text);padding:6px 8px;height:32px;}
+.ws-input:focus{background:rgba(92,110,248,.06);outline:none;box-shadow:none;}
+.ws-given{display:block;text-align:right;padding:6px 8px;font-family:var(--mono);font-size:13px;color:var(--text2);}
 .ws-total-row{background:var(--surface2);}
 .ws-total-input{font-weight:700;}
-.ws-col-head{min-width:80px;}
-/* Financial Statements */
-.stmt-wrap{padding:0 18px 8px;}
-.stmt-title{text-align:center;font-size:13px;line-height:1.8;padding:10px 0 8px;font-weight:600;color:var(--text);}
-.stmt-table{width:100%;max-width:500px;margin:0 auto;border-collapse:collapse;font-size:13.5px;}
-.stmt-label{padding:5px 8px;color:var(--text2);}
-.stmt-section{padding:7px 8px;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface2);}
-.stmt-sub-section{padding:5px 8px;font-weight:600;font-size:12px;color:var(--text);text-decoration:underline;}
-.pl20{padding-left:24px!important;}
-.stmt-amt{text-align:right;padding:5px 8px;}
-.stmt-space{width:120px;}
-.stmt-input{width:90px;border:none;border-bottom:1px solid var(--border2);background:transparent;font-family:var(--mono);font-size:13px;color:var(--accent);text-align:right;outline:none;padding:2px 4px;}
-.stmt-input:focus{border-bottom-color:var(--accent);}
-.stmt-subtotal td{border-top:1px solid var(--border2);}
-.stmt-total td{border-top:2px solid var(--text);border-bottom:2px solid var(--text);}
+.ws-col-head{min-width:100px;}
+.ws-double-border{border-top:3px double var(--text)!important;border-bottom:3px double var(--text)!important;}
+.ws-greyed{background:var(--surface3)!important;pointer-events:none;}
+.ws-divider-row{background:var(--surface3);}
+.ws-divider-label{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3);padding:4px 10px!important;border-top:2px solid var(--text)!important;text-align:left!important;}
+.ws-final-row{background:var(--surface3);}
+/* Accounting Paper (Balance Sheet) */
+.ap-outer{padding:0 18px 8px;overflow-x:auto;}
+.ap-heading{text-align:center;font-size:13.5px;line-height:1.9;padding:10px 0 8px;color:var(--text);}
+.ap-table{border-collapse:collapse;width:100%;max-width:700px;margin:0 auto;font-size:13.5px;}
+.ap-col-label{width:55%;}
+.ap-col-num{width:15%;}
+.ap-table td{border:1px solid var(--border3);padding:0;height:30px;}
+.ap-label{padding:3px 12px;color:var(--text);font-size:13.5px;border-right:2px solid var(--text)!important;}
+.ap-num{text-align:right;border-right:1px solid var(--border3);}
+.ap-num:last-child{border-right:2px solid var(--text)!important;}
+.ap-input{width:90%;background:transparent;border:none;outline:none;text-align:right;font-family:var(--mono);font-size:13px;color:var(--text);padding:4px 6px;}
+.ap-input:focus{background:rgba(92,110,248,.06);outline:none;box-shadow:none;}
+.ap-section-row td{background:var(--surface2);font-weight:700;padding:6px 12px;border-top:2px solid var(--text)!important;border-bottom:1px solid var(--border3)!important;}
+.ap-subsection-row td{padding:5px 12px;font-style:italic;color:var(--text2);background:rgba(0,0,0,.02);border-bottom:1px solid var(--border2)!important;}
+.ap-subtotal-row td{border-top:1px solid var(--text)!important;}
+.ap-total-row td{border-top:2px solid var(--text)!important;border-bottom:3px double var(--text)!important;font-weight:700;background:var(--surface2);}
+.ap-blank-row{height:14px!important;}
+/* Accounting Cycle */
+.cycle-wrap{padding:16px 18px;display:flex;flex-direction:column;align-items:center;gap:0;}
+.cycle-item{display:flex;flex-direction:column;align-items:center;width:100%;max-width:500px;}
+.cycle-num{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--mono);margin-bottom:4px;flex-shrink:0;}
+.cycle-box{width:100%;padding:8px 16px;border:1px solid var(--border2);border-radius:6px;background:var(--surface);font-size:13.5px;color:var(--text);min-height:36px;display:flex;align-items:center;text-align:center;justify-content:center;}
+.cycle-given{background:var(--surface2);border-color:var(--border3);}
+.cycle-blank{background:var(--surface);border-color:var(--accent);border-style:dashed;}
+.cycle-input{width:100%;background:transparent;border:none;outline:none;text-align:center;font-family:var(--sans);font-size:13.5px;color:var(--accent);padding:2px;}
+.cycle-arrow{font-size:18px;color:var(--text3);margin:4px 0;}
+
 
 /* ══ PRINCIPLES GRID ══ */
 .principles-grid{
@@ -2400,7 +2427,7 @@ function renderExamPrep(noPush){
   window.scrollTo(0,0);
   if(!noPush) pushRoute(BASE+'/exam-prep');
   var app=document.getElementById('app');
-  app.innerHTML='<div class="wrap"><div class="inner pop">'
+  app.innerHTML='<div class="exam-wrap pop">'
     +'<div class="exam-header">'
     +'<div class="exam-school">BAF3M - Grade 11 Financial Accounting Fundamentals</div>'
     +'<div class="exam-title">Practice Exam</div>'
@@ -2427,7 +2454,7 @@ function renderExamPrep(noPush){
     +'a) Supplies on hand at Dec 31: $320. Unadjusted Supplies balance: $1,100.<br>'
     +'b) Monthly insurance: $150/month. Unadjusted Prepaid Insurance balance: $1,800.<br>'
     +'c) Equipment cost $24,000, useful life 5 years, residual value $0. Use straight-line depreciation.<br>'
-    +'d) Wages earned but unpaid at Dec 31: $680.'
+    +'d) Salaries earned but unpaid at Dec 31: $680.'
     +'</div>'
     +buildJournal('adj',[
       {date:'Dec 31',desc:'(a) Supplies Expense',dr:'',cr:''},
@@ -2437,7 +2464,7 @@ function renderExamPrep(noPush){
       {date:'Dec 31',desc:'(c) Depreciation Expense - Equipment',dr:'',cr:''},
       {date:'',desc:'Accumulated Depreciation - Equipment',dr:'',cr:''},
       {date:'Dec 31',desc:'(d) Wages Expense',dr:'',cr:''},
-      {date:'',desc:'Wages Payable',dr:'',cr:''},
+      {date:'',desc:'Salaries Payable',dr:'',cr:''},
     ])
     +'<button class="exam-check-btn" onclick="checkAdjEntries()">Check Answers</button>'
     +'<div class="exam-feedback" id="adjFeedback"></div>'
@@ -2450,7 +2477,7 @@ function renderExamPrep(noPush){
     +'<div class="exam-scenario">'
     +'<b>Adjusted balances:</b><br>'
     +'Service Revenue: $48,200 &nbsp;|&nbsp; Rent Revenue: $3,600<br>'
-    +'Wages Expense: $18,400 &nbsp;|&nbsp; Rent Expense: $9,600 &nbsp;|&nbsp; Supplies Expense: $780 &nbsp;|&nbsp; Insurance Expense: $1,800 &nbsp;|&nbsp; Depreciation Expense: $4,800<br>'
+    +'Salaries Expense: $18,400 &nbsp;|&nbsp; Rent Expense: $9,600 &nbsp;|&nbsp; Supplies Expense: $780 &nbsp;|&nbsp; Insurance Expense: $1,800 &nbsp;|&nbsp; Depreciation Expense: $4,800<br>'
     +'Owner\'s Drawings: $14,000 &nbsp;|&nbsp; J. Smith, Capital (opening): $52,000'
     +'</div>'
     +buildJournal('cls',[
@@ -2473,28 +2500,36 @@ function renderExamPrep(noPush){
     +'</div>'
 
     // Section 4: 8-Column Worksheet
-    +'<div class="exam-section">'
+    +'<div class="exam-section exam-section-wide">'
     +'<div class="exam-section-title">Section 4 &nbsp;—&nbsp; 8-Column Worksheet <span class="exam-marks">/20</span></div>'
-    +'<div class="exam-instructions">Complete the 8-column worksheet for the year ended December 31. Use the trial balance and adjustments data provided.</div>'
+    +'<div class="exam-instructions">Complete the 8-column worksheet. Trial Balance is given. Fill in Adjustments, Income Statement, and Balance Sheet columns. Add adjustment accounts below the line.</div>'
     +buildWorksheet()
     +'<button class="exam-check-btn" onclick="checkWorksheet()">Check Answers</button>'
     +'<div class="exam-feedback" id="wsFeedback"></div>'
     +'</div>'
 
-    // Section 5: Classified Balance Sheet
+    // Section 5: Classified Balance Sheet with embedded equity
     +'<div class="exam-section">'
     +'<div class="exam-section-title">Section 5 &nbsp;—&nbsp; Classified Financial Statements <span class="exam-marks">/20</span></div>'
-    +'<div class="exam-instructions">Using the following adjusted balances, prepare: (a) the Statement of Owner\'s Equity, and (b) a classified Balance Sheet as at December 31.</div>'
+    +'<div class="exam-instructions">Prepare the Classified Balance Sheet with the Statement of Owner\'s Equity embedded in the equity section.</div>'
     +'<div class="exam-scenario">'
     +'Cash $8,400 &nbsp;|&nbsp; Accounts Receivable $3,200 &nbsp;|&nbsp; Supplies $320 &nbsp;|&nbsp; Prepaid Insurance $1,200<br>'
-    +'Equipment $24,000 &nbsp;|&nbsp; Accumulated Depreciation - Equipment $4,800<br>'
-    +'Accounts Payable $2,800 &nbsp;|&nbsp; Wages Payable $680 &nbsp;|&nbsp; Mortgage Payable (long-term) $12,000<br>'
-    +'Net Income (from Section 3): $16,420 &nbsp;|&nbsp; Drawings $14,000 &nbsp;|&nbsp; Opening Capital $52,000'
+    +'Equipment $24,000 &nbsp;|&nbsp; Accumulated Depreciation $4,800<br>'
+    +'Accounts Payable $2,800 &nbsp;|&nbsp; Salaries Payable $680 &nbsp;|&nbsp; Mortgage Payable (long-term) $12,000<br>'
+    +'Net Income: $16,420 &nbsp;|&nbsp; Drawings $14,000 &nbsp;|&nbsp; Opening Capital $52,000'
     +'</div>'
-    +buildStatementOfEquity()
     +buildClassifiedBS()
     +'<button class="exam-check-btn" onclick="checkFinancials()">Check Answers</button>'
     +'<div class="exam-feedback" id="bsFeedback"></div>'
+    +'</div>'
+
+    // Section 6: Accounting Cycle diagram
+    +'<div class="exam-section">'
+    +'<div class="exam-section-title">Section 6 &nbsp;—&nbsp; Accounting Cycle <span class="exam-marks">/8</span></div>'
+    +'<div class="exam-instructions">Fill in the missing steps of the accounting cycle. Each box represents one step in order.</div>'
+    +buildAccountingCycle()
+    +'<button class="exam-check-btn" onclick="checkCycle()">Check Answers</button>'
+    +'<div class="exam-feedback" id="cycleFeedback"></div>'
     +'</div>'
 
     +'<button class="back-nav" onclick="renderChapterList()">← Back to chapters</button>'
@@ -2530,123 +2565,306 @@ function buildJournal(prefix, rows){
 
 // ── Worksheet builder ──────────────────────────────────────────────
 function buildWorksheet(){
-  var accounts=[
-    {name:'Cash',tb_dr:'8,400',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Accounts Receivable',tb_dr:'3,200',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Supplies',tb_dr:'1,100',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Prepaid Insurance',tb_dr:'1,800',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Equipment',tb_dr:'24,000',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Accumulated Depreciation',tb_dr:'',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Accounts Payable',tb_dr:'',tb_cr:'2,800',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'J. Smith, Capital',tb_dr:'',tb_cr:'52,000',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'J. Smith, Drawings',tb_dr:'14,000',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Service Revenue',tb_dr:'',tb_cr:'48,200',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Rent Revenue',tb_dr:'',tb_cr:'3,600',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Wages Expense',tb_dr:'17,720',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Rent Expense',tb_dr:'9,600',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Supplies Expense',tb_dr:'',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Insurance Expense',tb_dr:'',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Depreciation Expense',tb_dr:'',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
-    {name:'Wages Payable',tb_dr:'',tb_cr:'',adj_dr:'',adj_cr:'',is_dr:'',is_cr:'',bs_dr:'',bs_cr:''},
+  // Row types: 'given' = TB pre-filled + student fills rest, 'blank' = all blank, 'adj' = adjustment-only rows below the line, 'divider' = double line separator, 'total' = totals row, 'ni' = net income row
+  // Pre-trial balance accounts (TB given, rest blank)
+  var tbAccounts = [
+    {name:'Cash',             no:'100', tb_dr:'8,400',  tb_cr:''},
+    {name:'Accounts Receivable', no:'102', tb_dr:'3,200',  tb_cr:''},
+    {name:'Supplies',         no:'131', tb_dr:'1,100',  tb_cr:''},
+    {name:'Prepaid Insurance',no:'132', tb_dr:'1,800',  tb_cr:''},
+    {name:'Equipment',        no:'141', tb_dr:'24,000', tb_cr:''},
+    {name:'Acc. Dep.—Equip.', no:'142', tb_dr:'',       tb_cr:''},
+    {name:'Accounts Payable', no:'200', tb_dr:'',       tb_cr:'2,800'},
+    {name:'J. Smith, Capital',no:'300', tb_dr:'',       tb_cr:'52,000'},
+    {name:'J. Smith, Drawings',no:'301',tb_dr:'14,000', tb_cr:''},
+    {name:'Service Revenue',  no:'400', tb_dr:'',       tb_cr:'48,200'},
+    {name:'Rent Revenue',     no:'401', tb_dr:'',       tb_cr:'3,600'},
+    {name:'Salaries Expense', no:'500', tb_dr:'17,720', tb_cr:''},
+    {name:'Rent Expense',     no:'501', tb_dr:'9,600',  tb_cr:''},
   ];
-  var html='<div class="ws-outer"><div class="ws-title">J. Smith Services<br>Work Sheet<br>For the Year Ended December 31</div>'
+  // Extra blank rows for student to add accounts
+  var blankRows = 0;
+  // Post-line adjustment accounts (student fills these in from adjusting entries)
+  var adjAccounts = [
+    {name:'Insurance Expense',  no:'502'},
+    {name:'Supplies Expense',   no:'503'},
+    {name:'Dep. Exp.—Equip.',   no:'504'},
+    {name:'Salaries Payable',   no:'505'},
+  ];
+  // Extra blank rows below adjustment accounts
+  var adjBlankRows = 0;
+
+  var tbTotal_dr = '106,420'; var tbTotal_cr = '106,420';
+
+  var html = '<div class="ws-outer">'
+    +'<div class="ws-title">J. Smith Services<br><b>Work Sheet</b><br>For the Year Ended December 31</div>'
     +'<div class="ws-scroll"><table class="ws-table">'
     +'<thead>'
     +'<tr class="ws-header-top">'
+    +'<th class="ws-row-num-h"></th>'
     +'<th rowspan="2" class="ws-acct-head">Account Title</th>'
+    +'<th rowspan="2" class="ws-acct-no-h">Acc.<br>No.</th>'
     +'<th colspan="2" class="ws-sec-head">Trial Balance</th>'
     +'<th colspan="2" class="ws-sec-head">Adjustments</th>'
     +'<th colspan="2" class="ws-sec-head">Income Statement</th>'
     +'<th colspan="2" class="ws-sec-head">Balance Sheet</th>'
+    +'<th class="ws-row-num-h"></th>'
     +'</tr>'
     +'<tr class="ws-header-sub">'
-    +'<th class="ws-col-head">Dr.</th><th class="ws-col-head">Cr.</th>'
-    +'<th class="ws-col-head">Dr.</th><th class="ws-col-head">Cr.</th>'
-    +'<th class="ws-col-head">Dr.</th><th class="ws-col-head">Cr.</th>'
-    +'<th class="ws-col-head">Dr.</th><th class="ws-col-head">Cr.</th>'
+    +'<th class="ws-row-num-h"></th>'
+    +'<th class="ws-col-head">Debit</th><th class="ws-col-head">Credit</th>'
+    +'<th class="ws-col-head">Debit</th><th class="ws-col-head">Credit</th>'
+    +'<th class="ws-col-head">Debit</th><th class="ws-col-head">Credit</th>'
+    +'<th class="ws-col-head">Debit</th><th class="ws-col-head">Credit</th>'
+    +'<th class="ws-row-num-h"></th>'
     +'</tr>'
     +'</thead><tbody>';
-  var cols=['tb_dr','tb_cr','adj_dr','adj_cr','is_dr','is_cr','bs_dr','bs_cr'];
-  accounts.forEach(function(a,i){
-    html+='<tr>';
-    html+='<td class="ws-acct-cell">'+a.name+'</td>';
-    cols.forEach(function(col){
-      var readonly = col==='tb_dr'||col==='tb_cr';
-      html+='<td class="ws-num-cell">'
-        +(readonly
-          ? '<span class="ws-given">'+(a[col]||'')+'</span>'
-          : '<input class="ws-input" type="text" id="ws_'+i+'_'+col+'" placeholder="">'
-        )+'</td>';
-    });
-    html+='</tr>';
+
+  var rowNum = 1;
+
+  // TB rows — account names given, student fills adjustments, IS, BS
+  tbAccounts.forEach(function(a, i){
+    html += '<tr>'
+      +'<td class="ws-rn">'+rowNum+'</td>'
+      +'<td class="ws-acct-cell ws-acct-given">'+a.name+'</td>'
+      +'<td class="ws-acct-no ws-given-val">'+a.no+'</td>'
+      +'<td class="ws-num-cell"><span class="ws-given">'+(a.tb_dr||'')+'</span></td>'
+      +'<td class="ws-num-cell"><span class="ws-given">'+(a.tb_cr||'')+'</span></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_'+i+'_adj_dr"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_'+i+'_adj_cr"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_'+i+'_is_dr"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_'+i+'_is_cr"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_'+i+'_bs_dr"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_'+i+'_bs_cr"></td>'
+      +'<td class="ws-rn">'+rowNum+'</td>'
+      +'</tr>';
+    rowNum++;
   });
-  // Totals row
-  html+='<tr class="ws-total-row">'
-    +'<td class="ws-acct-cell"><b>Totals</b></td>';
-  cols.forEach(function(col){
-    var readonly = col==='tb_dr'||col==='tb_cr';
-    html+='<td class="ws-num-cell">'
-      +(readonly ? '<span class="ws-given"></span>' : '<input class="ws-input ws-total-input" type="text" id="ws_total_'+col+'" placeholder="">')
-      +'</td>';
+
+  // Extra blank rows before totals
+  for(var b=0;b<blankRows;b++){
+    html += '<tr>'
+      +'<td class="ws-rn">'+rowNum+'</td>'
+      +'<td class="ws-acct-cell"><input class="ws-input ws-acct-input" type="text" id="ws_blank_name_'+b+'"></td>'
+      +'<td class="ws-acct-no"><input class="ws-input ws-no-input" type="text" id="ws_blank_no_'+b+'"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_blank_tbdr_'+b+'"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_blank_tbcr_'+b+'"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_blank_adjdr_'+b+'"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_blank_adjcr_'+b+'"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_blank_isdr_'+b+'"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_blank_iscr_'+b+'"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_blank_bsdr_'+b+'"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_blank_bscr_'+b+'"></td>'
+      +'<td class="ws-rn">'+rowNum+'</td>'
+      +'</tr>';
+    rowNum++;
+  }
+  html += '<tr class="ws-total-row">'
+    +'<td class="ws-rn">'+rowNum+'</td>'
+    +'<td class="ws-acct-cell"></td>'
+    +'<td class="ws-acct-no"></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_tot_tb_dr" placeholder=""></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_tot_tb_cr" placeholder=""></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_tot_adj_dr" placeholder=""></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_tot_adj_cr" placeholder=""></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_tot_is_dr" placeholder=""></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_tot_is_cr" placeholder=""></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_tot_bs_dr" placeholder=""></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_tot_bs_cr" placeholder=""></td>'
+    +'<td class="ws-rn">'+rowNum+'</td>'
+    +'</tr>';
+  rowNum++;
+
+  // ── BELOW THE LINE: adjustment-only accounts ──
+  // Separator label row
+  html += '<tr class="ws-divider-row">'
+    +'<td></td>'
+    +'<td class="ws-divider-label" colspan="11">Accounts added from adjusting entries</td>'
+    +'</tr>';
+
+  var adjOffset = tbAccounts.length;
+  adjAccounts.forEach(function(a, i){
+    var ri = adjOffset + i;
+    html += '<tr>'
+      +'<td class="ws-rn">'+rowNum+'</td>'
+      +'<td class="ws-acct-cell ws-acct-given">'+a.name+'</td>'
+      +'<td class="ws-acct-no ws-given-val">'+a.no+'</td>'
+      +'<td class="ws-num-cell ws-greyed"></td>'
+      +'<td class="ws-num-cell ws-greyed"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_'+ri+'_adj_dr"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_'+ri+'_adj_cr"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_'+ri+'_is_dr"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_'+ri+'_is_cr"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_'+ri+'_bs_dr"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text" id="ws_'+ri+'_bs_cr"></td>'
+      +'<td class="ws-rn">'+rowNum+'</td>'
+      +'</tr>';
+    rowNum++;
   });
-  html+='</tr>';
-  // Net income row
-  html+='<tr class="ws-total-row">'
-    +'<td class="ws-acct-cell"><b>Net Income</b></td>';
-  cols.forEach(function(col){
-    var show = col==='is_dr'||col==='is_cr'||col==='bs_dr'||col==='bs_cr';
-    html+='<td class="ws-num-cell">'
-      +(show ? '<input class="ws-input ws-total-input" type="text" id="ws_ni_'+col+'" placeholder="">' : '')
-      +'</td>';
-  });
-  html+='</tr>';
-  html+='</tbody></table></div></div>';
+
+  // Extra blank rows below adj accounts
+  for(var c=0;c<adjBlankRows;c++){
+    html += '<tr>'
+      +'<td class="ws-rn">'+rowNum+'</td>'
+      +'<td class="ws-acct-cell"><input class="ws-input ws-acct-input" type="text" id="ws_adj_blank_name_'+c+'"></td>'
+      +'<td class="ws-acct-no"><input class="ws-input ws-no-input" type="text" id="ws_adj_blank_no_'+c+'"></td>'
+      +'<td class="ws-num-cell ws-greyed"></td>'
+      +'<td class="ws-num-cell ws-greyed"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text"></td>'
+      +'<td class="ws-num-cell"><input class="ws-input" type="text"></td>'
+      +'<td class="ws-rn">'+rowNum+'</td>'
+      +'</tr>';
+    rowNum++;
+  }
+  html += '<tr class="ws-total-row">'
+    +'<td class="ws-rn">'+rowNum+'</td>'
+    +'<td class="ws-acct-cell"><b>Net Income / (Net Loss)</b></td>'
+    +'<td class="ws-acct-no"></td>'
+    +'<td class="ws-num-cell ws-greyed"></td>'
+    +'<td class="ws-num-cell ws-greyed"></td>'
+    +'<td class="ws-num-cell ws-greyed"></td>'
+    +'<td class="ws-num-cell ws-greyed"></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_ni_is_dr" placeholder=""></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_ni_is_cr" placeholder=""></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_ni_bs_dr" placeholder=""></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_ni_bs_cr" placeholder=""></td>'
+    +'<td class="ws-rn">'+rowNum+'</td>'
+    +'</tr>';
+  rowNum++;
+
+  // Final balanced totals row
+  html += '<tr class="ws-total-row ws-final-row">'
+    +'<td class="ws-rn">'+rowNum+'</td>'
+    +'<td class="ws-acct-cell"></td>'
+    +'<td class="ws-acct-no"></td>'
+    +'<td class="ws-num-cell ws-double-border ws-greyed"></td>'
+    +'<td class="ws-num-cell ws-double-border ws-greyed"></td>'
+    +'<td class="ws-num-cell ws-double-border ws-greyed"></td>'
+    +'<td class="ws-num-cell ws-double-border ws-greyed"></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_fin_is_dr" placeholder=""></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_fin_is_cr" placeholder=""></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_fin_bs_dr" placeholder=""></td>'
+    +'<td class="ws-num-cell ws-double-border"><input class="ws-input ws-total-input" type="text" id="ws_fin_bs_cr" placeholder=""></td>'
+    +'<td class="ws-rn">'+rowNum+'</td>'
+    +'</tr>';
+
+  html += '</tbody></table></div></div>';
   return html;
 }
 
-// ── Statement of Owner's Equity builder ───────────────────────────
-function buildStatementOfEquity(){
-  return '<div class="stmt-wrap">'
-    +'<div class="stmt-title">J. Smith, Capital<br><small>Statement of Owner\'s Equity</small><br><small>For the Year Ended December 31</small></div>'
-    +'<table class="stmt-table">'
-    +'<tr><td class="stmt-label">J. Smith, Capital — January 1</td><td class="stmt-space"></td><td class="stmt-amt"><input class="stmt-input" type="text" id="eq_open" placeholder=""></td></tr>'
-    +'<tr><td class="stmt-label">Add: Net Income for the year</td><td class="stmt-amt"><input class="stmt-input" type="text" id="eq_ni" placeholder=""></td><td></td></tr>'
-    +'<tr><td class="stmt-label">Less: Owner\'s Drawings</td><td class="stmt-amt">(<input class="stmt-input" type="text" id="eq_draw" placeholder="">)</td><td></td></tr>'
-    +'<tr class="stmt-subtotal"><td class="stmt-label">Net change in Capital</td><td class="stmt-amt"><input class="stmt-input" type="text" id="eq_change" placeholder=""></td><td></td></tr>'
-    +'<tr class="stmt-total"><td class="stmt-label"><b>J. Smith, Capital — December 31</b></td><td class="stmt-space"></td><td class="stmt-amt"><input class="stmt-input" type="text" id="eq_end" placeholder=""></td></tr>'
-    +'</table></div>';
+// ── Accounting Cycle builder ──────────────────────────────────────
+var CYCLE_STEPS = [
+  "Transfer opening balances to ledger",
+  "Record transactions in T-accounts",
+  "Determine T-account balances",
+  "Prepare the trial balance",
+  "Complete the worksheet",
+  "Prepare financial statements",
+  "Journalize and post adjusting entries",
+  "Journalize and post closing entries",
+  "Prepare post-closing trial balance",
+  "Prepare new balance sheet"
+];
+// Steps that are blank (student fills in) - we hide steps 2,4,5,7,8,10 (0-indexed 1,3,4,6,7,9)
+var CYCLE_BLANKS = [1,3,4,6,7,9];
+
+function buildAccountingCycle(){
+  var html='<div class="cycle-wrap">';
+  CYCLE_STEPS.forEach(function(step,i){
+    var isBlank = CYCLE_BLANKS.indexOf(i) >= 0;
+    html+='<div class="cycle-item">'
+      +'<div class="cycle-num">'+(i+1)+'</div>'
+      +'<div class="cycle-box'+(isBlank?' cycle-blank':' cycle-given')+'">'
+      +(isBlank
+        ? '<input class="cycle-input" type="text" id="cyc_'+i+'" placeholder="Write the step...">'
+        : '<span>'+step+'</span>'
+      )
+      +'</div>'
+      +(i < CYCLE_STEPS.length-1 ? '<div class="cycle-arrow">↓</div>' : '')
+      +'</div>';
+  });
+  html+='</div>';
+  return html;
+}
+
+function checkCycle(){
+  var keywords = {
+    1:['t-account','transactions','record','journal entry'],
+    3:['trial balance','tb'],
+    4:['worksheet','work sheet'],
+    6:['adjusting','adjust'],
+    7:['closing','close'],
+    9:['balance sheet','new balance']
+  };
+  var correct=0; var lines=[];
+  CYCLE_BLANKS.forEach(function(i){
+    var el=document.getElementById('cyc_'+i);
+    var val=(el?el.value:'').toLowerCase().replace(/[^a-z0-9 ]/g,'').trim();
+    var kws=keywords[i]||[];
+    var ok=kws.some(function(k){return val.indexOf(k)>=0;});
+    if(ok){correct++;lines.push('<span style="color:var(--green)">✓ Step '+(i+1)+': '+CYCLE_STEPS[i]+'</span>');}
+    else lines.push('<span style="color:var(--red)">✗ Step '+(i+1)+': '+CYCLE_STEPS[i]+'</span>');
+  });
+  var fb=document.getElementById('cycleFeedback');
+  fb.innerHTML='<div class="exam-result"><b>'+correct+' / '+CYCLE_BLANKS.length+'</b> steps correct</div>'+lines.join('<br>');
+  fb.className='exam-feedback show';
 }
 
 // ── Classified Balance Sheet builder ──────────────────────────────
 function buildClassifiedBS(){
-  return '<div class="stmt-wrap" style="margin-top:20px">'
-    +'<div class="stmt-title">J. Smith Services<br><small>Balance Sheet</small><br><small>December 31</small></div>'
-    +'<table class="stmt-table">'
-    +'<tr><td class="stmt-section" colspan="3">ASSETS</td></tr>'
-    +'<tr><td class="stmt-sub-section" colspan="3">Current Assets</td></tr>'
-    +'<tr><td class="stmt-label pl20">Cash</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_cash" placeholder=""></td><td></td></tr>'
-    +'<tr><td class="stmt-label pl20">Accounts Receivable</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_ar" placeholder=""></td><td></td></tr>'
-    +'<tr><td class="stmt-label pl20">Supplies</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_supp" placeholder=""></td><td></td></tr>'
-    +'<tr><td class="stmt-label pl20">Prepaid Insurance</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_prepaid" placeholder=""></td><td></td></tr>'
-    +'<tr class="stmt-subtotal"><td class="stmt-label pl20">Total Current Assets</td><td></td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_curr_tot" placeholder=""></td></tr>'
-    +'<tr><td class="stmt-sub-section" colspan="3">Fixed Assets</td></tr>'
-    +'<tr><td class="stmt-label pl20">Equipment</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_equip" placeholder=""></td><td></td></tr>'
-    +'<tr><td class="stmt-label pl20">Less: Accumulated Depreciation</td><td class="stmt-amt">(<input class="stmt-input" type="text" id="bs_accum" placeholder="">)</td><td></td></tr>'
-    +'<tr class="stmt-subtotal"><td class="stmt-label pl20">Book Value of Equipment</td><td></td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_bv" placeholder=""></td></tr>'
-    +'<tr class="stmt-total"><td class="stmt-label"><b>TOTAL ASSETS</b></td><td></td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_total_assets" placeholder=""></td></tr>'
-    +'<tr><td class="stmt-section" colspan="3">LIABILITIES</td></tr>'
-    +'<tr><td class="stmt-sub-section" colspan="3">Current Liabilities</td></tr>'
-    +'<tr><td class="stmt-label pl20">Accounts Payable</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_ap" placeholder=""></td><td></td></tr>'
-    +'<tr><td class="stmt-label pl20">Wages Payable</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_wp" placeholder=""></td><td></td></tr>'
-    +'<tr class="stmt-subtotal"><td class="stmt-label pl20">Total Current Liabilities</td><td></td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_curr_liab" placeholder=""></td></tr>'
-    +'<tr><td class="stmt-sub-section" colspan="3">Long-Term Liabilities</td></tr>'
-    +'<tr><td class="stmt-label pl20">Mortgage Payable</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_mort" placeholder=""></td><td></td></tr>'
-    +'<tr class="stmt-subtotal"><td class="stmt-label pl20">Total Liabilities</td><td></td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_total_liab" placeholder=""></td></tr>'
-    +'<tr><td class="stmt-section" colspan="3">OWNER\'S EQUITY</td></tr>'
-    +'<tr><td class="stmt-label pl20">J. Smith, Capital</td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_capital" placeholder=""></td><td></td></tr>'
-    +'<tr class="stmt-total"><td class="stmt-label"><b>TOTAL LIABILITIES AND OWNER\'S EQUITY</b></td><td></td><td class="stmt-amt"><input class="stmt-input" type="text" id="bs_total_le" placeholder=""></td></tr>'
-    +'</table></div>';
+  function inp(id,w){w=w||80;return '<input class="ap-input" type="text" id="'+id+'" style="width:'+w+'px">';}
+  function r(lbl,c1,c2,c3,cls){
+    return '<tr class="'+(cls||'')+'">'
+      +'<td class="ap-label">'+lbl+'</td>'
+      +'<td class="ap-num">'+(c1||'')+'</td>'
+      +'<td class="ap-num">'+(c2||'')+'</td>'
+      +'<td class="ap-num">'+(c3||'')+'</td>'
+      +'</tr>';
+  }
+  function blank(){return '<tr><td class="ap-label ap-blank-row"></td><td class="ap-num"></td><td class="ap-num"></td><td class="ap-num"></td></tr>';}
+  return '<div class="ap-outer">'
+    +'<div class="ap-heading"><div>J. Smith Services</div><div><b>Balance Sheet</b></div><div>As at December 31, 20--</div></div>'
+    +'<table class="ap-table"><colgroup><col class="ap-col-label"><col class="ap-col-num"><col class="ap-col-num"><col class="ap-col-num"></colgroup><tbody>'
+    +r('<b>Assets</b>','','','','ap-section-row')
+    +r('<u>Current Assets</u>','','','','ap-subsection-row')
+    +r('Cash',inp('bs_cash'),'','')
+    +r('Accounts Receivable',inp('bs_ar'),'','')
+    +r('Supplies',inp('bs_supp'),'','')
+    +r('Prepaid Insurance',inp('bs_prepaid'),'','')
+    +r('Total Current Assets','',inp('bs_curr_tot'),'','ap-subtotal-row')
+    +blank()
+    +r('<u>Fixed Assets</u>','','','','ap-subsection-row')
+    +r('Equipment',inp('bs_equip'),'','')
+    +r('\u00a0\u00a0Less: Acc. Dep. \u2014 Equipment','('+inp('bs_accum')+')','','')
+    +r('Book Value of Equipment','',inp('bs_bv'),'')
+    +r('Total Fixed Assets','',inp('bs_fix_tot'),'','ap-subtotal-row')
+    +r('<b>Total Assets</b>','','',inp('bs_total_assets'),'ap-total-row')
+    +blank()
+    +r('<b>Liabilities and Owner\'s Equity</b>','','','','ap-section-row')
+    +r('<u>Short-Term Liabilities</u>','','','','ap-subsection-row')
+    +r('Accounts Payable',inp('bs_ap'),'','')
+    +r('Salaries Payable',inp('bs_sp'),'','')
+    +r('Total Short-Term Liabilities','',inp('bs_curr_liab'),'','ap-subtotal-row')
+    +blank()
+    +r('<u>Long-Term Liabilities</u>','','','','ap-subsection-row')
+    +r('Mortgage Payable',inp('bs_mort'),'','')
+    +r('Total Long-Term Liabilities','',inp('bs_lt_liab'),'','ap-subtotal-row')
+    +r('Total Liabilities','','',inp('bs_total_liab'),'ap-subtotal-row')
+    +blank()
+    +r('<u>Statement of Owner\'s Equity</u>','','','','ap-subsection-row')
+    +r('J. Smith, Capital \u2014 January 1','',inp('eq_open'),'')
+    +r('Add: Net Income for the year',inp('eq_ni'),'','')
+    +r('Less: J. Smith, Drawings','('+inp('eq_draw')+')','','')
+    +r('Increase to Capital','',inp('eq_change'),'','ap-subtotal-row')
+    +r('J. Smith, Capital \u2014 December 31','','',inp('eq_end'),'ap-subtotal-row')
+    +r('<b>Total Liabilities and Owner\'s Equity</b>','','',inp('bs_total_le'),'ap-total-row')
+    +'</tbody></table></div>';
 }
+
 
 // ── FITB word bank for Section 1 ──────────────────────────────────
 var EXAM_FITB = [

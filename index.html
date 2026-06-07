@@ -806,6 +806,9 @@ body{
 .cl-extra-card:hover .cl-extra-arrow{color:#14b8a6;transform:translateX(3px);}
 
 /* ══ EXAM PREP ══ */
+.exam-regen{text-align:center;margin-bottom:12px;}
+.exam-regen-btn{background:transparent;border:1px solid var(--border2);border-radius:6px;padding:6px 16px;font-size:12.5px;font-weight:500;font-family:var(--sans);color:var(--text3);cursor:pointer;transition:all var(--ease);}
+.exam-regen-btn:hover{border-color:var(--accent);color:var(--accent);}
 .exam-wrap{width:100%;max-width:1100px;margin:0 auto;padding:28px 20px 100px;}
 .exam-section-wide .ws-outer,.exam-section-wide .ws-scroll,.exam-section-wide .ws-table{min-width:100%!important;}
 .exam-header{background:var(--surface);border:2px solid var(--text);border-radius:var(--r);padding:20px 24px;margin-bottom:24px;text-align:center;}
@@ -2243,6 +2246,7 @@ function routeFromPath(path){
   if(p==='/principles') { renderPrinciplesMode(true); return; }
   if(p==='/principles/session') { startPrinciplesSession(true); return; }
   if(p==='/exam-prep') { renderExamPrep(true); return; }
+  if(p==='/steps') { renderStepsPractice(true); return; }
 
   // /chapters/c1, /chapters/c1/level1, /chapters/c1/all, /chapters/c1/unit2 etc.
   var chMatch = p.match(/^\/chapters\/c(\d+)(\/(.+))?$/);
@@ -2350,6 +2354,14 @@ function renderChapterList(noPush){
   +'</div>'
   +'<div class="cl-extra-arrow">›</div>'
   +'</div>'
+  +'<div class="cl-extra-card" onclick="renderStepsPractice()">'
+  +'<div class="cl-extra-icon" style="color:#7c3aed">🔢</div>'
+  +'<div class="cl-extra-body">'
+  +'<div class="cl-extra-title">Step Sequences</div>'
+  +'<div class="cl-extra-sub">Practice the correct order of posting, journalizing, closing entries, the accounting cycle, and more.</div>'
+  +'</div>'
+  +'<div class="cl-extra-arrow">›</div>'
+  +'</div>'
   +'</div>'
 
   +'</div></div>';
@@ -2410,133 +2422,617 @@ var PRINCIPLES_QUESTIONS = [
   {type:'mcq',q:"What does GAAP stand for?",opts:["Generally Accepted Accounting Principles","Government Authorized Accounting Procedures","General Annual Accounting Practices","Gross Asset Accounting Policies"],ans:0,exp:"GAAP = Generally Accepted Accounting Principles. These are the standard rules and guidelines that accountants follow when preparing financial statements."},
   {type:'mcq',q:"Which of the following is NOT an accounting principle covered by GAAPs?",opts:["Business Entity Principle","Matching Principle","Profit Maximization Principle","Cost Principle"],ans:2,exp:"Profit Maximization is a business finance concept, not an accounting principle. GAAPs include Business Entity, Cost, Matching, Conservatism, Materiality, Objectivity, and Time Period principles."},
 
+  // ── Revenue Recognition Principle ────────────────────────────────
+  {type:'mcq',q:"What does the Revenue Recognition Principle state?",opts:["Revenue is recorded when cash is received","Revenue is recorded when it is earned, regardless of when cash is received","Revenue is recorded at the end of the accounting period","Revenue is recorded when the invoice is mailed"],ans:1,exp:"The Revenue Recognition Principle: record revenue when it is EARNED - the service has been performed or goods delivered. Cash does not need to have been received yet."},
+  {type:'mcq',q:"A business completes a $3,000 job in December but the customer pays in January. When is the revenue recorded?",opts:["January - when cash is received","December - when the service was earned/performed","Either month is fine","At year end only"],ans:1,exp:"Revenue Recognition: the service was EARNED in December (work was done), so revenue is recorded in December - even though cash arrives in January."},
+  {type:'mcq',q:"A customer pays $1,200 in advance for 6 months of services. How should this be recorded initially?",opts:["Revenue of $1,200 immediately","As Unearned Revenue (a liability) until each month's service is performed","As owner's equity","As a current asset"],ans:1,exp:"Revenue is not yet EARNED - the service hasn't been performed. The cash is Unearned Revenue (a liability) until each month's service is completed, at which point 1/6 is recognized as revenue."},
+  {type:'mcq',q:"TRUE or FALSE: Under the Revenue Recognition Principle, revenue is recorded when cash is received.",opts:["True","False"],ans:1,exp:"False. Revenue is recorded when EARNED (service performed or goods delivered) - not when cash is received. This is what distinguishes accrual from cash basis."},
+  {type:'mcq',q:"The Revenue Recognition Principle is a core feature of which basis of accounting?",opts:["Cash basis","Accrual basis","Tax basis","Single-entry basis"],ans:1,exp:"The Revenue Recognition Principle is central to ACCRUAL basis - record revenue when earned, not when cash arrives. Cash basis ignores this by recording revenue only when cash is received."},
+
   // ── Mixed / compare ───────────────────────────────────────
   {type:'mcq',q:"Which principle explains why adjusting entries are made for prepaid insurance each month?",opts:["Business Entity Principle","Cost Principle","Matching Principle","Conservatism Principle"],ans:2,exp:"Prepaid insurance adjustments match the insurance expense to the period in which the coverage was used - this is the Matching Principle."},
   {type:'mcq',q:"Which principle explains why land is still recorded at $50,000 even though it is now worth $200,000?",opts:["Matching Principle","Cost Principle","Conservatism Principle","Materiality Principle"],ans:1,exp:"The Cost Principle requires assets to be recorded at their original purchase price. Current market value is not used in historical cost accounting."},
   {type:'mcq',q:"An accountant is unsure whether to include a $50 discrepancy. Which principle would allow them to ignore it?",opts:["Business Entity Principle","Conservatism Principle","Materiality Principle","Objectivity Principle"],ans:2,exp:"The Materiality Principle allows insignificant items to be handled practically. A $50 discrepancy is typically immaterial and may be adjusted without strict accounting treatment."},
   {type:'mcq',q:"Which principle is violated when an accountant records an entry based on a verbal agreement with no supporting documentation?",opts:["Matching Principle","Objectivity Principle","Time Period Principle","Cost Principle"],ans:1,exp:"The Objectivity Principle requires verifiable, objective evidence (like invoices or contracts). A verbal agreement with no documentation is not objective evidence."},
   {type:'mcq',q:"A business records its owner's personal car as a company asset. Which two principles are violated?",opts:["Cost Principle and Matching Principle","Business Entity Principle and Objectivity Principle","Time Period Principle and Conservatism Principle","Matching Principle and Materiality Principle"],ans:1,exp:"Business Entity Principle: personal assets must be separate from business assets. Objectivity Principle: there is no objective business transaction to support recording a personal car as a company asset."},
-  {type:'mcq',q:"Which principle requires that the same depreciation method be used consistently from year to year?",opts:["Conservatism Principle","Matching Principle","Consistency Principle","Time Period Principle"],ans:2,exp:"The Consistency Principle requires businesses to use the same accounting methods each period so that financial statements are comparable over time."},
   {type:'mcq',q:"TRUE or FALSE: The Matching Principle is only relevant for large corporations.",opts:["True","False"],ans:1,exp:"False. The Matching Principle applies to ALL businesses regardless of size. Whenever a business has prepaid expenses, depreciation, or accrued items, the Matching Principle is at work."},
   {type:'mcq',q:"Which of the following is an example of applying the Conservatism Principle?",opts:["Recording revenue before it is earned","Choosing the depreciation method that gives the highest income","Estimating bad debts to avoid overstating Accounts Receivable","Recording assets at market value"],ans:2,exp:"Estimating bad debts (amounts unlikely to be collected) reduces Accounts Receivable to a more conservative, realistic amount - avoiding overstating assets. This is Conservatism in action."},
 ];
+
+// ── EXAM PREP ─────────────────────────────────────────────────────
+
+// Pool of FITB question sets (pick 10 randomly each time)
+var ALL_EXAM_FITB = [
+  {q:"The ___ account is used as a clearing account during the closing process.",ans:"Income Summary",hint:"income summary"},
+  {q:"The ___ method charges the same amount of depreciation each year.",ans:"straight-line",hint:"straight-line"},
+  {q:"Assets minus liabilities equals ___.",ans:"Owner's Equity",hint:"owner's equity"},
+  {q:"The ___ Principle requires recording expenses in the same period as the revenues they helped earn.",ans:"Matching",hint:"matching"},
+  {q:"Original cost minus accumulated depreciation equals the asset's ___ value.",ans:"book",hint:"book value"},
+  {q:"An asset that will be used for more than one year is called a ___ asset.",ans:"fixed",hint:"fixed"},
+  {q:"The ___ trial balance is prepared after all closing entries have been journalized and posted.",ans:"post-closing",hint:"post-closing"},
+  {q:"A ___ account (like Accumulated Depreciation) reduces the balance of a related account.",ans:"contra",hint:"contra"},
+  {q:"Under the ___ method, the depreciation rate is applied to the declining book value each year.",ans:"declining balance",hint:"declining balance"},
+  {q:"The ___ basis of accounting records revenue when earned and expenses when incurred.",ans:"accrual",hint:"accrual"},
+  {q:"The ___ Principle states that assets are recorded at their original purchase price.",ans:"Cost",hint:"cost"},
+  {q:"Temporary accounts include revenue, expenses, drawings, and ___.",ans:"Income Summary",hint:"income summary"},
+  {q:"The difference between the debit and credit sides of a T-account is called the account ___.",ans:"balance",hint:"balance"},
+  {q:"The ___ is the book of original entry where transactions are first recorded.",ans:"journal",hint:"journal"},
+  {q:"Transferring journal entries to the ledger accounts is called ___.",ans:"posting",hint:"posting"},
+  {q:"A numbered list of all accounts used by a business is called the chart of ___.",ans:"accounts",hint:"accounts"},
+  {q:"The ___ Principle keeps personal and business finances completely separate.",ans:"Business Entity",hint:"business entity"},
+  {q:"An entry made at year end to update prepaid and depreciation accounts is called an ___ entry.",ans:"adjusting",hint:"adjusting"},
+  {q:"The ___ is an informal working paper used to organize data before preparing financial statements.",ans:"worksheet",hint:"worksheet"},
+  {q:"Short-term assets expected to be converted to cash within one year are called ___ assets.",ans:"current",hint:"current"},
+  {q:"The 8-column worksheet adds two new columns called the ___ columns.",ans:"Adjustments",hint:"adjustments"},
+  {q:"Revenue and expense accounts that are zeroed out each period are called ___ accounts.",ans:"temporary",hint:"temporary"},
+  {q:"The ___ Summary account collects all revenues and expenses during the closing process.",ans:"Income",hint:"income"},
+  {q:"Accounts whose balances carry forward to the next period are called ___ accounts.",ans:"permanent",hint:"permanent"},
+  {q:"The ___ Principle says to choose the method least likely to overstate assets or income.",ans:"Conservatism",hint:"conservatism"},
+];
+
+// Pool of number scenarios for adjusting entries (pick one each time)
+var ADJ_SCENARIOS = [
+  {
+    label:'A',
+    supplies_hand:320, supplies_bal:1100,
+    ins_monthly:150, ins_bal:1800,
+    equip_cost:24000, equip_life:5, equip_res:0,
+    sal_unpaid:680,
+    owner:'J. Smith'
+  },
+  {
+    label:'B',
+    supplies_hand:450, supplies_bal:1300,
+    ins_monthly:200, ins_bal:2400,
+    equip_cost:18000, equip_life:4, equip_res:0,
+    sal_unpaid:920,
+    owner:'A. Chen'
+  },
+  {
+    label:'C',
+    supplies_hand:180, supplies_bal:950,
+    ins_monthly:125, ins_bal:1500,
+    equip_cost:30000, equip_life:6, equip_res:0,
+    sal_unpaid:540,
+    owner:'M. Park'
+  },
+  {
+    label:'D',
+    supplies_hand:600, supplies_bal:1400,
+    ins_monthly:175, ins_bal:2100,
+    equip_cost:20000, equip_life:5, equip_res:2000,
+    sal_unpaid:780,
+    owner:'T. Brown'
+  },
+];
+
+// Pool of closing entry scenarios
+var CLOSING_SCENARIOS = [
+  {
+    owner:'J. Smith', opening_cap:52000, drawings:14000,
+    revenues:[{name:'Service Revenue',amt:48200},{name:'Rent Revenue',amt:3600}],
+    expenses:[{name:'Salaries Expense',amt:18400},{name:'Rent Expense',amt:9600},{name:'Supplies Expense',amt:780},{name:'Insurance Expense',amt:1800},{name:'Depreciation Expense',amt:4800}]
+  },
+  {
+    owner:'A. Chen', opening_cap:61000, drawings:18000,
+    revenues:[{name:'Service Revenue',amt:54000},{name:'Commission Revenue',amt:4200}],
+    expenses:[{name:'Salaries Expense',amt:21000},{name:'Rent Expense',amt:12000},{name:'Supplies Expense',amt:650},{name:'Insurance Expense',amt:2400},{name:'Depreciation Expense',amt:4500}]
+  },
+  {
+    owner:'M. Park', opening_cap:43000, drawings:11000,
+    revenues:[{name:'Service Revenue',amt:39500}],
+    expenses:[{name:'Salaries Expense',amt:15200},{name:'Rent Expense',amt:8400},{name:'Supplies Expense',amt:770},{name:'Insurance Expense',amt:1500},{name:'Depreciation Expense',amt:5000}]
+  },
+];
+
+// Worksheet scenarios
+var WS_SCENARIOS = [
+  {
+    owner:'J. Smith', business:'J. Smith Services',
+    supplies_hand:320, supplies_bal:1100,
+    ins_monthly:150, ins_bal:1800,
+    equip_cost:24000, equip_life:5, equip_res:0,
+    sal_unpaid:680,
+    accounts:[
+      {name:'Cash',no:'100',tb_dr:'8,400',tb_cr:''},
+      {name:'Accounts Receivable',no:'102',tb_dr:'3,200',tb_cr:''},
+      {name:'Supplies',no:'131',tb_dr:'1,100',tb_cr:''},
+      {name:'Prepaid Insurance',no:'132',tb_dr:'1,800',tb_cr:''},
+      {name:'Equipment',no:'141',tb_dr:'24,000',tb_cr:''},
+      {name:'Acc. Dep.—Equip.',no:'142',tb_dr:'',tb_cr:''},
+      {name:'Accounts Payable',no:'200',tb_dr:'',tb_cr:'2,800'},
+      {name:'J. Smith, Capital',no:'300',tb_dr:'',tb_cr:'52,000'},
+      {name:'J. Smith, Drawings',no:'301',tb_dr:'14,000',tb_cr:''},
+      {name:'Service Revenue',no:'400',tb_dr:'',tb_cr:'48,200'},
+      {name:'Rent Revenue',no:'401',tb_dr:'',tb_cr:'3,600'},
+      {name:'Salaries Expense',no:'500',tb_dr:'17,720',tb_cr:''},
+      {name:'Rent Expense',no:'501',tb_dr:'9,600',tb_cr:''},
+    ],
+    adjAccounts:[
+      {name:'Insurance Expense',no:'502'},
+      {name:'Supplies Expense',no:'503'},
+      {name:'Dep. Exp.—Equip.',no:'504'},
+      {name:'Salaries Payable',no:'505'},
+    ]
+  },
+  {
+    owner:'A. Chen', business:'Chen Consulting',
+    supplies_hand:450, supplies_bal:1300,
+    ins_monthly:200, ins_bal:2400,
+    equip_cost:18000, equip_life:4, equip_res:0,
+    sal_unpaid:920,
+    accounts:[
+      {name:'Cash',no:'100',tb_dr:'11,200',tb_cr:''},
+      {name:'Accounts Receivable',no:'102',tb_dr:'4,800',tb_cr:''},
+      {name:'Supplies',no:'131',tb_dr:'1,300',tb_cr:''},
+      {name:'Prepaid Insurance',no:'132',tb_dr:'2,400',tb_cr:''},
+      {name:'Equipment',no:'141',tb_dr:'18,000',tb_cr:''},
+      {name:'Acc. Dep.—Equip.',no:'142',tb_dr:'',tb_cr:''},
+      {name:'Accounts Payable',no:'200',tb_dr:'',tb_cr:'3,200'},
+      {name:'A. Chen, Capital',no:'300',tb_dr:'',tb_cr:'61,000'},
+      {name:'A. Chen, Drawings',no:'301',tb_dr:'18,000',tb_cr:''},
+      {name:'Service Revenue',no:'400',tb_dr:'',tb_cr:'54,000'},
+      {name:'Commission Revenue',no:'401',tb_dr:'',tb_cr:'4,200'},
+      {name:'Salaries Expense',no:'500',tb_dr:'20,080',tb_cr:''},
+      {name:'Rent Expense',no:'501',tb_dr:'12,000',tb_cr:''},
+    ],
+    adjAccounts:[
+      {name:'Insurance Expense',no:'502'},
+      {name:'Supplies Expense',no:'503'},
+      {name:'Dep. Exp.—Equip.',no:'504'},
+      {name:'Salaries Payable',no:'505'},
+    ]
+  },
+];
+
+// Balance Sheet scenarios
+var BS_SCENARIOS = [
+  {
+    owner:'J. Smith', business:'J. Smith Services',
+    cash:8400, ar:3200, supplies:320, prepaid:1200,
+    equip:24000, accum_dep:4800,
+    ap:2800, sal_pay:680, mortgage:12000,
+    net_income:16420, drawings:14000, opening_cap:52000
+  },
+  {
+    owner:'A. Chen', business:'Chen Consulting',
+    cash:11200, ar:4800, supplies:450, prepaid:2000,
+    equip:18000, accum_dep:4500,
+    ap:3200, sal_pay:920, mortgage:8000,
+    net_income:19650, drawings:18000, opening_cap:61000
+  },
+  {
+    owner:'M. Park', business:'Park Design Co.',
+    cash:6500, ar:2800, supplies:180, prepaid:750,
+    equip:30000, accum_dep:5000,
+    ap:1900, sal_pay:540, mortgage:15000,
+    net_income:14580, drawings:11000, opening_cap:43000
+  },
+];
+
+// Step sequence pools
+var STEP_SETS = {
+  posting:[
+    "Locate the account in the ledger",
+    "Record the date in the ledger account",
+    "Enter the debit or credit amount",
+    "Calculate the new balance and write DR. or CR.",
+    "Write the journal page number in the ledger PR column",
+    "Write the account number in the journal PR column"
+  ],
+  worksheet8:[
+    "Write the formal heading (company name, Work Sheet, period)",
+    "Enter unadjusted account balances in the Trial Balance columns",
+    "Gather data required to prepare adjustments",
+    "Prepare the adjustments; total, balance, and rule the Adjustment columns",
+    "Transfer accounts to the Income Statement or Balance Sheet columns",
+    "Total the Income Statement and Balance Sheet columns; find net income or net loss",
+    "Balance and rule the worksheet"
+  ],
+  closing:[
+    "Close all Revenue accounts to Income Summary",
+    "Close all Expense accounts to Income Summary",
+    "Close Income Summary to Owner's Capital",
+    "Close Owner's Drawings to Owner's Capital"
+  ],
+  accounting_cycle:[
+    "Transfer opening balances to the ledger",
+    "Record transactions in T-accounts",
+    "Determine T-account balances",
+    "Prepare the trial balance",
+    "Complete the worksheet",
+    "Prepare the financial statements",
+    "Journalize and post adjusting entries",
+    "Journalize and post closing entries",
+    "Prepare the post-closing trial balance",
+    "Prepare the new balance sheet"
+  ],
+  t_account:[
+    "Add all the amounts on the debit side",
+    "Add all the amounts on the credit side",
+    "Subtract the smaller total from the larger; write the balance on the larger side"
+  ],
+  journalizing:[
+    "Record the date of the transaction",
+    "Record the account(s) debited and the debit amount",
+    "Record the account(s) credited (indented) and the credit amount",
+    "Write the explanation (include cheque or invoice number)"
+  ]
+};
+
+// Pick which step set to show each session
+var STEP_SET_LABELS = {
+  posting: "Steps of Posting to a Ledger",
+  worksheet8: "Steps of Preparing an 8-Column Worksheet",
+  closing: "Four Closing Entries in Order",
+  accounting_cycle: "Steps of the Accounting Cycle",
+  t_account: "Steps to Determine a T-Account Balance",
+  journalizing: "Steps of Journalizing a Transaction"
+};
+
+var examState = {};
+
+function fmt(n){ return n.toLocaleString('en-CA',{minimumFractionDigits:0}); }
 
 function renderExamPrep(noPush){
   hideSubBar(); showTopStats(false);
   setBreadcrumb(['Exam Prep']);
   window.scrollTo(0,0);
   if(!noPush) pushRoute(BASE+'/exam-prep');
+
+  // Randomize everything
+  var adjSc = ADJ_SCENARIOS[Math.floor(Math.random()*ADJ_SCENARIOS.length)];
+  var clsSc = CLOSING_SCENARIOS[Math.floor(Math.random()*CLOSING_SCENARIOS.length)];
+  var stepKey = Object.keys(STEP_SETS)[Math.floor(Math.random()*Object.keys(STEP_SETS).length)];
+  var showWS = Math.random() < 0.5;
+  var wsSc = WS_SCENARIOS[Math.floor(Math.random()*WS_SCENARIOS.length)];
+  var bsSc = BS_SCENARIOS[Math.floor(Math.random()*BS_SCENARIOS.length)];
+  var fitbPick = shuffle(ALL_EXAM_FITB.slice()).slice(0,10);
+
+  // Store for check functions
+  examState = {adjSc:adjSc, clsSc:clsSc, showWS:showWS, wsSc:wsSc, bsSc:bsSc, stepKey:stepKey, fitb:fitbPick};
+
+  // Compute adj values
+  var sup_exp = adjSc.supplies_bal - adjSc.supplies_hand;
+  var ins_exp = adjSc.ins_monthly;
+  var dep_exp = Math.round((adjSc.equip_cost - adjSc.equip_res) / adjSc.equip_life);
+  var sal_pay = adjSc.sal_unpaid;
+
+  // Compute closing values
+  var totalRev = clsSc.revenues.reduce(function(s,r){return s+r.amt;},0);
+  var totalExp = clsSc.expenses.reduce(function(s,e){return s+e.amt;},0);
+  var netInc = totalRev - totalExp;
+
   var app=document.getElementById('app');
   app.innerHTML='<div class="exam-wrap pop">'
     +'<div class="exam-header">'
     +'<div class="exam-school">BAF3M - Grade 11 Financial Accounting Fundamentals</div>'
     +'<div class="exam-title">Practice Exam</div>'
+    +'<div class="exam-regen"><button class="exam-regen-btn" onclick="renderExamPrep()">&#8635; New Version</button></div>'
     +'<div class="exam-meta-row">'
     +'<span><b>Name:</b> <input class="exam-name-input" type="text" placeholder="Your name"></span>'
     +'<span><b>Date:</b> <input class="exam-name-input" type="text" placeholder="Date"></span>'
     +'</div>'
     +'</div>'
 
-    // Section 1: Fill in the Blank word bank
+    // Section 1: FITB
     +'<div class="exam-section">'
     +'<div class="exam-section-title">Section 1 &nbsp;—&nbsp; Fill in the Blank <span class="exam-marks">/20</span></div>'
-    +'<div class="exam-instructions">Use the word bank below. Write the best term in each blank.</div>'
+    +'<div class="exam-instructions">Use the word bank below. Write the correct term in each blank.</div>'
     +'<div class="exam-wordbank" id="wordBank"></div>'
     +'<div class="exam-fitb-list" id="fitbList"></div>'
     +'</div>'
 
-    // Section 2: Journal Entries
+    // Section 2: Steps
     +'<div class="exam-section">'
-    +'<div class="exam-section-title">Section 2 &nbsp;—&nbsp; Adjusting Journal Entries <span class="exam-marks">/16</span></div>'
-    +'<div class="exam-instructions">Prepare the adjusting journal entries for December 31. Show your work in the general journal below.</div>'
+    +'<div class="exam-section-title">Section 2 &nbsp;—&nbsp; Sequencing: '+STEP_SET_LABELS[stepKey]+' <span class="exam-marks">/'+(STEP_SETS[stepKey].length)+'</span></div>'
+    +'<div class="exam-instructions">Fill in the missing steps in the correct order.</div>'
+    +buildStepsSection(stepKey)
+    +'<button class="exam-check-btn" onclick="checkSteps()">Check Answers</button>'
+    +'<div class="exam-feedback" id="stepsFeedback"></div>'
+    +'</div>'
+
+    // Section 3: Adjusting Entries
+    +'<div class="exam-section">'
+    +'<div class="exam-section-title">Section 3 &nbsp;—&nbsp; Adjusting Journal Entries <span class="exam-marks">/16</span></div>'
+    +'<div class="exam-instructions">Prepare the adjusting journal entries for December 31.</div>'
     +'<div class="exam-scenario">'
-    +'<b>Given information for December 31:</b><br>'
-    +'a) Supplies on hand at Dec 31: $320. Unadjusted Supplies balance: $1,100.<br>'
-    +'b) Monthly insurance: $150/month. Unadjusted Prepaid Insurance balance: $1,800.<br>'
-    +'c) Equipment cost $24,000, useful life 5 years, residual value $0. Use straight-line depreciation.<br>'
-    +'d) Salaries earned but unpaid at Dec 31: $680.'
+    +'<b>Information for December 31 ('+adjSc.owner+'):</b><br>'
+    +'a) Supplies on hand: $'+fmt(adjSc.supplies_hand)+'. Unadjusted Supplies balance: $'+fmt(adjSc.supplies_bal)+'.<br>'
+    +'b) Monthly insurance: $'+fmt(adjSc.ins_monthly)+'/month. Unadjusted Prepaid Insurance: $'+fmt(adjSc.ins_bal)+'.<br>'
+    +'c) Equipment cost $'+fmt(adjSc.equip_cost)+', useful life '+adjSc.equip_life+' years, residual value $'+fmt(adjSc.equip_res)+'. Straight-line.<br>'
+    +'d) Salaries earned but unpaid at Dec 31: $'+fmt(adjSc.sal_unpaid)+'.'
     +'</div>'
     +buildJournal('adj',[
       {date:'Dec 31',desc:'(a) Supplies Expense',dr:'',cr:''},
       {date:'',desc:'Supplies',dr:'',cr:''},
       {date:'Dec 31',desc:'(b) Insurance Expense',dr:'',cr:''},
       {date:'',desc:'Prepaid Insurance',dr:'',cr:''},
-      {date:'Dec 31',desc:'(c) Depreciation Expense - Equipment',dr:'',cr:''},
+      {date:'Dec 31',desc:'(c) Depreciation Expense',dr:'',cr:''},
       {date:'',desc:'Accumulated Depreciation - Equipment',dr:'',cr:''},
-      {date:'Dec 31',desc:'(d) Wages Expense',dr:'',cr:''},
+      {date:'Dec 31',desc:'(d) Salaries Expense',dr:'',cr:''},
       {date:'',desc:'Salaries Payable',dr:'',cr:''},
     ])
     +'<button class="exam-check-btn" onclick="checkAdjEntries()">Check Answers</button>'
     +'<div class="exam-feedback" id="adjFeedback"></div>'
     +'</div>'
 
-    // Section 3: Closing Entries
+    // Section 4: Closing Entries
     +'<div class="exam-section">'
-    +'<div class="exam-section-title">Section 3 &nbsp;—&nbsp; Closing Journal Entries <span class="exam-marks">/16</span></div>'
+    +'<div class="exam-section-title">Section 4 &nbsp;—&nbsp; Closing Journal Entries <span class="exam-marks">/16</span></div>'
     +'<div class="exam-instructions">Prepare the four closing entries for the year ended December 31.</div>'
     +'<div class="exam-scenario">'
-    +'<b>Adjusted balances:</b><br>'
-    +'Service Revenue: $48,200 &nbsp;|&nbsp; Rent Revenue: $3,600<br>'
-    +'Salaries Expense: $18,400 &nbsp;|&nbsp; Rent Expense: $9,600 &nbsp;|&nbsp; Supplies Expense: $780 &nbsp;|&nbsp; Insurance Expense: $1,800 &nbsp;|&nbsp; Depreciation Expense: $4,800<br>'
-    +'Owner\'s Drawings: $14,000 &nbsp;|&nbsp; J. Smith, Capital (opening): $52,000'
+    +'<b>Adjusted balances ('+clsSc.owner+'):</b><br>'
+    +clsSc.revenues.map(function(r){return r.name+': $'+fmt(r.amt);}).join(' &nbsp;|&nbsp; ')
+    +'<br>'+clsSc.expenses.map(function(e){return e.name+': $'+fmt(e.amt);}).join(' &nbsp;|&nbsp; ')
+    +'<br>Drawings: $'+fmt(clsSc.drawings)+' &nbsp;|&nbsp; '+clsSc.owner+', Capital (opening): $'+fmt(clsSc.opening_cap)
     +'</div>'
-    +buildJournal('cls',[
-      {date:'Dec 31',desc:'(1) Service Revenue',dr:'',cr:''},
-      {date:'',desc:'Rent Revenue',dr:'',cr:''},
-      {date:'',desc:'Income Summary',dr:'',cr:''},
-      {date:'Dec 31',desc:'(2) Income Summary',dr:'',cr:''},
-      {date:'',desc:'Wages Expense',dr:'',cr:''},
-      {date:'',desc:'Rent Expense',dr:'',cr:''},
-      {date:'',desc:'Supplies Expense',dr:'',cr:''},
-      {date:'',desc:'Insurance Expense',dr:'',cr:''},
-      {date:'',desc:'Depreciation Expense',dr:'',cr:''},
-      {date:'Dec 31',desc:'(3) Income Summary',dr:'',cr:''},
-      {date:'',desc:'J. Smith, Capital',dr:'',cr:''},
-      {date:'Dec 31',desc:'(4) J. Smith, Capital',dr:'',cr:''},
-      {date:'',desc:'J. Smith, Drawings',dr:'',cr:''},
-    ])
+    +buildClosingJournal(clsSc)
     +'<button class="exam-check-btn" onclick="checkClosingEntries()">Check Answers</button>'
     +'<div class="exam-feedback" id="clsFeedback"></div>'
     +'</div>'
 
-    // Section 4: 8-Column Worksheet
-    +'<div class="exam-section exam-section-wide">'
-    +'<div class="exam-section-title">Section 4 &nbsp;—&nbsp; 8-Column Worksheet <span class="exam-marks">/20</span></div>'
-    +'<div class="exam-instructions">Complete the 8-column worksheet. Trial Balance is given. Fill in Adjustments, Income Statement, and Balance Sheet columns. Add adjustment accounts below the line.</div>'
-    +buildWorksheet()
-    +'<button class="exam-check-btn" onclick="checkWorksheet()">Check Answers</button>'
-    +'<div class="exam-feedback" id="wsFeedback"></div>'
-    +'</div>'
-
-    // Section 5: Classified Balance Sheet with embedded equity
-    +'<div class="exam-section">'
-    +'<div class="exam-section-title">Section 5 &nbsp;—&nbsp; Classified Financial Statements <span class="exam-marks">/20</span></div>'
-    +'<div class="exam-instructions">Prepare the Classified Balance Sheet with the Statement of Owner\'s Equity embedded in the equity section.</div>'
-    +'<div class="exam-scenario">'
-    +'Cash $8,400 &nbsp;|&nbsp; Accounts Receivable $3,200 &nbsp;|&nbsp; Supplies $320 &nbsp;|&nbsp; Prepaid Insurance $1,200<br>'
-    +'Equipment $24,000 &nbsp;|&nbsp; Accumulated Depreciation $4,800<br>'
-    +'Accounts Payable $2,800 &nbsp;|&nbsp; Salaries Payable $680 &nbsp;|&nbsp; Mortgage Payable (long-term) $12,000<br>'
-    +'Net Income: $16,420 &nbsp;|&nbsp; Drawings $14,000 &nbsp;|&nbsp; Opening Capital $52,000'
-    +'</div>'
-    +buildClassifiedBS()
-    +'<button class="exam-check-btn" onclick="checkFinancials()">Check Answers</button>'
-    +'<div class="exam-feedback" id="bsFeedback"></div>'
-    +'</div>'
-
-    // Section 6: Accounting Cycle diagram
-    +'<div class="exam-section">'
-    +'<div class="exam-section-title">Section 6 &nbsp;—&nbsp; Accounting Cycle <span class="exam-marks">/8</span></div>'
-    +'<div class="exam-instructions">Fill in the missing steps of the accounting cycle. Each box represents one step in order.</div>'
-    +buildAccountingCycle()
-    +'<button class="exam-check-btn" onclick="checkCycle()">Check Answers</button>'
-    +'<div class="exam-feedback" id="cycleFeedback"></div>'
-    +'</div>'
+    // Section 5: Worksheet OR Balance Sheet
+    +(showWS
+      ? '<div class="exam-section exam-section-wide">'
+        +'<div class="exam-section-title">Section 5 &nbsp;—&nbsp; 8-Column Worksheet <span class="exam-marks">/20</span></div>'
+        +'<div class="exam-instructions">Complete the worksheet. Trial Balance is given. Fill in Adjustments, Income Statement, and Balance Sheet columns.</div>'
+        +buildWorksheet(wsSc)
+        +'<button class="exam-check-btn" onclick="checkWorksheet()">Check Answers</button>'
+        +'<div class="exam-feedback" id="wsFeedback"></div>'
+        +'</div>'
+      : '<div class="exam-section">'
+        +'<div class="exam-section-title">Section 5 &nbsp;—&nbsp; Classified Balance Sheet <span class="exam-marks">/20</span></div>'
+        +'<div class="exam-instructions">Prepare the Classified Balance Sheet with Statement of Owner\'s Equity embedded.</div>'
+        +'<div class="exam-scenario">'
+        +'Cash $'+fmt(bsSc.cash)+' &nbsp;|&nbsp; Accounts Receivable $'+fmt(bsSc.ar)+' &nbsp;|&nbsp; Supplies $'+fmt(bsSc.supplies)+' &nbsp;|&nbsp; Prepaid Insurance $'+fmt(bsSc.prepaid)+'<br>'
+        +'Equipment $'+fmt(bsSc.equip)+' &nbsp;|&nbsp; Accumulated Depreciation $'+fmt(bsSc.accum_dep)+'<br>'
+        +'Accounts Payable $'+fmt(bsSc.ap)+' &nbsp;|&nbsp; Salaries Payable $'+fmt(bsSc.sal_pay)+' &nbsp;|&nbsp; Mortgage Payable (long-term) $'+fmt(bsSc.mortgage)+'<br>'
+        +'Net Income: $'+fmt(bsSc.net_income)+' &nbsp;|&nbsp; Drawings: $'+fmt(bsSc.drawings)+' &nbsp;|&nbsp; Opening Capital: $'+fmt(bsSc.opening_cap)
+        +'</div>'
+        +buildClassifiedBS(bsSc)
+        +'<button class="exam-check-btn" onclick="checkFinancials()">Check Answers</button>'
+        +'<div class="exam-feedback" id="bsFeedback"></div>'
+        +'</div>'
+    )
 
     +'<button class="back-nav" onclick="renderChapterList()">← Back to chapters</button>'
-    +'</div></div>';
+    +'</div>';
 
-  // Populate word bank FITB
-  buildExamFITB();
+  buildExamFITB(fitbPick);
+}
+
+function buildStepsSection(key){
+  var steps = STEP_SETS[key];
+  // Randomly blank out roughly half the steps
+  var indices = shuffle(steps.map(function(_,i){return i;}));
+  var blanks = indices.slice(0, Math.ceil(steps.length/2)).sort(function(a,b){return a-b;});
+  examState.stepKey = key;
+  examState.stepBlanks = blanks;
+  var html='<div class="cycle-wrap">';
+  steps.forEach(function(step,i){
+    var isBlank = blanks.indexOf(i)>=0;
+    html+='<div class="cycle-item">'
+      +'<div class="cycle-num">'+( i+1)+'</div>'
+      +'<div class="cycle-box'+(isBlank?' cycle-blank':' cycle-given')+'">'
+      +(isBlank
+        ? '<input class="cycle-input" type="text" id="step_'+i+'" placeholder="Write step '+( i+1)+'...">'
+        : '<span>'+step+'</span>'
+      )
+      +'</div>'
+      +(i<steps.length-1?'<div class="cycle-arrow">↓</div>':'')
+      +'</div>';
+  });
+  html+='</div>';
+  return html;
+}
+
+function checkSteps(){
+  var steps = STEP_SETS[examState.stepKey];
+  var blanks = examState.stepBlanks;
+  var correct=0; var lines=[];
+  blanks.forEach(function(i){
+    var el=document.getElementById('step_'+i);
+    var val=(el?el.value:'').toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+    var expected = steps[i].toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+    // Check any 3 key words from expected appear in answer
+    var words = expected.split(' ').filter(function(w){return w.length>3;});
+    var matches = words.filter(function(w){return val.indexOf(w)>=0;}).length;
+    var ok = matches >= Math.min(2, words.length);
+    if(ok){correct++;lines.push('<span style="color:var(--green)">\u2713 Step '+(i+1)+': '+steps[i]+'</span>');}
+    else lines.push('<span style="color:var(--red)">\u2717 Step '+(i+1)+': '+steps[i]+'</span>');
+  });
+  var fb=document.getElementById('stepsFeedback');
+  fb.innerHTML='<div class="exam-result"><b>'+correct+' / '+blanks.length+'</b> correct</div>'+lines.join('<br>');
+  fb.className='exam-feedback show';
+}
+
+function buildClosingJournal(sc){
+  var rows=[];
+  // Step 1: revenues
+  sc.revenues.forEach(function(r,i){rows.push({date:i===0?'Dec 31':'',desc:'('+( i===0?'1':'')+') '+r.name,dr:'',cr:''}); });
+  rows.push({date:'',desc:'Income Summary',dr:'',cr:''});
+  // Step 2: expenses
+  rows.push({date:'Dec 31',desc:'(2) Income Summary',dr:'',cr:''});
+  sc.expenses.forEach(function(e){rows.push({date:'',desc:e.name,dr:'',cr:''}); });
+  // Step 3
+  rows.push({date:'Dec 31',desc:'(3) Income Summary',dr:'',cr:''});
+  rows.push({date:'',desc:sc.owner+', Capital',dr:'',cr:''});
+  // Step 4
+  rows.push({date:'Dec 31',desc:'(4) '+sc.owner+', Capital',dr:'',cr:''});
+  rows.push({date:'',desc:sc.owner+', Drawings',dr:'',cr:''});
+  return buildJournal('cls',rows);
+}
+
+function checkAdjEntries(){
+  var sc=examState.adjSc;
+  var sup_exp = sc.supplies_bal - sc.supplies_hand;
+  var ins_exp = sc.ins_monthly;
+  var dep_exp = Math.round((sc.equip_cost - sc.equip_res) / sc.equip_life);
+  var sal_pay = sc.sal_unpaid;
+  var checks=[
+    [sup_exp,'adj_dr_0','adj_cr_1','Supplies ('+fmt(sup_exp)+')'],
+    [ins_exp,'adj_dr_2','adj_cr_3','Insurance ('+fmt(ins_exp)+')'],
+    [dep_exp,'adj_dr_4','adj_cr_5','Depreciation ('+fmt(dep_exp)+')'],
+    [sal_pay,'adj_dr_6','adj_cr_7','Salaries ('+fmt(sal_pay)+')'],
+  ];
+  var correct=0; var lines=[];
+  checks.forEach(function(ck){
+    var drOk=Math.abs(numVal(ck[1])-ck[0])<1;
+    var crOk=Math.abs(numVal(ck[2])-ck[0])<1;
+    if(drOk&&crOk){correct++;lines.push('<span style="color:var(--green)">\u2713 '+ck[3]+'</span>');}
+    else lines.push('<span style="color:var(--red)">\u2717 '+ck[3]+': Dr. $'+fmt(ck[0])+' / Cr. $'+fmt(ck[0])+'</span>');
+  });
+  var fb=document.getElementById('adjFeedback');
+  fb.innerHTML='<div class="exam-result"><b>'+correct+' / 4</b> entries correct</div>'+lines.join('<br>');
+  fb.className='exam-feedback show';
+}
+
+function checkClosingEntries(){
+  var sc=examState.clsSc;
+  var totalRev=sc.revenues.reduce(function(s,r){return s+r.amt;},0);
+  var totalExp=sc.expenses.reduce(function(s,e){return s+e.amt;},0);
+  var ni=totalRev-totalExp;
+  var revRow=sc.revenues.length; // IS row index
+  var expRow=revRow+1+sc.expenses.length; // after IS summary
+  // Check rev credit to IS
+  var isCredit=numVal('cls_cr_'+(sc.revenues.length));
+  var revOk=Math.abs(isCredit-totalRev)<1;
+  var expDebit=numVal('cls_dr_'+(sc.revenues.length+1));
+  var expOk=Math.abs(expDebit-totalExp)<1;
+  var niRow=sc.revenues.length+1+sc.expenses.length;
+  var niOk=Math.abs(numVal('cls_dr_'+niRow)-ni)<1;
+  var drawRow=niRow+2;
+  var drawOk=Math.abs(numVal('cls_dr_'+drawRow)-sc.drawings)<1;
+  var results=[[revOk,'Close Revenue: $'+fmt(totalRev)+' to Income Summary'],[expOk,'Close Expenses: $'+fmt(totalExp)+' from Income Summary'],[niOk,'Close Income Summary: $'+fmt(ni)+' to Capital'],[drawOk,'Close Drawings: $'+fmt(sc.drawings)+' from Capital']];
+  var correct=results.filter(function(r){return r[0];}).length;
+  var lines=results.map(function(r){return '<span style="color:'+(r[0]?'var(--green)':' var(--red)')+'">'+( r[0]?' \u2713':' \u2717')+' '+r[1]+'</span>';});
+  var fb=document.getElementById('clsFeedback');
+  fb.innerHTML='<div class="exam-result"><b>'+correct+' / 4</b> closing entries correct</div>'+lines.join('<br>');
+  fb.className='exam-feedback show';
+}
+
+function checkWorksheet(){
+  var sc=examState.wsSc;
+  var sup_exp=sc.supplies_bal-sc.supplies_hand;
+  var ins_exp=sc.ins_monthly;
+  var dep_exp=Math.round((sc.equip_cost-sc.equip_res)/sc.equip_life);
+  var sal_pay=sc.sal_unpaid;
+  var adjOk=Math.abs(numVal('ws_13_adj_dr')-sup_exp)<1;
+  var insOk=Math.abs(numVal('ws_14_adj_dr')-ins_exp)<1;
+  var depOk=Math.abs(numVal('ws_15_adj_dr')-dep_exp)<1;
+  var salOk=Math.abs(numVal('ws_16_adj_dr')-sal_pay)<1;
+  var ni=0; // simplified check
+  var feedback=[[adjOk,'Supplies adj: '+fmt(sup_exp)],[insOk,'Insurance adj: '+fmt(ins_exp)],[depOk,'Depreciation adj: '+fmt(dep_exp)],[salOk,'Salaries payable adj: '+fmt(sal_pay)]];
+  var correct=feedback.filter(function(r){return r[0];}).length;
+  var lines=feedback.map(function(r){return '<span style="color:'+(r[0]?'var(--green)':' var(--red)')+'">'+( r[0]?' \u2713':' \u2717')+' '+r[1]+'</span>';});
+  var fb=document.getElementById('wsFeedback');
+  fb.innerHTML='<div class="exam-result"><b>'+correct+' / 4</b> adjustment items correct</div>'+lines.join('<br>');
+  fb.className='exam-feedback show';
+}
+
+function checkFinancials(){
+  var sc=examState.bsSc;
+  var endCap=sc.opening_cap+sc.net_income-sc.drawings;
+  var currAssets=sc.cash+sc.ar+sc.supplies+sc.prepaid;
+  var bvEquip=sc.equip-sc.accum_dep;
+  var totalAssets=currAssets+bvEquip;
+  var currLiab=sc.ap+sc.sal_pay;
+  var totalLiab=currLiab+sc.mortgage;
+  var checks=[
+    [Math.abs(numVal('eq_end')-endCap)<1,'Ending Capital: $'+fmt(endCap)],
+    [Math.abs(numVal('bs_curr_tot')-currAssets)<1,'Total Current Assets: $'+fmt(currAssets)],
+    [Math.abs(numVal('bs_total_assets')-totalAssets)<1,'Total Assets: $'+fmt(totalAssets)],
+    [Math.abs(numVal('bs_total_liab')-totalLiab)<1,'Total Liabilities: $'+fmt(totalLiab)],
+    [Math.abs(numVal('bs_total_le')-(totalLiab+endCap))<1,'Total L + OE: $'+fmt(totalLiab+endCap)],
+  ];
+  var correct=checks.filter(function(r){return r[0];}).length;
+  var lines=checks.map(function(r){return '<span style="color:'+(r[0]?'var(--green)':' var(--red)')+'">'+( r[0]?' \u2713':' \u2717')+' '+r[1]+'</span>';});
+  var fb=document.getElementById('bsFeedback');
+  fb.innerHTML='<div class="exam-result"><b>'+correct+' / 5</b> key totals correct</div>'+lines.join('<br>');
+  fb.className='exam-feedback show';
+}
+
+// ── Exam FITB ─────────────────────────────────────────────────────
+function buildExamFITB(pool){
+  if(!pool) pool=examState.fitb||shuffle(ALL_EXAM_FITB.slice()).slice(0,10);
+  var wordBank=shuffle(pool.map(function(q){return q.ans;}));
+  var bankHtml='<div class="exam-wordbank-label">Word Bank:</div><div class="exam-wordbank-chips">'
+    +wordBank.map(function(w){return '<span class="wb-chip">'+w+'</span>';}).join('')
+    +'</div>';
+  document.getElementById('wordBank').innerHTML=bankHtml;
+  var listHtml='';
+  pool.forEach(function(q,i){
+    listHtml+='<div class="exam-fitb-row">'
+      +'<span class="exam-fitb-num">'+( i+1)+'.</span>'
+      +'<span class="exam-fitb-q">'+q.q.replace('___','<input class="exam-blank" type="text" id="efitb_'+i+'" data-ans="'+q.hint+'" placeholder="___________">')+'</span>'
+      +'</div>';
+  });
+  document.getElementById('fitbList').innerHTML=listHtml;
+}
+
+// ── Separate Steps Practice Section ───────────────────────────────
+function renderStepsPractice(noPush){
+  hideSubBar(); showTopStats(false);
+  setBreadcrumb(['Step Sequences']);
+  window.scrollTo(0,0);
+  if(!noPush) pushRoute(BASE+'/steps');
+  var app=document.getElementById('app');
+  var keys=Object.keys(STEP_SETS);
+  var html='<div class="wrap"><div class="inner pop">'
+    +'<div class="chapter-list-header">'
+    +'<div class="chapter-list-title">Step Sequences</div>'
+    +'<div class="chapter-list-sub">Practice the correct order of each accounting procedure</div>'
+    +'</div>';
+  keys.forEach(function(key){
+    html+='<div class="exam-section" style="margin-bottom:16px">'
+      +'<div class="exam-section-title">'+STEP_SET_LABELS[key]+'</div>'
+      +buildStepsFull(key)
+      +'<button class="exam-check-btn" onclick="checkStepsFull(\''+key+'\')">Check Answers</button>'
+      +'<div class="exam-feedback" id="sfb_'+key+'"></div>'
+      +'</div>';
+  });
+  html+='<button class="back-nav" onclick="renderChapterList()">← Back</button>'
+    +'</div></div>';
+  app.innerHTML=html;
+}
+
+function buildStepsFull(key){
+  var steps=STEP_SETS[key];
+  var indices=shuffle(steps.map(function(_,i){return i;}));
+  var blanks=indices.slice(0,Math.ceil(steps.length/2)).sort(function(a,b){return a-b;});
+  // Store blanks on DOM for later
+  var html='<div class="cycle-wrap" data-key="'+key+'" data-blanks="'+JSON.stringify(blanks)+'">';
+  steps.forEach(function(step,i){
+    var isBlank=blanks.indexOf(i)>=0;
+    html+='<div class="cycle-item">'
+      +'<div class="cycle-num">'+( i+1)+'</div>'
+      +'<div class="cycle-box'+(isBlank?' cycle-blank':' cycle-given')+'">'
+      +(isBlank?'<input class="cycle-input" type="text" id="sf_'+key+'_'+i+'" placeholder="Step '+( i+1)+'...">':' <span>'+step+'</span>')
+      +'</div>'
+      +(i<steps.length-1?'<div class="cycle-arrow">↓</div>':'')
+      +'</div>';
+  });
+  html+='</div>';
+  return html;
+}
+
+function checkStepsFull(key){
+  var steps=STEP_SETS[key];
+  var wrap=document.querySelector('.cycle-wrap[data-key="'+key+'"]');
+  var blanks=wrap?JSON.parse(wrap.getAttribute('data-blanks')||'[]'):[];
+  var correct=0; var lines=[];
+  blanks.forEach(function(i){
+    var el=document.getElementById('sf_'+key+'_'+i);
+    var val=(el?el.value:'').toLowerCase().replace(/[^a-z0-9 ]/g,' ').trim();
+    var expected=steps[i].toLowerCase().replace(/[^a-z0-9 ]/g,' ').trim();
+    var words=expected.split(' ').filter(function(w){return w.length>3;});
+    var ok=words.filter(function(w){return val.indexOf(w)>=0;}).length>=Math.min(2,words.length);
+    if(ok){correct++;lines.push('<span style="color:var(--green)">\u2713 Step '+(i+1)+': '+steps[i]+'</span>');}
+    else lines.push('<span style="color:var(--red)">\u2717 Step '+(i+1)+': '+steps[i]+'</span>');
+  });
+  var fb=document.getElementById('sfb_'+key);
+  if(fb){fb.innerHTML='<div class="exam-result"><b>'+correct+' / '+blanks.length+'</b> correct</div>'+lines.join('<br>');fb.className='exam-feedback show';}
 }
 
 // ── Journal builder ────────────────────────────────────────────────
@@ -2564,40 +3060,19 @@ function buildJournal(prefix, rows){
 }
 
 // ── Worksheet builder ──────────────────────────────────────────────
-function buildWorksheet(){
-  // Row types: 'given' = TB pre-filled + student fills rest, 'blank' = all blank, 'adj' = adjustment-only rows below the line, 'divider' = double line separator, 'total' = totals row, 'ni' = net income row
-  // Pre-trial balance accounts (TB given, rest blank)
-  var tbAccounts = [
-    {name:'Cash',             no:'100', tb_dr:'8,400',  tb_cr:''},
-    {name:'Accounts Receivable', no:'102', tb_dr:'3,200',  tb_cr:''},
-    {name:'Supplies',         no:'131', tb_dr:'1,100',  tb_cr:''},
-    {name:'Prepaid Insurance',no:'132', tb_dr:'1,800',  tb_cr:''},
-    {name:'Equipment',        no:'141', tb_dr:'24,000', tb_cr:''},
-    {name:'Acc. Dep.—Equip.', no:'142', tb_dr:'',       tb_cr:''},
-    {name:'Accounts Payable', no:'200', tb_dr:'',       tb_cr:'2,800'},
-    {name:'J. Smith, Capital',no:'300', tb_dr:'',       tb_cr:'52,000'},
-    {name:'J. Smith, Drawings',no:'301',tb_dr:'14,000', tb_cr:''},
-    {name:'Service Revenue',  no:'400', tb_dr:'',       tb_cr:'48,200'},
-    {name:'Rent Revenue',     no:'401', tb_dr:'',       tb_cr:'3,600'},
-    {name:'Salaries Expense', no:'500', tb_dr:'17,720', tb_cr:''},
-    {name:'Rent Expense',     no:'501', tb_dr:'9,600',  tb_cr:''},
-  ];
-  // Extra blank rows for student to add accounts
+function buildWorksheet(sc){
+  sc = sc || WS_SCENARIOS[0];
+  var tbAccounts = sc.accounts;
+  var adjAccounts = sc.adjAccounts;
+  // Extra blank rows
   var blankRows = 0;
-  // Post-line adjustment accounts (student fills these in from adjusting entries)
-  var adjAccounts = [
-    {name:'Insurance Expense',  no:'502'},
-    {name:'Supplies Expense',   no:'503'},
-    {name:'Dep. Exp.—Equip.',   no:'504'},
-    {name:'Salaries Payable',   no:'505'},
-  ];
-  // Extra blank rows below adjustment accounts
   var adjBlankRows = 0;
 
   var tbTotal_dr = '106,420'; var tbTotal_cr = '106,420';
 
+
   var html = '<div class="ws-outer">'
-    +'<div class="ws-title">J. Smith Services<br><b>Work Sheet</b><br>For the Year Ended December 31</div>'
+    +'<div class="ws-title">'+sc.business+'<br><b>Work Sheet</b><br>For the Year Ended December 31</div>'
     +'<div class="ws-scroll"><table class="ws-table">'
     +'<thead>'
     +'<tr class="ws-header-top">'
@@ -2815,8 +3290,9 @@ function checkCycle(){
 }
 
 // ── Classified Balance Sheet builder ──────────────────────────────
-function buildClassifiedBS(){
-  function inp(id,w){w=w||80;return '<input class="ap-input" type="text" id="'+id+'" style="width:'+w+'px">';}
+function buildClassifiedBS(sc){
+  sc = sc || BS_SCENARIOS[0];
+  var owner = sc.owner;
   function r(lbl,c1,c2,c3,cls){
     return '<tr class="'+(cls||'')+'">'
       +'<td class="ap-label">'+lbl+'</td>'
@@ -2827,7 +3303,7 @@ function buildClassifiedBS(){
   }
   function blank(){return '<tr><td class="ap-label ap-blank-row"></td><td class="ap-num"></td><td class="ap-num"></td><td class="ap-num"></td></tr>';}
   return '<div class="ap-outer">'
-    +'<div class="ap-heading"><div>J. Smith Services</div><div><b>Balance Sheet</b></div><div>As at December 31, 20--</div></div>'
+    +'<div class="ap-heading"><div>'+sc.business+'</div><div><b>Balance Sheet</b></div><div>As at December 31, 20--</div></div>'
     +'<table class="ap-table"><colgroup><col class="ap-col-label"><col class="ap-col-num"><col class="ap-col-num"><col class="ap-col-num"></colgroup><tbody>'
     +r('<b>Assets</b>','','','','ap-section-row')
     +r('<u>Current Assets</u>','','','','ap-subsection-row')
@@ -2997,12 +3473,14 @@ function renderPrinciplesMode(noPush){
     +[
       ['Business Entity','Keeps personal and business finances separate.','var(--accent)'],
       ['Cost (Historical Cost)','Record assets at original purchase price.','#0ea5e9'],
+      ['Fair Value / IFRS','Public companies report assets at current market value.','#6366f1'],
       ['Matching','Match expenses to the revenues they helped earn.','#10b981'],
+      ['Revenue Recognition','Record revenue when it is earned, not when cash arrives.','#f59e0b'],
       ['Conservatism','Choose the method least likely to overstate assets or income.','#8b5cf6'],
-      ['Materiality','Insignificant items can be handled practically.','#f59e0b'],
+      ['Materiality','Insignificant items can be handled practically.','#f97316'],
       ['Objectivity','Entries must be supported by verifiable evidence.','#ef4444'],
       ['Time Period','Business life is divided into reporting periods.','#ec4899'],
-      ['IFRS vs ASPE','Public companies use IFRS; private companies use ASPE.','#14b8a6'],
+      ['Accrual vs Cash Basis','Accrual: earned/incurred. Cash: received/paid.','#14b8a6'],
     ].map(function(p){
       return '<div class="principle-chip" style="border-color:'+p[2]+'22;background:'+p[2]+'08">'
         +'<div class="principle-chip-name" style="color:'+p[2]+'">'+p[0]+'</div>'

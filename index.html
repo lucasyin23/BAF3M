@@ -2161,7 +2161,6 @@ function gradeFITBAnswer(userInput, acceptedAnswers){
 
     // Require minimum character overlap AND same first letter
     var overlap = charOverlap(norm.replace(/ /g,''), expected.replace(/ /g,''));
-    if(!lines[2163]) lines.insert(2163, "")
     if(overlap < 0.75) continue;
     var sameStart = !norm.length || !expected.length || norm[0]===expected[0];
     if(overlap < 0.75 || !sameStart) continue;
@@ -4364,6 +4363,8 @@ function checkFITB(){
   var q=state.questions[state.idx];
   var grade=gradeFITBAnswer(val, q.ans);
   var fb=document.getElementById('fb');
+  // Get display answer regardless of string or array
+  var displayAns = Array.isArray(q.ans) ? q.ans[0] : q.ans;
 
   if(grade==='exact'){
     state.correct++;
@@ -4374,12 +4375,12 @@ function checkFITB(){
     state.correct++;
     card.classList.add('c-close');
     fb.className='fb fb-close show';
-    fb.innerHTML='<strong>Close enough!</strong> Accepted — the ideal answer is: <strong>'+q.ans[0]+'</strong>. '+q.exp;
+    fb.innerHTML='<strong>Close enough!</strong> Accepted — the ideal answer is: <strong>'+displayAns+'</strong>. '+q.exp;
   } else {
     state.wrong++;
     card.classList.add('c-no');
     fb.className='fb fb-no show';
-    fb.innerHTML='<strong>Not quite.</strong> The answer is: <strong>'+q.ans[0]+'</strong>. '+q.exp;
+    fb.innerHTML='<strong>Not quite.</strong> The answer is: <strong>'+displayAns+'</strong>. '+q.exp;
   }
   document.getElementById('btnNext').style.display='block';
   document.querySelector('.btn-skip').style.display='none';

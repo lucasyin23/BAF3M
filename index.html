@@ -1160,12 +1160,26 @@ function toggleTheme(){
 // Global Enter key — press Enter to go to next question when Next is visible
 document.addEventListener('keydown', function(e){
   if(e.key !== 'Enter') return;
-  // Don't fire if user is typing in a text input (except fitbInput which handles its own)
+
+  // FITB second-press handler — fires when fitbInput exists but is disabled
+  var fitbInput = document.getElementById('fitbInput');
+  if(fitbInput){
+    if(!fitbInput.disabled){
+      // Input still active — handleFitbKey on the input handles first press
+      return;
+    }
+    // Input disabled = answer was checked. Allow advance after 1s
+    var card = document.getElementById('card');
+    var checkedAt = card ? parseInt(card.dataset.checkedAt || '0') : 0;
+    if(Date.now() - checkedAt >= 1000){
+      e.preventDefault();
+      nextQ();
+    }
+    return;
+  }
+
   var tag = document.activeElement ? document.activeElement.tagName : '';
-  var id  = document.activeElement ? document.activeElement.id : '';
-  // Allow Enter on fitbInput (handled by checkFITB), block on other inputs/textareas
-  if((tag==='INPUT'||tag==='TEXTAREA') && id!=='fitbInput') return;
-  // If Next button is visible, click it
+  if(tag==='INPUT' || tag==='TEXTAREA') return;
   var btn = document.getElementById('btnNext');
   if(btn && btn.style.display !== 'none' && !btn.disabled){
     e.preventDefault();
@@ -4340,7 +4354,7 @@ function renderFITB(q){
     +'<div class="q-num">Question '+(state.idx+1)+' of '+state.questions.length+'</div>'
     +'<div class="q-body fitb-q">'+q.q+'</div>'
     +'<div class="fitb-wrap">'
-    +'<input class="fitb-input" id="fitbInput" type="text" placeholder="Type your answer..." autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key===\'Enter\')checkFITB()">'
+    +'<input class="fitb-input" id="fitbInput" type="text" placeholder="Type your answer..." autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="handleFitbKey(event)">'
     +'<button class="fitb-check-btn" onclick="checkFITB()">Check</button>'
     +'</div>'
     +'<div class="fb" id="fb"></div>'
@@ -4351,6 +4365,22 @@ function renderFITB(q){
   setTimeout(function(){ var el=document.getElementById('fitbInput'); if(el) el.focus(); },80);
 }
 
+function handleFitbKey(e){
+  if(e.key !== 'Enter') return;
+  e.preventDefault();
+  e.stopPropagation();
+  var card = document.getElementById('card');
+  // First Enter — check the answer
+  if(!card || !card.dataset.done){
+    checkFITB();
+    return;
+  }
+  // Second Enter — only advance if 1 second has passed since checking
+  var checkedAt = parseInt(card.dataset.checkedAt || '0');
+  if(Date.now() - checkedAt < 1000) return;
+  nextQ();
+}
+
 function checkFITB(){
   var card=document.getElementById('card');
   if(card.dataset.done) return;
@@ -4358,6 +4388,7 @@ function checkFITB(){
   var val=input.value.trim();
   if(!val) return;
   card.dataset.done='1';
+  card.dataset.checkedAt=Date.now();
   input.disabled=true;
 
   var q=state.questions[state.idx];

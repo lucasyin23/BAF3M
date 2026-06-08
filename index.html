@@ -432,7 +432,10 @@ body{
 }
 .qcard.c-ok{border-color:var(--green);border-left:3px solid var(--green);}
 .qcard.c-no{border-color:var(--red);border-left:3px solid var(--red);}
+.qcard.c-close{border-color:var(--amber);border-left:3px solid var(--amber);}
 .qcard.c-skip{border-color:var(--border2);}
+.fb-close{background:var(--amber-bg);border:1px solid rgba(146,64,14,.2);color:var(--amber);}
+[data-theme="dark"] .fb-close{color:#fcd34d;}
 .q-num{
   font-family:var(--mono);font-size:10px;font-weight:500;
   letter-spacing:.06em;text-transform:uppercase;
@@ -913,15 +916,49 @@ body{
 /* ══ PRINCIPLES GRID ══ */
 .principles-grid{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:8px;margin-top:4px;
+  gap:10px;margin-top:4px;
 }
-.principle-chip{
-  padding:14px 16px;border-radius:var(--r-sm);
-  border:1px solid var(--border);
-  background:var(--surface);
+.principle-card{
+  padding:16px 18px;border-radius:var(--r);
+  border:1px solid var(--pc,var(--border));
+  background:color-mix(in srgb,var(--pc,var(--accent)) 6%,var(--surface));
+  cursor:pointer;transition:all var(--ease);
 }
-.principle-chip-name{font-size:13px;font-weight:700;margin-bottom:4px;letter-spacing:-.01em;}
-.principle-chip-def{font-size:12px;color:var(--text3);line-height:1.5;}
+.principle-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 4px 16px color-mix(in srgb,var(--pc,var(--accent)) 20%,transparent);
+  border-color:var(--pc,var(--accent));
+}
+.pc-name{font-size:13.5px;font-weight:700;color:var(--pc,var(--accent));margin-bottom:5px;letter-spacing:-.01em;}
+.pc-short{font-size:12px;color:var(--text3);line-height:1.5;}
+
+/* ══ PRINCIPLE DETAIL ══ */
+.pd-header{
+  padding:20px 22px;border-radius:var(--r);
+  border:1px solid;margin-bottom:20px;
+}
+.pd-name{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;}
+.pd-desc{font-size:14.5px;color:var(--text2);line-height:1.8;}
+.pd-section-label{
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:12px;padding-bottom:6px;
+  border-bottom:1px solid var(--border);
+}
+.pd-q-list{display:flex;flex-direction:column;gap:14px;}
+.pd-q-item{display:flex;gap:12px;align-items:flex-start;}
+.pd-q-num{
+  min-width:26px;height:26px;border-radius:50%;
+  background:var(--surface3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:11px;font-weight:700;
+  color:var(--text3);flex-shrink:0;margin-top:2px;
+}
+.pd-q-body{flex:1;}
+.pd-q-text{font-size:14px;font-weight:500;color:var(--text);margin-bottom:8px;line-height:1.6;}
+.pd-opts{margin:0 0 6px 16px;padding:0;display:flex;flex-direction:column;gap:4px;}
+.pd-opts li{font-size:13px;color:var(--text3);line-height:1.5;list-style:upper-alpha;}
+.pd-correct{color:var(--green)!important;font-weight:600;}
+.pd-exp{font-size:12.5px;color:var(--text3);background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:8px 12px;line-height:1.65;margin-top:4px;}
 
 /* ══ FILL IN THE BLANK ══ */
 .ttag-fitb{background:rgba(20,184,166,.1);color:#14b8a6;}
@@ -1119,6 +1156,22 @@ function toggleTheme(){
   document.getElementById('themeBtn').textContent=t==='dark'?'🌙':'☀️';
   try{localStorage.setItem('baf3m-theme',t);}catch(e){}
 }
+
+// Global Enter key — press Enter to go to next question when Next is visible
+document.addEventListener('keydown', function(e){
+  if(e.key !== 'Enter') return;
+  // Don't fire if user is typing in a text input (except fitbInput which handles its own)
+  var tag = document.activeElement ? document.activeElement.tagName : '';
+  var id  = document.activeElement ? document.activeElement.id : '';
+  // Allow Enter on fitbInput (handled by checkFITB), block on other inputs/textareas
+  if((tag==='INPUT'||tag==='TEXTAREA') && id!=='fitbInput') return;
+  // If Next button is visible, click it
+  var btn = document.getElementById('btnNext');
+  if(btn && btn.style.display !== 'none' && !btn.disabled){
+    e.preventDefault();
+    btn.click();
+  }
+});
 (function(){
   try{
     var saved=localStorage.getItem('baf3m-theme');
@@ -1989,14 +2042,14 @@ var CHAPTER_UNITS = [
   [{name:"Unit 1 – Financial Position",keys:["financial position","net worth","asset","liability","owner.s equity","balance sheet","ALOE","creditor","debtor","liquidity","cost principle","business entity","IFRS","ASPE","IASB","AcSB","bookkeeping","accounting"]},
    {name:"Unit 2 – Business Transactions",keys:["transaction","accounting period","standard","public","private","ethics","code of ethics","conflict","law","professional"]}],
   [{name:"Unit 3 – T-Accounts",keys:["t-account","debit","credit","ledger","double-entry","trial balance","opening balance","account balance","general ledger","accounting cycle","understated","overstated"]}],
-  [{name:"Unit 4 – Income Statement",keys:["income statement","revenue","expense","net income","net loss","heading","time-period","accrual","cash basis","revenue recognition","matching","fiscal","profitability"]},
+  [{name:"Unit 4 – Income Statement",keys:["income statement","revenue","expense","net income","net loss","heading","time-period","accrual","accrual basis","accrual-basis","cash basis","revenue recognition","matching","fiscal","profitability"]},
    {name:"Unit 5 – Revenue & Expense Accounts",keys:["drawings","owner.s equity","report form","salary","withdrawal","increase owner","decrease owner"]}],
   [{name:"Unit 6 – The Journal",keys:["journal","journaliz","book of original","chronolog","double-entry","advantage","indented","explanation"]},
    {name:"Unit 7 – Posting to the Ledger",keys:["posting","chart of accounts","opening entry","compound","forwarding","audit","balance-column","posting reference","transposition","error","correction"]},
    {name:"Unit 8 – Source Documents",keys:["source document","sales slip","sales invoice","purchase invoice","cheque","bank credit","bank debit","prenumber","endorsement","objectiv"]}],
   [{name:"Unit 9 – The Worksheet",keys:["worksheet","work sheet","income statement section","balance sheet section","temporary account","permanent account","net income on","net loss on","6-column","rule the"]},
-   {name:"Unit 10 – Classified Financial Statements",keys:["current asset","fixed asset","current liability","long-term liability","prepaid","classified","statement of owner","schedule of accounts","ending capital","liquidity order"]}],
-  [{name:"Unit 11 – Adjusting the Books",keys:["adjusting","depreciation","accumulated","book value","straight-line","declining","capital cost allowance","CCA","contra","prepaid insurance","supplies","materiality","conservatism"]},
+   {name:"Unit 10 – Classified Financial Statements",keys:["current asset","fixed asset","current liability","long-term liability","prepaid","classified","classified balance sheet","statement of owner","schedule of accounts","ending capital","liquidity order"]}],
+  [{name:"Unit 11 – Adjusting the Books",keys:["adjusting","depreciation","accumulated","book value","straight-line","straight line","straightline","straight-line method","straight line method","declining","capital cost allowance","CCA","contra","prepaid insurance","supplies","materiality","conservatism"]},
    {name:"Unit 12 – Worksheet Adjustments",keys:["8-column","eight-column","adjustment column","two new column","adjusted trial balance","10-column","ten-column","step.*worksheet","worksheet.*step","net income.*added","net loss.*greater","net income.*column","net loss.*column","income statement section.*greater","balance sheet section.*greater","formal heading","unadjusted.*balance","transfer.*income statement","balance and rule","gather.*adjustment","adjusted amount","trial balance.*adjustment","adjustment.*trial balance"]},
    {name:"Unit 13 – Closing Entries",keys:["closing","income summary","post-closing","close revenue","close expense","closing step"]}],
 ];
@@ -2010,9 +2063,9 @@ var FITB_QUESTIONS = {
     {q:"A ___ is someone to whom the business owes money.",ans:["creditor"],exp:"A creditor is owed money BY the business. A debtor owes money TO the business."},
     {q:"Under the Cost Principle, assets are recorded at their original ___ price.",ans:["purchase","cost","historical cost","purchase price"],exp:"The Cost Principle (Historical Cost Principle) requires assets to be recorded at what was paid for them."},
     {q:"The ___ Principle requires personal and business finances to be kept separate.",ans:["business entity","business entity principle","entity"],exp:"The Business Entity Principle treats the business as separate from its owner for accounting purposes."},
-    {q:"A ___ shows the financial position of a business at a specific date.",ans:["balance sheet"],exp:"The balance sheet lists assets, liabilities, and owner's equity at a single point in time."},
+    {q:"A ___ shows the financial position of a business at a specific date.",ans:["balance sheet","the balance sheet","previous balance sheet"],exp:"The balance sheet lists assets, liabilities, and owner's equity at a single point in time."},
     {q:"___ are amounts owed by a business to outside parties.",ans:["liabilities","liability"],exp:"Liabilities are debts - things the business owes to creditors, banks, and suppliers."},
-    {q:"Listing assets in order of how quickly they can be converted to cash is called order of ___.",ans:["liquidity","permanence"],exp:"Assets on the balance sheet are listed in order of liquidity - Cash first, then Accounts Receivable, then fixed assets last."},
+    {q:"Listing assets in order of how quickly they can be converted to cash is called order of ___.",ans:["liquidity","liquidity order","permanence","order of liquidity"],exp:"Assets on the balance sheet are listed in order of liquidity - Cash first, then Accounts Receivable, then fixed assets last."},
     {q:"IFRS stands for International Financial Reporting ___.",ans:["standards","standard"],exp:"IFRS = International Financial Reporting Standards. Used by publicly traded companies in Canada."},
     {q:"ASPE stands for Accounting Standards for Private ___.",ans:["enterprises","enterprise"],exp:"ASPE = Accounting Standards for Private Enterprises. Used by smaller private companies in Canada."},
     {q:"A person who owes money to the business is called a ___.",ans:["debtor"],exp:"A debtor owes money TO your business (e.g., a customer who bought on credit). A creditor is owed money by your business."},
@@ -2022,68 +2075,159 @@ var FITB_QUESTIONS = {
     {q:"The left side of a T-account is the ___ side.",ans:["debit","dr","dr."],exp:"Debit = Left side. Credit = Right side. This is fixed - never changes."},
     {q:"Assets normally have a ___ balance.",ans:["debit","dr"],exp:"Assets increase on the debit (left) side, so their normal balance is a debit balance."},
     {q:"The complete collection of all T-accounts is called the general ___.",ans:["ledger"],exp:"The general ledger contains one T-account for every account the business uses."},
-    {q:"A ___ balance proves that total debits equal total credits in the ledger.",ans:["trial","trial balance"],exp:"A trial balance lists all accounts and their balances to verify the ledger is mathematically accurate."},
-    {q:"Opening balances are taken from the previous ___.",ans:["balance sheet"],exp:"At the start of each period, the opening balances come from the closing balance sheet of the previous period."},
+    {q:"A ___ balance proves that total debits equal total credits in the ledger.",ans:["trial","trial balance","tb"],exp:"A trial balance lists all accounts and their balances to verify the ledger is mathematically accurate."},
+    {q:"Opening balances are taken from the previous ___.",ans:["balance sheet","the balance sheet","previous balance sheet"],exp:"At the start of each period, the opening balances come from the closing balance sheet of the previous period."},
     {q:"Liabilities and Owner's Equity normally have a ___ balance.",ans:["credit","cr","cr."],exp:"Liabilities and equity increase on the credit (right) side, so their normal balance is a credit balance."},
     {q:"The three steps to find a T-account balance are: add each side, subtract smaller from ___, write the balance on the larger side.",ans:["larger","the larger side","larger side"],exp:"The balance goes on whichever side has the larger total - debit side for assets, credit side for liabilities/equity."},
   ],
   C3:[
     {q:"The financial statement that shows revenues and expenses for a period is the ___ statement.",ans:["income","income statement"],exp:"The income statement reports revenues minus expenses to show net income or net loss for the period."},
     {q:"When revenues exceed expenses, the result is called net ___.",ans:["income","net income"],exp:"Net income = revenues greater than expenses. Net loss = expenses greater than revenues."},
-    {q:"The accounting principle that matches expenses to the revenues they helped earn is the ___ principle.",ans:["matching","matching principle"],exp:"The matching principle ensures expenses are recorded in the same period as the revenues they helped generate."},
+    {q:"The accounting principle that matches expenses to the revenues they helped earn is the ___ principle.",ans:["matching","matching principle","the matching principle"],exp:"The matching principle ensures expenses are recorded in the same period as the revenues they helped generate."},
     {q:"Owner's ___ are withdrawals of cash or assets by the owner for personal use.",ans:["drawings","drawing","drawings account"],exp:"Drawings reduce the owner's equity. They are not an expense - they do not go on the income statement."},
-    {q:"Revenue is recognized when it is ___, not when cash is received, under accrual accounting.",ans:["earned"],exp:"Under accrual basis, revenue is recorded when EARNED (work done), not when cash arrives."},
-    {q:"Under ___ basis accounting, revenue is recorded only when cash is received.",ans:["cash","cash basis","cash-basis"],exp:"Cash-basis accounting records transactions only when cash changes hands - simpler but less accurate than accrual."},
+    {q:"Revenue is recognized when it is ___, not when cash is received, under accrual accounting.",ans:["earned","is earned","been earned"],exp:"Under accrual basis, revenue is recorded when EARNED (work done), not when cash arrives."},
+    {q:"Under ___ basis accounting, revenue is recorded only when cash is received.",ans:["cash","cash basis","cash-basis","cash basis accounting"],exp:"Cash-basis accounting records transactions only when cash changes hands - simpler but less accurate than accrual."},
     {q:"The income statement heading includes: company name, Income Statement, and the ___.",ans:["date","period","accounting period","dates","time period"],exp:"The heading tells who (company name), what (Income Statement), and when (the period covered, e.g., For the Month Ended...)."},
   ],
   C4:[
-    {q:"The book where transactions are first recorded in date order is called the ___.",ans:["journal","general journal"],exp:"The journal is the book of original entry - all transactions are first recorded here before being posted."},
-    {q:"The process of transferring journal entries to the ledger is called ___.",ans:["posting"],exp:"Posting moves each debit and credit from the journal into the appropriate T-account in the general ledger."},
+    {q:"The book where transactions are first recorded in date order is called the ___.",ans:["journal","general journal","journals"],exp:"The journal is the book of original entry - all transactions are first recorded here before being posted."},
+    {q:"The process of transferring journal entries to the ledger is called ___.",ans:["posting","post"],exp:"Posting moves each debit and credit from the journal into the appropriate T-account in the general ledger."},
     {q:"In a journal entry, the credited account is ___ to distinguish it from the debit.",ans:["indented","indented below"],exp:"The credit account is indented to visually separate it from the debit account written at the left margin."},
-    {q:"A numbered list of all accounts used by a business is called the chart of ___.",ans:["accounts"],exp:"The chart of accounts assigns a number to every account, making it easy to locate and organize accounts."},
-    {q:"The column in the journal and ledger used to cross-reference entries is called the ___ column.",ans:["posting reference","pr","posting reference (pr)","p.r."],exp:"The PR (Posting Reference) column links journal entries to their corresponding ledger accounts and vice versa."},
-    {q:"An entry at the start of a new period to set up opening balances is called the ___ entry.",ans:["opening","opening entry"],exp:"The opening entry transfers all balance sheet balances from the previous period into the new ledger accounts."},
-    {q:"A journal entry with more than one debit or credit is called a ___ entry.",ans:["compound","compound journal"],exp:"A compound journal entry has multiple debits and/or credits - as long as total debits still equal total credits."},
+    {q:"A numbered list of all accounts used by a business is called the chart of ___.",ans:["accounts","chart of accounts"],exp:"The chart of accounts assigns a number to every account, making it easy to locate and organize accounts."},
+    {q:"The column in the journal and ledger used to cross-reference entries is called the ___ column.",ans:["posting reference","pr","posting reference (pr)","p.r.","posting ref"],exp:"The PR (Posting Reference) column links journal entries to their corresponding ledger accounts and vice versa."},
+    {q:"An entry at the start of a new period to set up opening balances is called the ___ entry.",ans:["opening","opening entry","opening journal entry"],exp:"The opening entry transfers all balance sheet balances from the previous period into the new ledger accounts."},
+    {q:"A journal entry with more than one debit or credit is called a ___ entry.",ans:["compound","compound journal","compound journal entry","compound entry"],exp:"A compound journal entry has multiple debits and/or credits - as long as total debits still equal total credits."},
     {q:"Documents that provide proof a transaction occurred are called ___ documents.",ans:["source","source documents"],exp:"Source documents include invoices, receipts, cheque copies, and bank statements - the paper trail for every transaction."},
     {q:"Source documents are ___ (given sequential numbers) to make it easy to detect missing ones.",ans:["prenumbered","pre-numbered","numbered"],exp:"Prenumbering means any gap in the number sequence immediately signals a missing or lost document."},
   ],
   C5:[
-    {q:"An informal working paper used to organize data before preparing financial statements is called a ___.",ans:["worksheet","work sheet","working paper"],exp:"The worksheet is not a formal financial statement - it is an internal tool used to prepare the income statement and balance sheet."},
-    {q:"Revenue and expense accounts are called ___ accounts because they are closed each period.",ans:["temporary"],exp:"Temporary accounts (revenue, expense, drawings) are closed to zero at the end of each period so they start fresh."},
-    {q:"Asset, liability, and owner's equity accounts are called ___ accounts.",ans:["permanent"],exp:"Permanent accounts carry their balances forward from period to period - they are never closed."},
+    {q:"An informal working paper used to organize data before preparing financial statements is called a ___.",ans:["worksheet","work sheet","working paper","worksheets","work sheets"],exp:"The worksheet is not a formal financial statement - it is an internal tool used to prepare the income statement and balance sheet."},
+    {q:"Revenue and expense accounts are called ___ accounts because they are closed each period.",ans:["temporary","temp","temporary account","temporary accounts"],exp:"Temporary accounts (revenue, expense, drawings) are closed to zero at the end of each period so they start fresh."},
+    {q:"Asset, liability, and owner's equity accounts are called ___ accounts.",ans:["permanent","permanent account","permanent accounts"],exp:"Permanent accounts carry their balances forward from period to period - they are never closed."},
     {q:"On the worksheet, expenses are extended to the Income Statement ___ column.",ans:["debit","dr","dr."],exp:"Expenses have debit balances, so they go in the DEBIT column of the Income Statement section."},
-    {q:"A balance sheet that separates current assets from fixed assets is called a ___ balance sheet.",ans:["classified"],exp:"A classified balance sheet groups accounts by category: current assets, fixed assets, current liabilities, long-term liabilities."},
-    {q:"Assets expected to be converted to cash within one year are called ___ assets.",ans:["current"],exp:"Current assets include Cash, Accounts Receivable, Supplies, and Prepaid Insurance."},
-    {q:"Assets used over many years to operate the business are called ___ assets.",ans:["fixed","plant","long-term","non-current"],exp:"Fixed assets (plant and equipment) include Buildings, Equipment, and Vehicles - they are used for more than one year."},
+    {q:"A balance sheet that separates current assets from fixed assets is called a ___ balance sheet.",ans:["classified","classified balance sheet"],exp:"A classified balance sheet groups accounts by category: current assets, fixed assets, current liabilities, long-term liabilities."},
+    {q:"Assets expected to be converted to cash within one year are called ___ assets.",ans:["current","current assets","current asset"],exp:"Current assets include Cash, Accounts Receivable, Supplies, and Prepaid Insurance."},
+    {q:"Assets used over many years to operate the business are called ___ assets.",ans:["fixed","plant","long-term","non-current","plant and equipment","capital assets"],exp:"Fixed assets (plant and equipment) include Buildings, Equipment, and Vehicles - they are used for more than one year."},
     {q:"Ending Capital = Opening Capital + Net Income - ___.",ans:["drawings","owner's drawings","drawing"],exp:"The statement of owner's equity formula: Opening Capital + Net Income (or - Net Loss) - Drawings = Ending Capital."},
   ],
   C6:[
-    {q:"Entries made at the end of the period to update prepaid and depreciation accounts are called ___ entries.",ans:["adjusting","adjusting entries"],exp:"Adjusting entries correct account balances (prepaid expenses, depreciation, supplies) before the financial statements are prepared."},
-    {q:"The systematic allocation of a fixed asset's cost over its useful life is called ___.",ans:["depreciation"],exp:"Depreciation spreads the cost of a long-term asset over the years it is used, matching expense to the benefit received."},
-    {q:"The original cost of an asset minus its accumulated depreciation is called its ___ value.",ans:["book","book value","net book value"],exp:"Book Value = Original Cost - Accumulated Depreciation. It represents the asset's remaining undepreciated cost."},
-    {q:"The ___ balance method charges higher depreciation in early years of an asset's life.",ans:["declining","declining balance","diminishing"],exp:"Declining balance applies a fixed % to the reducing book value - resulting in higher depreciation when the asset is new."},
-    {q:"Accumulated Depreciation is a ___ account - it reduces the asset's value on the balance sheet.",ans:["contra","contra asset","contra-asset"],exp:"Contra assets have credit balances and offset their related asset accounts. Accumulated Depreciation is subtracted from the asset's cost."},
-    {q:"Entries that zero out all temporary accounts at year end are called ___ entries.",ans:["closing","closing entries"],exp:"Closing entries transfer revenue and expense balances to Income Summary, then to Owner's Capital, resetting temporary accounts."},
-    {q:"The account used as a clearing account during the closing process is called ___ Summary.",ans:["income","income summary"],exp:"Income Summary temporarily holds all revenues and expenses during closing, then is closed to Owner's Capital."},
-    {q:"A ___ trial balance is prepared after closing entries to confirm only permanent accounts remain.",ans:["post-closing","postclosing","post closing"],exp:"The post-closing trial balance lists only permanent accounts with their new balances - all temporary accounts should be zero."},
+    {q:"Entries made at the end of the period to update prepaid and depreciation accounts are called ___ entries.",ans:["adjusting","adjusting entries","adjustment","adjustment entries","adjusting entry","adjustment entry"],exp:"Adjusting entries correct account balances (prepaid expenses, depreciation, supplies) before the financial statements are prepared."},
+    {q:"The systematic allocation of a fixed asset's cost over its useful life is called ___.",ans:["depreciation","depreciation expense"],exp:"Depreciation spreads the cost of a long-term asset over the years it is used, matching expense to the benefit received."},
+    {q:"The original cost of an asset minus its accumulated depreciation is called its ___ value.",ans:["book","book value","net book value","book val","nbv"],exp:"Book Value = Original Cost - Accumulated Depreciation. It represents the asset's remaining undepreciated cost."},
+    {q:"The ___ balance method charges higher depreciation in early years of an asset's life.",ans:["declining","declining balance","declining bal","declining","diminishing","diminishing balance"],exp:"Declining balance applies a fixed % to the reducing book value - resulting in higher depreciation when the asset is new."},
+    {q:"Accumulated Depreciation is a ___ account - it reduces the asset's value on the balance sheet.",ans:["contra","contra asset","contra-asset","contra account"],exp:"Contra assets have credit balances and offset their related asset accounts. Accumulated Depreciation is subtracted from the asset's cost."},
+    {q:"Entries that zero out all temporary accounts at year end are called ___ entries.",ans:["closing","closing entries","closing entry"],exp:"Closing entries transfer revenue and expense balances to Income Summary, then to Owner's Capital, resetting temporary accounts."},
+    {q:"The account used as a clearing account during the closing process is called ___ Summary.",ans:["income","income summary","income summery"],exp:"Income Summary temporarily holds all revenues and expenses during closing, then is closed to Owner's Capital."},
+    {q:"A ___ trial balance is prepared after closing entries to confirm only permanent accounts remain.",ans:["post-closing","postclosing","post closing","post closing trial balance","post-closing trial balance"],exp:"The post-closing trial balance lists only permanent accounts with their new balances - all temporary accounts should be zero."},
     {q:"The 8-column worksheet adds ___ columns to the standard 6-column version.",ans:["adjustments","adjustment","two adjustment","two"],exp:"The two new columns are the Adjustments Debit and Adjustments Credit columns for recording end-of-period adjusting entries."},
-    {q:"Under the straight-line method, depreciation is calculated as: Cost minus ___ value, divided by useful life.",ans:["residual","salvage","scrap","residual value","salvage value"],exp:"Straight-line depreciation = (Cost - Residual/Salvage Value) / Useful Life in years."},
+    {q:"Under the straight-line method, depreciation is calculated as: Cost minus ___ value, divided by useful life.",ans:["residual","salvage","scrap","residual value","salvage value","residual val"],exp:"Straight-line depreciation = (Cost - Residual/Salvage Value) / Useful Life in years."},
   ]
 };
 
 function normalizeFITB(str){
-  // lowercase, remove extra spaces, punctuation, hyphens
   return str.toLowerCase()
     .replace(/[^a-z0-9 ]/g,'')
     .replace(/\s+/g,' ')
     .trim();
 }
 
+// Returns: 'exact', 'close', or 'wrong'
+function gradeFITBAnswer(userInput, acceptedAnswers){
+  var norm = normalizeFITB(userInput);
+  if(!norm) return 'wrong';
+
+  var answers = Array.isArray(acceptedAnswers) ? acceptedAnswers : [acceptedAnswers];
+
+  // Helper: what fraction of expected chars appear in input (unordered)
+  function charOverlap(a, b){
+    var bChars = b.split('');
+    var matched = a.split('').filter(function(ch){
+      var idx = bChars.indexOf(ch);
+      if(idx >= 0){ bChars.splice(idx,1); return true; }
+      return false;
+    }).length;
+    return matched / Math.max(a.length, b.length);
+  }
+
+  // 1 — Exact match
+  for(var i=0;i<answers.length;i++){
+    if(normalizeFITB(answers[i]) === norm) return 'exact';
+  }
+
+  // 2 — Close match
+  for(var j=0;j<answers.length;j++){
+    var expected = normalizeFITB(answers[j]);
+    if(!expected) continue;
+
+    // Require minimum character overlap AND same first letter
+    var overlap = charOverlap(norm.replace(/ /g,''), expected.replace(/ /g,''));
+    if(!lines[2163]) lines.insert(2163, "")
+    if(overlap < 0.75) continue;
+    var sameStart = !norm.length || !expected.length || norm[0]===expected[0];
+    if(overlap < 0.75 || !sameStart) continue;
+    // a) Substring either way
+    if(norm.indexOf(expected)>=0 || expected.indexOf(norm)>=0) return 'close';
+
+    // b) Whole-phrase Levenshtein — ~35% of length
+    var maxDist = Math.max(1, Math.floor(expected.length * 0.25));
+    if(levenshtein(norm, expected) <= maxDist) return 'close';
+
+    // c) Per-word fuzzy — all expected words are fuzzily present
+    var normWords = norm.split(' ').filter(function(w){return w.length>1;});
+    var expWords  = expected.split(' ').filter(function(w){return w.length>1;});
+    if(expWords.length > 0){
+      var allFuzzy = expWords.every(function(ew){
+        return normWords.some(function(nw){
+          if(nw===ew || nw.indexOf(ew)>=0 || ew.indexOf(nw)>=0) return true;
+          var wd = Math.max(1, Math.floor(ew.length * 0.4));
+          return levenshtein(nw, ew) <= wd;
+        });
+      });
+      if(allFuzzy) return 'close';
+    }
+
+    // d) 60%+ of expected words match fuzzily
+    if(expWords.length >= 2 && normWords.length >= 1){
+      var matched = expWords.filter(function(ew){
+        return normWords.some(function(nw){
+          if(nw===ew || nw.indexOf(ew)>=0 || ew.indexOf(nw)>=0) return true;
+          return levenshtein(nw, ew) <= Math.max(1, Math.floor(ew.length*0.4));
+        });
+      }).length;
+      if(matched / expWords.length >= 0.6) return 'close';
+    }
+
+    // e) Input words all covered by expected (handles extra words typed)
+    if(normWords.length >= 1 && expWords.length >= 1){
+      var inputCovered = normWords.every(function(nw){
+        return expWords.some(function(ew){
+          if(nw===ew || nw.indexOf(ew)>=0 || ew.indexOf(nw)>=0) return true;
+          return levenshtein(nw,ew) <= Math.max(1, Math.floor(Math.min(nw.length,ew.length)*0.4));
+        });
+      });
+      if(inputCovered && normWords.length >= Math.ceil(expWords.length*0.6)) return 'close';
+    }
+  }
+
+  return 'wrong';
+}
+
+// Simple Levenshtein distance
+function levenshtein(a, b){
+  var m=a.length, n=b.length;
+  var dp=[];
+  for(var i=0;i<=m;i++){dp[i]=[i];}
+  for(var j=0;j<=n;j++){dp[0][j]=j;}
+  for(var i=1;i<=m;i++){
+    for(var j=1;j<=n;j++){
+      dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
+    }
+  }
+  return dp[m][n];
+}
+
 function checkFITBAnswer(userInput, acceptedAnswers){
-  var normalized = normalizeFITB(userInput);
-  return acceptedAnswers.some(function(ans){
-    return normalizeFITB(ans) === normalized;
-  });
+  return gradeFITBAnswer(userInput, acceptedAnswers) !== 'wrong';
 }
 
 function expandFITB(ch){
@@ -2245,6 +2389,13 @@ function routeFromPath(path){
   if(p==='/fill-in-the-blank') { startGlobalFITB(true); return; }
   if(p==='/principles') { renderPrinciplesMode(true); return; }
   if(p==='/principles/session') { startPrinciplesSession(true); return; }
+  // principle detail: /principles/business_entity or /principles/cost etc.
+  var prinMatch = p.match(/^\/principles\/([a-z_]+)(\/session)?$/);
+  if(prinMatch){
+    var key=prinMatch[1]; var isSession=!!prinMatch[2];
+    var idx=-1; for(var pi=0;pi<PRINCIPLE_DATA.length;pi++){if(PRINCIPLE_DATA[pi].key===key){idx=pi;break;}}
+    if(idx>=0){ isSession ? startPrincipleSession(idx) : renderPrincipleDetail(idx); return; }
+  }
   if(p==='/exam-prep') { renderExamPrep(true); return; }
   if(p==='/steps') { renderStepsPractice(true); return; }
 
@@ -2444,7 +2595,7 @@ var PRINCIPLES_QUESTIONS = [
 // Pool of FITB question sets (pick 10 randomly each time)
 var ALL_EXAM_FITB = [
   {q:"The ___ account is used as a clearing account during the closing process.",ans:"Income Summary",hint:"income summary"},
-  {q:"The ___ method charges the same amount of depreciation each year.",ans:"straight-line",hint:"straight-line"},
+  {q:"The ___ method charges the same amount of depreciation each year.",ans:["straight-line","straight line","straightline","straight-line method","straight line method"],hint:"straight-line"},
   {q:"Assets minus liabilities equals ___.",ans:"Owner's Equity",hint:"owner's equity"},
   {q:"The ___ Principle requires recording expenses in the same period as the revenues they helped earn.",ans:"Matching",hint:"matching"},
   {q:"Original cost minus accumulated depreciation equals the asset's ___ value.",ans:"book",hint:"book value"},
@@ -2452,7 +2603,7 @@ var ALL_EXAM_FITB = [
   {q:"The ___ trial balance is prepared after all closing entries have been journalized and posted.",ans:"post-closing",hint:"post-closing"},
   {q:"A ___ account (like Accumulated Depreciation) reduces the balance of a related account.",ans:"contra",hint:"contra"},
   {q:"Under the ___ method, the depreciation rate is applied to the declining book value each year.",ans:"declining balance",hint:"declining balance"},
-  {q:"The ___ basis of accounting records revenue when earned and expenses when incurred.",ans:"accrual",hint:"accrual"},
+  {q:"The ___ basis of accounting records revenue when earned and expenses when incurred.",ans:["accrual","accrual basis","accrual-basis"],hint:"accrual"},
   {q:"The ___ Principle states that assets are recorded at their original purchase price.",ans:"Cost",hint:"cost"},
   {q:"Temporary accounts include revenue, expenses, drawings, and ___.",ans:"Income Summary",hint:"income summary"},
   {q:"The difference between the debit and credit sides of a T-account is called the account ___.",ans:"balance",hint:"balance"},
@@ -2462,11 +2613,11 @@ var ALL_EXAM_FITB = [
   {q:"The ___ Principle keeps personal and business finances completely separate.",ans:"Business Entity",hint:"business entity"},
   {q:"An entry made at year end to update prepaid and depreciation accounts is called an ___ entry.",ans:"adjusting",hint:"adjusting"},
   {q:"The ___ is an informal working paper used to organize data before preparing financial statements.",ans:"worksheet",hint:"worksheet"},
-  {q:"Short-term assets expected to be converted to cash within one year are called ___ assets.",ans:"current",hint:"current"},
+  {q:"Short-term assets expected to be converted to cash within one year are called ___ assets.",ans:["current","current assets","current asset"],hint:"current"},
   {q:"The 8-column worksheet adds two new columns called the ___ columns.",ans:"Adjustments",hint:"adjustments"},
-  {q:"Revenue and expense accounts that are zeroed out each period are called ___ accounts.",ans:"temporary",hint:"temporary"},
+  {q:"Revenue and expense accounts that are zeroed out each period are called ___ accounts.",ans:["temporary","temp","temporary account","temporary accounts"],hint:"temporary"},
   {q:"The ___ Summary account collects all revenues and expenses during the closing process.",ans:"Income",hint:"income"},
-  {q:"Accounts whose balances carry forward to the next period are called ___ accounts.",ans:"permanent",hint:"permanent"},
+  {q:"Accounts whose balances carry forward to the next period are called ___ accounts.",ans:["permanent","permanent account","permanent accounts"],hint:"permanent"},
   {q:"The ___ Principle says to choose the method least likely to overstate assets or income.",ans:"Conservatism",hint:"conservatism"},
 ];
 
@@ -3345,7 +3496,7 @@ function buildClassifiedBS(sc){
 // ── FITB word bank for Section 1 ──────────────────────────────────
 var EXAM_FITB = [
   {q:"The ___ account is used as a clearing account during the closing process.",ans:"Income Summary",hint:"income summary"},
-  {q:"The ___ method charges the same amount of depreciation each year.",ans:"straight-line",hint:"straight-line"},
+  {q:"The ___ method charges the same amount of depreciation each year.",ans:["straight-line","straight line","straightline","straight-line method","straight line method"],hint:"straight-line"},
   {q:"Assets minus liabilities equals ___.",ans:"Owner's Equity",hint:"owner's equity"},
   {q:"The ___ Principle requires recording expenses in the same period as the revenues they helped earn.",ans:"Matching",hint:"matching"},
   {q:"Original cost minus accumulated depreciation equals the asset's ___ value.",ans:"book",hint:"book value"},
@@ -3353,7 +3504,7 @@ var EXAM_FITB = [
   {q:"The ___ trial balance is prepared after all closing entries have been journalized and posted.",ans:"post-closing",hint:"post-closing"},
   {q:"A ___ account (like Accumulated Depreciation) reduces the balance of a related account.",ans:"contra",hint:"contra"},
   {q:"Under the ___ method, the depreciation rate is applied to the declining book value each year.",ans:"declining balance",hint:"declining balance"},
-  {q:"The ___ basis of accounting records revenue when earned and expenses when incurred.",ans:"accrual",hint:"accrual"},
+  {q:"The ___ basis of accounting records revenue when earned and expenses when incurred.",ans:["accrual","accrual basis","accrual-basis"],hint:"accrual"},
 ];
 
 function buildExamFITB(){
@@ -3457,40 +3608,164 @@ function checkFinancials(){
   fb.className='exam-feedback show';
 }
 
+// ── PRINCIPLES DATA ───────────────────────────────────────────────
+var PRINCIPLE_DATA = [
+  {
+    key:'business_entity', name:'Business Entity Principle', color:'var(--accent)',
+    short:'Keeps personal and business finances separate.',
+    desc:'Each business is considered a separate unit or entity. For the purpose of accounting, the financial data for a business must be kept separate from the owner\'s personal financial data.',
+    filter:['business entity','separate','personal','entity']
+  },
+  {
+    key:'cost', name:'Cost Principle', color:'#0ea5e9',
+    short:'Record assets at original purchase price.',
+    desc:'Assets are shown on the balance sheet at the cost of their acquisition or construction. This principle is applied by Canadian companies that use the ASPE.',
+    filter:['cost principle','historical cost','purchase price','original cost','acquisition']
+  },
+  {
+    key:'fair_value', name:'Fair Value Principle — IFRS', color:'#6366f1',
+    short:'Public companies report assets at current market value.',
+    desc:'This principle uses the current fair market value of the assets for the financial reports. This principle is applied by publicly traded companies that use the IFRS.',
+    filter:['fair value','ifrs','international','market value','publicly traded']
+  },
+  {
+    key:'objectivity', name:'Principle of Objectivity', color:'#ef4444',
+    short:'Records must be based on objective, verifiable evidence.',
+    desc:'The principle of objectivity requires that accounting records be based on objective evidence. Records should be free from bias and should be verifiable. Source documents provide objective evidence to support the value used to record transactions.',
+    filter:['objectivity','objective evidence','verifiable','source document','bias']
+  },
+  {
+    key:'time_period', name:'Time-Period Principle', color:'#ec4899',
+    short:'Business life is divided into accounting periods.',
+    desc:'Each company sets and defines an accounting period. The period may be a month, three months, a year, etc. The company consistently uses the same time period when it prepares its financial statements.',
+    filter:['time period','time-period','accounting period','fiscal','monthly','annually']
+  },
+  {
+    key:'matching', name:'Matching Principle', color:'#10b981',
+    short:'Match expenses to the revenues they helped earn.',
+    desc:'The costs recorded in the expense accounts should be matched with the revenue of the same accounting period to determine net income or net loss.',
+    filter:['matching','match expense','same period','incurred','prepaid','adjusting']
+  },
+  {
+    key:'revenue_recognition', name:'Revenue Recognition Principle', color:'#f59e0b',
+    short:'Revenue is recognized when it is earned.',
+    desc:'Revenue is recognized at the time the revenue is earned. The accrual basis of accounting records revenue when it is earned, whether that revenue is in the form of cash or credit granted to a customer. Expenses are recorded when incurred, whether those expenses are paid for in cash or credit granted by the supplier.',
+    filter:['revenue recognition','earned','accrual','cash basis','unearned']
+  },
+  {
+    key:'materiality', name:'Principle of Materiality', color:'#f97316',
+    short:'Insignificant items can be handled practically.',
+    desc:'The principle of materiality requires that information that could affect the decisions of users of financial statements be included when the financial statements are prepared. Minor or insignificant items may be handled in the most practical way.',
+    filter:['materiality','insignificant','immaterial','practical','minor']
+  },
+  {
+    key:'conservatism', name:'Principle of Conservatism', color:'#8b5cf6',
+    short:'Choose the treatment that results in lower income and net assets.',
+    desc:'The principle of conservatism requires that, where there are acceptable alternative accounting treatments for an item, accountants must choose the one that will result in lower net income and net assets.',
+    filter:['conservatism','conservative','lower net income','lower asset','alternative method']
+  },
+  {
+    key:'accrual_cash', name:'Accrual vs Cash Basis', color:'#14b8a6',
+    short:'Accrual: earned/incurred. Cash: received/paid.',
+    desc:'The accrual basis of accounting records revenue when it is earned and expenses when incurred, regardless of cash flow. The cash basis of accounting recognizes revenue and expenses only when cash is received or paid.',
+    filter:['accrual','cash basis','earned','incurred','received','paid']
+  },
+];
+
+function getPrincipleQuestions(pdata){
+  return PRINCIPLES_QUESTIONS.filter(function(q){
+    var text = (q.q + ' ' + q.exp).toLowerCase();
+    return pdata.filter.some(function(k){ return text.indexOf(k) >= 0; });
+  });
+}
+
 function renderPrinciplesMode(noPush){
   hideSubBar(); showTopStats(false);
   setBreadcrumb(['Accounting Principles']);
   window.scrollTo(0,0);
   if(!noPush) pushRoute(BASE+'/principles');
   var app=document.getElementById('app');
+  var grid = PRINCIPLE_DATA.map(function(p,i){
+    return '<div class="principle-card" onclick="renderPrincipleDetail('+i+')" style="--pc:'+p.color+'">'
+      +'<div class="pc-name">'+p.name+'</div>'
+      +'<div class="pc-short">'+p.short+'</div>'
+      +'</div>';
+  }).join('');
   app.innerHTML='<div class="wrap"><div class="inner pop">'
-    +'<div class="pt-header">'
-    +'<div class="pt-eyebrow">GAAPs &amp; IFRS</div>'
-    +'<div class="pt-title">Accounting Principles</div>'
-    +'<div class="pt-sub">Practice every major principle covered in BAF3M - Business Entity, Cost, Matching, Conservatism, Materiality, Objectivity, Time Period, IFRS vs ASPE, and more. Questions shuffle every session.</div>'
+    +'<div class="chapter-list-header">'
+    +'<div class="chapter-list-title">Accounting Principles</div>'
+    +'<div class="chapter-list-sub">Click a principle to see the full description and practice questions on that topic</div>'
     +'</div>'
-    +'<div class="principles-grid">'
-    +[
-      ['Business Entity','Keeps personal and business finances separate.','var(--accent)'],
-      ['Cost (Historical Cost)','Record assets at original purchase price.','#0ea5e9'],
-      ['Fair Value / IFRS','Public companies report assets at current market value.','#6366f1'],
-      ['Matching','Match expenses to the revenues they helped earn.','#10b981'],
-      ['Revenue Recognition','Record revenue when it is earned, not when cash arrives.','#f59e0b'],
-      ['Conservatism','Choose the method least likely to overstate assets or income.','#8b5cf6'],
-      ['Materiality','Insignificant items can be handled practically.','#f97316'],
-      ['Objectivity','Entries must be supported by verifiable evidence.','#ef4444'],
-      ['Time Period','Business life is divided into reporting periods.','#ec4899'],
-      ['Accrual vs Cash Basis','Accrual: earned/incurred. Cash: received/paid.','#14b8a6'],
-    ].map(function(p){
-      return '<div class="principle-chip" style="border-color:'+p[2]+'22;background:'+p[2]+'08">'
-        +'<div class="principle-chip-name" style="color:'+p[2]+'">'+p[0]+'</div>'
-        +'<div class="principle-chip-def">'+p[1]+'</div>'
-        +'</div>';
-    }).join('')
+    +'<div class="principles-grid">'+grid+'</div>'
+    +'<div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">'
+    +'<button class="start-btn" style="padding:12px 32px;font-size:15px" onclick="startPrinciplesSession()">Practise All Principles</button>'
     +'</div>'
-    +'<button class="start-btn" style="margin-top:28px;padding:14px 40px;font-size:16px" onclick="startPrinciplesSession()">Start Practising</button>'
     +'<button class="back-nav" onclick="renderChapterList()">← Back</button>'
     +'</div></div>';
+}
+
+function renderPrincipleDetail(idx){
+  var p = PRINCIPLE_DATA[idx];
+  var qs = getPrincipleQuestions(p);
+  hideSubBar(); showTopStats(false);
+  setBreadcrumb(['Accounting Principles', p.name]);
+  window.scrollTo(0,0);
+  pushRoute(BASE+'/principles/'+p.key);
+
+  var qHtml = '';
+  if(qs.length === 0){
+    qHtml = '<div style="padding:16px;color:var(--text3);font-size:14px">No specific questions for this principle yet — use the Practise All Principles session to encounter them mixed in.</div>';
+  } else {
+    qHtml = '<div class="pd-q-list">'
+      +qs.map(function(q,i){
+        var opts = q.type==='mcq'
+          ? '<ol class="pd-opts">'+q.opts.map(function(o,oi){
+              return '<li class="pd-opt'+(oi===q.ans?' pd-correct':'')+'">'+o+'</li>';
+            }).join('')+'</ol>'
+          : '';
+        var exp = '<div class="pd-exp">'+q.exp+'</div>';
+        return '<div class="pd-q-item"><div class="pd-q-num">'+(i+1)+'</div><div class="pd-q-body"><div class="pd-q-text">'+q.q+'</div>'+opts+exp+'</div></div>';
+      }).join('')
+      +'</div>';
+  }
+
+  var app = document.getElementById('app');
+  app.innerHTML='<div class="wrap"><div class="inner pop">'
+    +'<div class="pd-header" style="border-color:'+p.color+';background:'+p.color+'0a">'
+    +'<div class="pd-name" style="color:'+p.color+'">'+p.name+'</div>'
+    +'<div class="pd-desc">'+p.desc+'</div>'
+    +'</div>'
+    +'<div class="pd-section-label">Practice Questions ('+qs.length+')</div>'
+    +qHtml
+    +'<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">'
+    +(qs.length>0?'<button class="btn-fill" onclick="startPrincipleSession('+idx+')">Practise these questions →</button>':'')
+    +'<button class="btn-outline" onclick="renderPrinciplesMode()">← All Principles</button>'
+    +'</div>'
+    +'</div></div>';
+}
+
+function startPrincipleSession(idx){
+  var p = PRINCIPLE_DATA[idx];
+  var qs = shuffle(getPrincipleQuestions(p)).map(function(q){ return Object.assign({},q); });
+  if(!qs.length){ renderPrinciplesMode(); return; }
+  state.chIdx=0; state.level='PRIN'; state.unitIdx=null;
+  state.questions=qs;
+  state.idx=0; state.correct=0; state.wrong=0; state.skipped=[];
+  state.screen='quiz';
+  setBreadcrumb(['Accounting Principles', p.name]);
+  pushRoute(BASE+'/principles/'+p.key+'/session');
+  var sb=document.getElementById('subBar');
+  sb.classList.add('on');
+  document.getElementById('lvlBadge').textContent=p.name;
+  document.getElementById('lvlBadge').className='q-mode-tag';
+  document.getElementById('subProgBar').style.background=p.color;
+  var tog=document.getElementById('saveToggle');
+  if(tog) tog.checked=false;
+  sessionSaveEnabled=false;
+  setSubProg(0);
+  showTopStats(true);
+  updateTopStats();
+  renderQuestion();
 }
 
 function startPrinciplesSession(noPush){
@@ -3503,9 +3778,8 @@ function startPrinciplesSession(noPush){
   if(!noPush) pushRoute(BASE+'/principles/session');
   var sb=document.getElementById('subBar');
   sb.classList.add('on');
-  var badge=document.getElementById('lvlBadge');
-  badge.textContent='Accounting Principles - '+qs.length+' questions';
-  badge.className='q-mode-tag';
+  document.getElementById('lvlBadge').textContent='Accounting Principles - '+qs.length+' questions';
+  document.getElementById('lvlBadge').className='q-mode-tag';
   document.getElementById('subProgBar').style.background='var(--accent)';
   var tog=document.getElementById('saveToggle');
   if(tog) tog.checked=false;
@@ -3515,6 +3789,7 @@ function startPrinciplesSession(noPush){
   updateTopStats();
   renderQuestion();
 }
+
 
 function startGlobalFITB(noPush){
   // Pool all FITB questions from all chapters
@@ -4087,20 +4362,24 @@ function checkFITB(){
   input.disabled=true;
 
   var q=state.questions[state.idx];
-  var correct=checkFITBAnswer(val, q.ans);
+  var grade=gradeFITBAnswer(val, q.ans);
   var fb=document.getElementById('fb');
 
-  if(correct){
+  if(grade==='exact'){
     state.correct++;
     card.classList.add('c-ok');
     fb.className='fb fb-ok show';
     fb.innerHTML='<strong>Correct!</strong> '+q.exp;
+  } else if(grade==='close'){
+    state.correct++;
+    card.classList.add('c-close');
+    fb.className='fb fb-close show';
+    fb.innerHTML='<strong>Close enough!</strong> Accepted — the ideal answer is: <strong>'+q.ans[0]+'</strong>. '+q.exp;
   } else {
     state.wrong++;
     card.classList.add('c-no');
     fb.className='fb fb-no show';
-    fb.innerHTML='<strong>Not quite.</strong> The answer is: <strong>'
-      +q.ans[0]+'</strong>. '+q.exp;
+    fb.innerHTML='<strong>Not quite.</strong> The answer is: <strong>'+q.ans[0]+'</strong>. '+q.exp;
   }
   document.getElementById('btnNext').style.display='block';
   document.querySelector('.btn-skip').style.display='none';
